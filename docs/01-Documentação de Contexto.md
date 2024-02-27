@@ -34,10 +34,33 @@ O grupo de trabalho pode fazer uso de questionários, entrevistas e dados estat�
 
 ## Público-Alvo
 
-Descreva quem serão as pessoas que usarão a sua aplicação indicando os diferentes perfis. O objetivo aqui não é definir quem serão os clientes ou quais serão os papéis dos usuários na aplicação. A ideia é, dentro do possível, conhecer um pouco mais sobre o perfil dos usuários: conhecimentos prévios, relação com a tecnologia, relações
-hierárquicas, etc.
+   > 1- Cidadãos em Geral:
+        ◦ Todas as faixas etárias, gêneros e ocupações.
+        ◦ Pessoas que buscam agilidade e conveniência no acesso aos serviços de saúde.
+        ◦ Indivíduos que desejam monitorar seu histórico de vacinação e agendar consultas de forma eficiente.
+> 
+   > 2- Profissionais com Rotinas Ocupadas:
+        ◦ Trabalhadores com agendas apertadas, como empresários, profissionais liberais e autônomos.
+        ◦ Pessoas que precisam gerenciar sua saúde de maneira flexível, incluindo o agendamento de consultas fora do horário comercial convencional.
+>       
+  >  3- Estudantes:
+        ◦ Jovens que têm rotinas intensas de estudos.
+        ◦ Aqueles que buscam comodidade no acompanhamento de vacinas e na marcação de consultas sem prejudicar seu tempo dedicado aos estudos.
+>       
+ >   4- Aposentados e Idosos:
+        ◦ Indivíduos que valorizam a comodidade de acessar informações de saúde online.
+        ◦ Pessoas que desejam evitar deslocamentos frequentes aos postos de saúde.
+>            
+>    5- Pais e Responsáveis:
+        ◦ Famílias que desejam gerenciar a vacinação de seus filhos de maneira eficaz.
+        ◦ Pais que buscam facilidade na marcação de consultas pediátricas e acompanhamento do desenvolvimento de seus filhos.
+>       
+  >  6- Pessoas com Necessidades Específicas:
+        ◦ Indivíduos com dificuldades de mobilidade ou acesso a postos de saúde.
+        ◦ Pessoas que precisam monitorar de perto sua saúde e que se beneficiam da comodidade oferecida pelo sistema online.
+Ao abranger esses diversos grupos, o sistema do SUS visa garantir um acesso mais inclusivo e eficiente aos serviços de saúde, atendendo às demandas específicas de cada público-alvo.
 
-Adicione informações sobre o público-alvo por meio de uma descrição textual, diagramas de personas e mapa de stakeholders.
+
 
 > **Links Úteis**:
 > - [Público-alvo](https://blog.hotmart.com/pt-br/publico-alvo/)
