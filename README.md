@@ -11,11 +11,11 @@ Descrever resumidamente, em um ou dois parágrafos, o projeto que está sendo de
 ## Integrantes
 
 * Wellington Andrade
-* Lucas Filipe
+* Lucas Felipe
 * Lucas Guilherme
-* Neemias
+* Neemias Cândido
 * Natan Fonseca
-* Eryc
+* Eryc Lisboa
 
 ## Orientador
 
