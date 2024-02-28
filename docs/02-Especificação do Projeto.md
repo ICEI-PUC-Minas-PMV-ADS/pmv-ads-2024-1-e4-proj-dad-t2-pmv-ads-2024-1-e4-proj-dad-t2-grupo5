@@ -7,11 +7,33 @@ Definição do problema e ideia de solução a partir da perspectiva do usuário
 Apresente uma visão geral do que será abordado nesta parte do documento, enumerando as técnicas e/ou ferramentas utilizadas para realizar a especificações do projeto
 
 ## Personas
+| ![Mariana Souza](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-1-e2-proj-int-t2-time4-forkfinder/blob/main/docs/img/Personas/5.png?raw=true)  | **Mariana Souza** |
+| --- | --- |
+| **Idade:** 28 | **Ocupação:** Estudante |
+| **Perfil:** Estudante que encontrou no sistema do SUS uma forma mais acessível de cuidar da saúde. Acompanha o estoque de medicamentos   e solicita resultados exames sem sair de casa, o que é especialmente útil para sua intensa rotina de estudos. |
+| **Motivações:**. Acompanha o estoque de medicamentos e resultados de exames . |
 
-Pedro Paulo tem 26 anos, é arquiteto recém-formado e autônomo. Pensa em se desenvolver profissionalmente através de um mestrado fora do país, pois adora viajar, é solteiro e sempre quis fazer um intercâmbio. Está buscando uma agência que o ajude a encontrar universidades na Europa que aceitem alunos estrangeiros.
 
-Enumere e detalhe as personas da sua solução. Para tanto, baseie-se tanto nos documentos disponibilizados na disciplina e/ou nos seguintes links:
+| ![João Silva]  <img src="https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-1-e2-proj-int-t2-time4-forkfinder/blob/main/docs/img/Personas/1.png?raw=true" title="Amaury Júnior" align="left">. | **João Silva** |
+| --- | --- |
+| **Idade:** 50 | **Ocupação:** Comerciante |
+| **Perfil:** Comerciante satisfeito com o sistema SUS. A funcionalidade de visualizar a fila de atendimento permite que planeje sua ida ao posto de saúde de forma eficiente, evitando longas esperas e ganhando mais controle sobre seu tempo. |
+| **Motivações:** Visualizar fila de atendimento, Planejar ida ao posto de saúde. |
+| 
 
+| ![Fernanda Oliveira](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-1-e2-proj-int-t2-time4-forkfinder/blob/main/docs/img/Personas/2.png?raw=true) | **Fernanda Oliveira** |
+| --- | --- |
+| **Idade:** 55 | **Ocupação:** Aposentada |
+| **Perfil:** Aposentada preocupada com a saúde. O sistema SUS proporcionou a comodidade de verificar os resultados dos exames sem sair de casa, facilitando significativamente sua vida. |
+
+
+| ![Rafael Oliveira](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-1-e2-proj-int-t2-time4-forkfinder/blob/main/docs/img/Personas/4.png?raw=true) | **Rafael Oliveira** |
+| --- | --- |
+| **Idade:** 45 | **Ocupação:** Médico |
+| **Perfil:** Médico que encontrou no sistema do SUS uma maneira flexíviel para ver e solicitar dados dos seus pacientes |
+| **Motivações:** Forma rapida e eificaz sobre os dados do paciente . |
+| **Motivações:** Verificar resultados de exames online, Facilidade e comodidade na gestão da saúde. |
+| 
 > **Links Úteis**:
 > - [Rock Content](https://rockcontent.com/blog/personas/)
 > - [Hotmart](https://blog.hotmart.com/pt-br/como-criar-persona-negocio/)
@@ -24,14 +46,17 @@ Lembre-se que você deve ser enumerar e descrever precisamente e personalizada t
 
 ## Histórias de Usuários
 
-Com base na análise das personas forma identificadas as seguintes histórias de usuários:
-
-|EU COMO... `PERSONA`| QUERO/PRECISO ... `FUNCIONALIDADE` |PARA ... `MOTIVO/VALOR`                 |
+|EU COMO... `Estudante`| QUERO/PRECISO ... `Acompanhar Medicamentos e Resultados de Exames` |PARA ... `Facilitar a gestão da minha saúde e otimizar meu tempo de estudos.`                 |
 |--------------------|------------------------------------|----------------------------------------|
-|Usuário do sistema  | Registrar minhas tarefas           | Não esquecer de fazê-las               |
-|Administrador       | Alterar permissões                 | Permitir que possam administrar contas |
-
-Apresente aqui as histórias de usuário que são relevantes para o projeto de sua solução. As Histórias de Usuário consistem em uma ferramenta poderosa para a compreensão e elicitação dos requisitos funcionais e não funcionais da sua aplicação. Se possível, agrupe as histórias de usuário por contexto, para facilitar consultas recorrentes à essa parte do documento.
+|EU COMO... `Comerciante`| QUERO/PRECISO ... `Visualizar Fila de Atendimento no Posto de Saúde` |PARA ... `Planejar minha ida de forma eficiente, evitar longas esperas e ganhar mais controle sobre meu tempo, atendendo minhas obrigações profissionais.`                 |
+|--------------------|------------------------------------|----------------------------------------|
+|EU COMO... `Aposentada`| QUERO/PRECISO ... `Verificar Resultados de Exames Online` |PARA ... `Ter mais comodidade e facilidade na gestão da minha saúde, evitando deslocamentos desnecessários e agilizando o processo.`                 |
+|--------------------|------------------------------------|----------------------------------------|
+|EU COMO... `Médico`| QUERO/PRECISO ... `Acesso Rápido aos Dados dos Pacientes` |PARA ... `Garantir um atendimento de qualidade, tomar decisões baseadas em informações precisas e contribuir para o cuidado e bem-estar dos meus pacientes.`                 |
+|--------------------|------------------------------------|----------------------------------------|
+|EU COMO... `Usuário do Sistema`| QUERO/PRECISO ... `Registrar Minhas Tarefas` |PARA ... `Não esquecer de fazê-las.`                 |
+|--------------------|------------------------------------|----------------------------------------|
+|EU COMO... `Administrador`| QUERO/PRECISO ... `Alterar Permissões` |PARA ... `Permitir que possam administrar contas.`                 |
 
 > **Links Úteis**:
 > - [Histórias de usuários com exemplos e template](https://www.atlassian.com/br/agile/project-management/user-stories)
