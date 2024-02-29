@@ -7,12 +7,13 @@ O sistema atual utilizado nos postos de saúde de João Pessoa não consegue sup
 
 ## Objetivos
 
-Aqui você deve descrever os objetivos do trabalho indicando que o objetivo geral é desenvolver um software para solucionar o problema apresentado acima. 
-
-Apresente também alguns (pelo menos 2) objetivos específicos dependendo de onde você vai querer concentrar a sua prática investigativa, ou como você vai aprofundar no seu trabalho.
+Temos como objetivo a criação de um sistema que permitirá ao Posto de Saúde ter maior informação sobre os pacientes, medicações e atendimentos.
  
-> **Links Úteis**:
-> - [Objetivo geral e objetivo específico: como fazer e quais verbos utilizar](https://blog.mettzer.com/diferenca-entre-objetivo-geral-e-objetivo-especifico/)
+> **Objetivos Específicos**:
+> - Desenvolver uma interface intuitiva e fácil de usar para que facilite o processo de atendimento.
+> - Criar um sistema de busca avançado que permita ao Posto de Saúde, filtrar e encontrar facilmente os pacientes, seus atendimentos anteriores e os medicamentos disponíveis na farmácia do Posto.
+> - Permitir que Atendentes e Médicos gerenciem as informações dentro do sistema.
+> - Permitir que Médicos e Pacientes tenham acesso aos prontuários atuais e antigos.
 
 ## Justificativa
 
