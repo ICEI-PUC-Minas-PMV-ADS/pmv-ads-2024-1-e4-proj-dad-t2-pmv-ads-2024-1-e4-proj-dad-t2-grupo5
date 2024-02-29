@@ -16,12 +16,7 @@ Apresente também alguns (pelo menos 2) objetivos específicos dependendo de ond
 
 ## Justificativa
 
-Descreva a importância ou a motivação para trabalhar com esta aplicação que você escolheu. Indique as razões pelas quais você escolheu seus objetivos específicos ou as razões para aprofundar em certos aspectos do software.
-
-O grupo de trabalho pode fazer uso de questionários, entrevistas e dados estatísticos, que podem ser apresentados, com o objetivo de esclarecer detalhes do problema que será abordado pelo grupo.
-
-> **Links Úteis**:
-> - [Como montar a justificativa](https://guiadamonografia.com.br/como-montar-justificativa-do-tcc/)
+A necessidade de desenvolver um novo sistema distribuído para o SUS em João Pessoa é evidenciada pela demanda direta dos profissionais de saúde que enfrentam essas limitações diariamente. Um sistema eficiente e integrado é crucial para melhorar a qualidade do atendimento ao paciente, otimizar o fluxo de trabalho dos profissionais de saúde e garantir uma gestão eficaz dos recursos disponíveis nos postos de saúde. Ao proporcionar acesso a informações completas e atualizadas sobre os pacientes, incluindo históricos médicos e exames anteriores, o novo sistema possibilitará uma assistência mais informada, personalizada e rápida, beneficiando diretamente a população atendida.
 
 ## Público-Alvo
 
