@@ -1,12 +1,14 @@
 # TÍTULO DO PROJETO
 
-`CURSO`
+`Análise e Desenvolvimento de Sistemas` 
 
-`DISCIPLINA`
+`Projeto: Desenvolvimento de uma Aplicação Distribuída` 
 
-`SEMESTRE`
+`1/2024` 
 
-Descrever resumidamente, em um ou dois parágrafos, o projeto que está sendo desenvolvido.
+O projeto em desenvolvimento é um sistema de informação integrado para os postos de saúde de João Pessoa, Paraíba, visando melhorar a gestão e o atendimento no âmbito do Sistema Único de Saúde (SUS). Com uma interface intuitiva e fácil de usar, o sistema permitirá acesso integrado e atualizado às informações dos pacientes, aos estoques de medicamentos e aos registros de atendimentos anteriores. Além disso, será possível realizar buscas avançadas, gerenciar informações e acessar exames atuais e antigos, beneficiando tanto os profissionais de saúde quanto os pacientes.
+
+Ao abranger uma ampla gama de públicos-alvo, desde cidadãos em geral até pessoas com necessidades específicas, o projeto visa garantir um acesso mais inclusivo e eficiente aos serviços de saúde. Isso contribuirá significativamente para a melhoria da qualidade do cuidado ao paciente e para a otimização dos recursos disponíveis nos postos de saúde, atendendo às demandas específicas de cada usuário.
 
 ## Integrantes
 
@@ -19,7 +21,7 @@ Descrever resumidamente, em um ou dois parágrafos, o projeto que está sendo de
 
 ## Orientador
 
-* Nome completo do professor 1
+* Leonardo Vilela Cardoso
 
 ## Instruções de utilização
 
