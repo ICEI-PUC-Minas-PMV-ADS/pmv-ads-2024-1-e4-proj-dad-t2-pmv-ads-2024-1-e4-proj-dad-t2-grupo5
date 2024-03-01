@@ -1,6 +1,7 @@
 # Introdução
 
-Texto descritivo com a visão geral do projeto abordado. Inclui o contexto, o problema, os objetivos, a justificativa e o público-alvo do projeto.
+## Contexto
+O Sistema Único de Saúde (SUS) em João Pessoa - Paraíba, assim como em muitas outras regiões do Brasil, enfrenta desafios significativos na gestão de saúde pública, especialmente em níveis municipais, onde a demanda por serviços de saúde é alta. Os postos de saúde da cidade são a primeira linha de atendimento ao público, fornecendo serviços essenciais de saúde que vão desde consultas médicas até distribuição de medicamentos. Entretanto, a eficiência e a eficácia desses serviços são frequentemente comprometidas por limitações do sistema de informação atual, que não atende adequadamente às necessidades dos profissionais de saúde nem dos pacientes.
 
 ## Problema
 O sistema atual utilizado nos postos de saúde de João Pessoa não consegue suprir todas as necessidades dos usuários - incluindo médicos, enfermeiros, assistentes e farmacêuticos - devido a sua incapacidade de fornecer acesso integrado e atualizado às informações dos pacientes, aos estoques de medicamentos e aos registros de atendimentos anteriores. Isso resulta em atrasos nos atendimentos, dificuldades no acesso a históricos médicos completos dos pacientes, ineficiências na gestão de estoques da farmácia e, em última instância, na diminuição da qualidade do cuidado ao paciente.
