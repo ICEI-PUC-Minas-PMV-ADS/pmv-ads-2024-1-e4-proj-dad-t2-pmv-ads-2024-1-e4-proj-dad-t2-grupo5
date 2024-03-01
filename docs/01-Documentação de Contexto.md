@@ -11,11 +11,11 @@ Temos como objetivo a criação de um sistema que permitirá ao Posto de Saúde 
  
 > **Objetivos Específicos**:
 > - Desenvolver uma interface intuitiva e fácil de usar para que facilite o processo de atendimento.
- 
+>   
 > - Criar um sistema de busca avançado que permita ao Posto de Saúde, filtrar e encontrar facilmente os pacientes, seus atendimentos anteriores e os medicamentos disponíveis na farmácia do Posto.
-
+>   
 > - Permitir que Atendentes e Médicos gerenciem as informações dentro do sistema.
- 
+>   
 > - Permitir que Médicos e Pacientes tenham acesso aos exames atuais e antigos.
 
 ## Justificativa
