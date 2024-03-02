@@ -145,8 +145,13 @@ O projeto está restrito pelos itens apresentados na tabela a seguir.
 
 |ID| Restrição                                             |
 |--|-------------------------------------------------------|
-|01| O projeto deverá ser entregue até o final do semestre |
-|02| Não pode ser desenvolvido um módulo de backend        |
+|01| O projeto deverá ser entregue até o final do semestre. |
+|02| Orçamentárias: Disponibilidade limitada de recursos financeiros para o desenvolvimento, implementação e manutenção do sistema. |
+|03| Tecnológicas: Necessidade de compatibilidade com sistemas já existentes no SUS, além da infraestrutura de TI disponível nos postos de saúde. |
+|04| Operacionais: O sistema deve ser intuitivo e fácil de usar para garantir sua adoção pelos profissionais de saúde, considerando os diferentes níveis de familiaridade com tecnologia. |
+|05| Legais e de Privacidade: O sistema deve estar em conformidade com a legislação brasileira sobre proteção de dados (LGPD) e outras regulamentações de saúde. |
+|06| Temporais: O projeto deve ser concluído dentro de um prazo estabelecido para atender às necessidades urgentes de melhoria do atendimento à saúde. |
+|07| Recursos Humanos: Limitações na disponibilidade de profissionais qualificados para o desenvolvimento, implementação e treinamento no uso do novo sistema. |
 
 Enumere as restrições à sua solução. Lembre-se de que as restrições geralmente limitam a solução candidata.
 
