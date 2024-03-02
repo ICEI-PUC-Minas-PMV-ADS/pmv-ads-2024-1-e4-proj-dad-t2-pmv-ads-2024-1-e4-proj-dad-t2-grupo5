@@ -121,23 +121,16 @@ As tabelas que se seguem apresentam os requisitos funcionais e não funcionais q
 
 |ID     | Descrição do Requisito  |Prioridade |
 |-------|-------------------------|----|
-|RNF-001| O sistema deve ser responsivo para rodar em um dispositivos móvel | MÉDIA | 
-|RNF-002| Deve processar requisições do usuário em no máximo 3s |  BAIXA | 
+|RNF-01| O sistema deve ser intuitivo e fácil de usar para todos os usuários, independentemente de sua experiência com tecnologia. | ALTA |
+|RNF-02| O sistema deve oferecer um desempenho rápido e responsivo, garantindo uma experiência fluida para os usuários em todas as interações. | ALTA |
+|RNF-03| A segurança das informações pessoais dos clientes deve ser prioridade, garantindo proteção adequada dos dados armazenados. | ALTA |
+|RNF-04| Deve ser disponibilizado suporte eficiente para resolver problemas técnicos e questões relacionadas ao serviço de forma rápida e eficaz. | ALTA |
+|RNF-05| O sistema deve estar disponível 100% do tempo, garantindo acesso ininterrupto aos usuários. | ALTA |
+|RNF-06| O sistema deve apresentar uma interface amigável e atraente, proporcionando uma experiência de uso agradável aos usuários. | ALTA |
+|RNF-07| Deve ser assegurada a compatibilidade com os principais navegadores web, como Chrome, Firefox, Safari e Edge, para garantir uma experiência consistente para todos os usuários. | MÉDIA |
+|RNF-08| O tempo de carregamento inicial do sistema, após o usuário iniciar a aplicação, não deve exceder 15 segundos, proporcionando uma experiência inicial ágil. | ALTA |
+|RNF-09| O sistema deverá se comunicar de forma eficiente com o banco de dados MongoDB e MySQL, garantindo uma operação suave e eficaz da aplicação. | ALTA |
 
-Com base nas Histórias de Usuário, enumere os requisitos da sua solução. Classifique esses requisitos em dois grupos:
-
-- [Requisitos Funcionais
- (RF)](https://pt.wikipedia.org/wiki/Requisito_funcional):
- correspondem a uma funcionalidade que deve estar presente na
-  plataforma (ex: cadastro de usuário).
-- [Requisitos Não Funcionais
-  (RNF)](https://pt.wikipedia.org/wiki/Requisito_n%C3%A3o_funcional):
-  correspondem a uma característica técnica, seja de usabilidade,
-  desempenho, confiabilidade, segurança ou outro (ex: suporte a
-  dispositivos iOS e Android).
-Lembre-se que cada requisito deve corresponder à uma e somente uma
-característica alvo da sua solução. Além disso, certifique-se de que
-todos os aspectos capturados nas Histórias de Usuário foram cobertos.
 
 ## Restrições
 
@@ -167,14 +160,12 @@ Enumere as restrições à sua solução. Lembre-se de que as restrições geral
 
 A matriz de rastreabilidade é uma ferramenta usada para facilitar a visualização dos relacionamento entre requisitos e outros artefatos ou objetos, permitindo a rastreabilidade entre os requisitos e os objetivos de negócio. 
 
-A matriz deve contemplar todos os elementos relevantes que fazem parte do sistema, conforme a figura meramente ilustrativa apresentada a seguir.
+Abaixo segue matriz de rastreabilidade de requisitos:
 
-![Exemplo de matriz de rastreabilidade](img/02-matriz-rastreabilidade.png)
+![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e4-proj-dad-t2-pmv-ads-2024-1-e4-proj-dad-t2-grupo5/assets/90806252/d31678a9-ab26-46f4-a8f5-c9aa1999186f)
 
-> **Links Úteis**:
-> - [Artigo Engenharia de Software 13 - Rastreabilidade](https://www.devmedia.com.br/artigo-engenharia-de-software-13-rastreabilidade/12822/)
-> - [Verificação da rastreabilidade de requisitos usando a integração do IBM Rational RequisitePro e do IBM ClearQuest Test Manager](https://developer.ibm.com/br/tutorials/requirementstraceabilityverificationusingrrpandcctm/)
-> - [IBM Engineering Lifecycle Optimization – Publishing](https://www.ibm.com/br-pt/products/engineering-lifecycle-optimization/publishing/)
+
+
 
 
 # Gerenciamento de Projeto
@@ -201,4 +192,14 @@ O gerenciamento adequado de tarefas contribuirá para que o projeto alcance alto
 
 O processo de determinar o orçamento do projeto é uma tarefa que depende, além dos produtos (saídas) dos processos anteriores do gerenciamento de custos, também de produtos oferecidos por outros processos de gerenciamento, como o escopo e o tempo.
 
-![Orçamento](img/02-orcamento.png)
+Abaixo segue gerenciamento de custos do projeto:
+
+### ORÇAMENTO
+| Recurso necessários | Valor estimado |
+|------------|----------------------|
+| Recursos Humanos | R$ 95.000,00 |
+| Hardware | R$ 7.000,00 |
+| Custos operacionais | R$ 2.500,00 |
+| Software | R$ 10.000,00 |
+| Serviço | R$ 5.000,00 |
+| TOTAL  | R$ 119.500,00 |
