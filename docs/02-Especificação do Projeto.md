@@ -104,17 +104,17 @@ As tabelas que se seguem apresentam os requisitos funcionais e não funcionais q
 
 |ID    | Descrição do Requisito  | Prioridade |
 |------|-----------------------------------------|----|
-|RF-001| O aplicativo deve possibilitar autenticação do usuário | ALTA | 
-|RF-002| O aplicativo deve possibilitar o cadastramento de pacientes | ALTA |
-|RF-003| O aplicativo deve possibilitar a criação de fichas de atendimento | ALTA |
-|RF-004| O Aplicativo deve permitir ao usuário gerenciar os atendimentos criados, dispondo os mesmos em uma fila de atendimento com funcionalidades de conclusão e cancelamento de atendimento | ALTA |
-|RF-005| O aplicativo deve permitir ao usuário consultar e editar cadastros de pacientes | ALTA |
-|RF-006| O aplicativo deve possibilitar ao usuário a criação/preenchimento de um prontuário de atendimento | ALTA |
-|RF-007| O aplicativo deve permitir uma visualização do histórico de atendimentos passados de um paciente | MÉDIA |
-|RF-008| O aplicativo deve permitir a emissão de prescrições médicas | MÉDIA |
-|RF-009| O aplicativo deve permitir a emissão de atestados médicos | MÉDIA |
-|RF-010| O aplicativo deve possuir cadastro de inventário de medicamentos da farmácia da UBS/Hospital | MÉDIA |
-|RF-011| O aplicativo deve permitir ao usuário controlar o estoque de medicamentos (adicionar/deduzir quantidade disponível, cadastrar novos medicamentos) | MÉDIA |
+|RF-001| A aplicação deve possibilitar autenticação do usuário | ALTA | 
+|RF-002| A aplicação deve possibilitar o cadastramento de pacientes | ALTA |
+|RF-003| A aplicação deve possibilitar a criação de fichas de atendimento | ALTA |
+|RF-004| A aplicação deve permitir ao usuário gerenciar os atendimentos criados, dispondo os mesmos em uma fila de atendimento com funcionalidades de conclusão e cancelamento de atendimento | ALTA |
+|RF-005| A aplicação deve permitir ao usuário consultar e editar cadastros de pacientes | ALTA |
+|RF-006| A aplicação deve possibilitar ao usuário a criação/preenchimento de um prontuário de atendimento | ALTA |
+|RF-007| A aplicação deve permitir uma visualização do histórico de atendimentos passados de um paciente | MÉDIA |
+|RF-008| A aplicação deve permitir a emissão de prescrições médicas | MÉDIA |
+|RF-009| A aplicação deve permitir a emissão de atestados médicos | MÉDIA |
+|RF-010| A aplicação deve possuir cadastro de inventário de medicamentos da farmácia da UBS/Hospital | MÉDIA |
+|RF-011| A aplicação deve permitir ao usuário controlar o estoque de medicamentos (adicionar/deduzir quantidade disponível, cadastrar novos medicamentos) | MÉDIA |
 |RF-012| A funcionalidade de prescrições deve se integrar com o estoque de medicamentos da UBS/Hospital, para que o usuário possa consultar a disponibilidade de um medicamento qualquer no mesmo | MÉDIA |
 
 ### Requisitos não Funcionais
