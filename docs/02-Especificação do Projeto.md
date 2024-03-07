@@ -121,15 +121,15 @@ As tabelas que se seguem apresentam os requisitos funcionais e não funcionais q
 
 |ID     | Descrição do Requisito  |Prioridade |
 |-------|-------------------------|----|
-|RNF-01| O sistema deve ser intuitivo e fácil de usar para todos os usuários, independentemente de sua experiência com tecnologia. | ALTA |
-|RNF-02| O sistema deve oferecer um desempenho rápido e responsivo, garantindo uma experiência fluida para os usuários em todas as interações. | ALTA |
-|RNF-03| A segurança das informações pessoais dos clientes deve ser prioridade, garantindo proteção adequada dos dados armazenados. | ALTA |
-|RNF-04| Deve ser disponibilizado suporte eficiente para resolver problemas técnicos e questões relacionadas ao serviço de forma rápida e eficaz. | ALTA |
-|RNF-05| O sistema deve estar disponível 100% do tempo, garantindo acesso ininterrupto aos usuários. | ALTA |
-|RNF-06| O sistema deve apresentar uma interface amigável e atraente, proporcionando uma experiência de uso agradável aos usuários. | ALTA |
-|RNF-07| Deve ser assegurada a compatibilidade com os principais navegadores web, como Chrome, Firefox, Safari e Edge, para garantir uma experiência consistente para todos os usuários. | MÉDIA |
-|RNF-08| O tempo de carregamento inicial do sistema, após o usuário iniciar a aplicação, não deve exceder 15 segundos, proporcionando uma experiência inicial ágil. | ALTA |
-|RNF-09| O sistema deverá se comunicar de forma eficiente com o banco de dados MongoDB e MySQL, garantindo uma operação suave e eficaz da aplicação. | ALTA |
+|RNF-01| O sistema deve ser intuitivo e fácil de usar para todos os usuários, independentemente de sua experiência com tecnologia. | ALTO |
+|RNF-02| O sistema deve oferecer um desempenho rápido e responsivo, garantindo uma experiência fluida para os usuários em todas as interações. | MÉDIO |
+|RNF-03| A segurança das informações pessoais dos clientes deve ser prioridade, garantindo proteção adequada dos dados armazenados. | ALTO |
+|RNF-04| Deve ser disponibilizado suporte eficiente para resolver problemas técnicos e questões relacionadas ao serviço de forma rápida e eficaz. | MÉDIO |
+|RNF-05| O sistema deve estar disponível 100% do tempo, garantindo acesso ininterrupto aos usuários. | MÉDIO |
+|RNF-06| O sistema deve apresentar uma interface amigável e atraente, proporcionando uma experiência de uso agradável aos usuários. | ALTO |
+|RNF-07| Deve ser assegurada a compatibilidade com os principais navegadores web, como Chrome, Firefox, Safari e Edge, para garantir uma experiência consistente para todos os usuários. | BAIXO |
+|RNF-08| O tempo de carregamento inicial do sistema, após o usuário iniciar a aplicação, não deve exceder 15 segundos, proporcionando uma experiência inicial ágil. | BAIXO |
+|RNF-09| O sistema deverá se comunicar de forma eficiente com o banco de dados MongoDB e MySQL, garantindo uma operação suave e eficaz da aplicação. | ALTO |
 
 
 ## Restrições
@@ -162,7 +162,8 @@ A matriz de rastreabilidade é uma ferramenta usada para facilitar a visualizaç
 
 Abaixo segue matriz de rastreabilidade de requisitos:
 
-![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e4-proj-dad-t2-pmv-ads-2024-1-e4-proj-dad-t2-grupo5/assets/90806252/d31678a9-ab26-46f4-a8f5-c9aa1999186f)
+![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e4-proj-dad-t2-pmv-ads-2024-1-e4-proj-dad-t2-grupo5/assets/90806252/bf92c531-bfef-44a2-a5ca-8e338d2f313c)
+
 
 
 
