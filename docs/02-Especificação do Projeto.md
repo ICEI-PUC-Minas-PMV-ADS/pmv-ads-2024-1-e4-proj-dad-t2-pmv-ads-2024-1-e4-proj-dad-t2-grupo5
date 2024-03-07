@@ -112,10 +112,10 @@ As tabelas que se seguem apresentam os requisitos funcionais e não funcionais q
 |RF-006| A aplicação deve possibilitar ao usuário a criação/preenchimento de um prontuário de atendimento | ALTA |
 |RF-007| A aplicação deve permitir uma visualização do histórico de atendimentos passados de um paciente | MÉDIA |
 |RF-008| A aplicação deve permitir a emissão de prescrições médicas | MÉDIA |
-|RF-009| A aplicação deve permitir a emissão de atestados médicos | MÉDIA |
-|RF-010| A aplicação deve possuir cadastro de inventário de medicamentos da farmácia da UBS/Hospital | MÉDIA |
-|RF-011| A aplicação deve permitir ao usuário controlar o estoque de medicamentos (adicionar/deduzir quantidade disponível, cadastrar novos medicamentos) | MÉDIA |
-|RF-012| A funcionalidade de prescrições deve se integrar com o estoque de medicamentos da UBS/Hospital, para que o usuário possa consultar a disponibilidade de um medicamento qualquer no mesmo | MÉDIA |
+|RF-009| A aplicação deve permitir a emissão de atestados médicos | BAIXO |
+|RF-010| A aplicação deve possuir cadastro de inventário de medicamentos da farmácia da UBS/Hospital | BAIXO |
+|RF-011| A aplicação deve permitir ao usuário controlar o estoque de medicamentos (adicionar/deduzir quantidade disponível, cadastrar novos medicamentos) | BAIXO |
+|RF-012| A funcionalidade de prescrições deve se integrar com o estoque de medicamentos da UBS/Hospital, para que o usuário possa consultar a disponibilidade de um medicamento qualquer no mesmo | BAIXO |
 
 ### Requisitos não Funcionais
 
