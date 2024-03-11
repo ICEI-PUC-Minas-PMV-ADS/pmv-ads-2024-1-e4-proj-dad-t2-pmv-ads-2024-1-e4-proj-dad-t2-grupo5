@@ -42,18 +42,23 @@ Lembre-se que você deve ser enumerar e descrever precisamente e personalizada t
 
 ## Histórias de Usuários
 
-|EU COMO... `Estudante`| QUERO/PRECISO ... `Acompanhar Medicamentos e Resultados de Exames` |PARA ... `Facilitar a gestão da minha saúde e otimizar meu tempo de estudos.`                 |
-|--------------------|------------------------------------|----------------------------------------|
-|EU COMO... `Comerciante`| QUERO/PRECISO ... `Visualizar Fila de Atendimento no Posto de Saúde` |PARA ... `Planejar minha ida de forma eficiente, evitar longas esperas e ganhar mais controle sobre meu tempo, atendendo minhas obrigações profissionais.`                 |
-|--------------------|------------------------------------|----------------------------------------|
-|EU COMO... `Aposentada`| QUERO/PRECISO ... `Verificar Resultados de Exames Online` |PARA ... `Ter mais comodidade e facilidade na gestão da minha saúde, evitando deslocamentos desnecessários e agilizando o processo.`                 |
-|--------------------|------------------------------------|----------------------------------------|
-|EU COMO... `Médico`| QUERO/PRECISO ... `Acesso Rápido aos Dados dos Pacientes` |PARA ... `Garantir um atendimento de qualidade, tomar decisões baseadas em informações precisas e contribuir para o cuidado e bem-estar dos meus pacientes.`                 |
-|--------------------|------------------------------------|----------------------------------------|
-|EU COMO... `Usuário do Sistema`| QUERO/PRECISO ... `Registrar Minhas Tarefas` |PARA ... `Não esquecer de fazê-las.`                 |
-|--------------------|------------------------------------|----------------------------------------|
-|EU COMO... `Administrador`| QUERO/PRECISO ... `Alterar Permissões` |PARA ... `Permitir que possam administrar contas.`                 |
+**Histórias das Personas **
 
+1. **Luciana Oliveira - Estudante:**
+   - *Eu, como Estudante  insatisfeita com o sistema do SUS, quero acompanhar o estoque de medicamentos, visualizar a fila da consulta e solicitar resultados de exames através de uma aplicação para melhorar minha experiência no sistema de saúde.*  
+   Luciana encontrou alívio em uma aplicação que proporciona transparência sobre o estoque de medicamentos, a fila da consulta e a facilidade de solicitar resultados de exames. Isso melhora sua experiência, apesar das críticas ao sistema público.
+
+2. **Roberto Santos - Arquiteto:**
+   - *Eu, como arquiteto  crítico do sistema do SUS, quero utilizar uma aplicação para  visualizar a fila da consulta e solicitar resultados de exames, reconhecendo benefícios mesmo diante das críticas.*  
+   Roberto destaca uma aplicação que oferece informações cruciais sobre o sistema de saúde, permitindo verificar o estoque de medicamentos, visualizar a fila da consulta e solicitar resultados de exames. Ele reconhece o benefício da transparência proporcionada pela aplicação.
+
+3. **Carla Mendes - Professora:**
+   - *Eu, como professora descontente com o SUS, quero utilizar uma aplicação para visualizar o estoque de medicamentos, a fila da consulta e ver resultados de exames para melhorar minha interação com os serviços de saúde.*  
+   Carla, descontente com o sistema público de saúde, encontra conforto em uma aplicação que facilita a visualização do estoque de medicamentos, a fila da consulta e permite solicitar resultados de exames. Essa tecnologia melhora sua experiência no contexto da saúde.
+
+4. **José da Silva - Agricultor:**
+   - *Eu, como agricultor crítico da falta de acessibilidade no SUS, quero utilizar uma aplicação para verificar o estoque de medicamentos, visualizar a fila da consulta e solicitar resultados de exames para melhorar significativamente minha experiência.*  
+   José destaca uma aplicação que o auxilia a verificar o estoque de medicamentos, a fila da consulta e a solicitar resultados de exames. Mesmo crítico em relação à acessibilidade do SUS, a aplicação traz uma melhoria significativa à sua interação com os serviços de saúde.
 > **Links Úteis**:
 > - [Histórias de usuários com exemplos e template](https://www.atlassian.com/br/agile/project-management/user-stories)
 > - [Como escrever boas histórias de usuário (User Stories)](https://medium.com/vertice/como-escrever-boas-users-stories-hist%C3%B3rias-de-usu%C3%A1rios-b29c75043fac)
