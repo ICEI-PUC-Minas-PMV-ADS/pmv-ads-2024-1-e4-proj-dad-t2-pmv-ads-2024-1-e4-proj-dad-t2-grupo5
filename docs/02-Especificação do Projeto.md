@@ -7,32 +7,28 @@ Definição do problema e ideia de solução a partir da perspectiva do usuário
 Apresente uma visão geral do que será abordado nesta parte do documento, enumerando as técnicas e/ou ferramentas utilizadas para realizar a especificações do projeto
 
 ## Personas
-| ![Mariana Souza](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-1-e2-proj-int-t2-time4-forkfinder/blob/main/docs/img/Personas/5.png?raw=true)  | **Mariana Souza** |
-| --- | --- |
-| **Idade:** 28 | **Ocupação:** Estudante |
-| **Perfil:** Estudante que encontrou no sistema do SUS uma forma mais acessível de cuidar da saúde. Acompanha o estoque de medicamentos   e solicita resultados exames sem sair de casa, o que é especialmente útil para sua intensa rotina de estudos. |
-| **Motivações:**. Acompanha o estoque de medicamentos e resultados de exames . |
 
 
-| ![João Silva]  <img src="https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-1-e2-proj-int-t2-time4-forkfinder/blob/main/docs/img/Personas/1.png?raw=true" title="Amaury Júnior" align="left">. | **João Silva** |
+| ![Luciana Oliveira](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-1-e2-proj-int-t2-time4-forkfinder/blob/main/docs/img/Personas/5.png?raw=true) | **Luciana Oliveira** |
 | --- | --- |
-| **Idade:** 50 | **Ocupação:** Comerciante |
-| **Perfil:** Comerciante satisfeito com o sistema SUS. A funcionalidade de visualizar a fila de atendimento permite que planeje sua ida ao posto de saúde de forma eficiente, evitando longas esperas e ganhando mais controle sobre seu tempo. |
-| **Motivações:** Visualizar fila de atendimento, Planejar ida ao posto de saúde. |
-| 
+| **Idade:** 25 | **Ocupação:** Estudante |
+| **Perfil:** Estudante  insatisfeita com o sistema do SUS, mas encontrou alívio através de uma aplicação que permite verificar o estoque de medicamentos, a fila da consulta e solicitar resultados de exames. Isso melhorou sua experiência, mesmo que ainda critique a estrutura do sistema público. |
+
+|  <img src="https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-1-e2-proj-int-t2-time4-forkfinder/blob/main/docs/img/Personas/1.png?raw=true" title="Amaury Júnior" align="left">| **Roberto Santos** |
+| --- | --- |
+| **Idade:** 30 | **Ocupação:** arquiteto|
+| **Perfil:** a crítico do sistema do SUS, porém, destaca uma aplicação que oferece informações sobre o estoque de medicamentos, a fila de atendimento e permite solicitar resultados de exames. Ainda acredita que o sistema precisa de melhorias, mas reconhece o benefício da transparência proporcionada pela aplicação. |
 
 | ![Fernanda Oliveira](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-1-e2-proj-int-t2-time4-forkfinder/blob/main/docs/img/Personas/2.png?raw=true) | **Fernanda Oliveira** |
 | --- | --- |
-| **Idade:** 55 | **Ocupação:** Aposentada |
-| **Perfil:** Aposentada preocupada com a saúde. O sistema SUS proporcionou a comodidade de verificar os resultados dos exames sem sair de casa, facilitando significativamente sua vida. |
+| **Idade:** 30 | **Ocupação:** Professora |
+| **Perfil:** Professora descontente com o SUS, mas encontrou conforto em uma aplicação que facilita a visualização do estoque de medicamentos, a fila de consultas e permite solicitar resultados de exames. Embora critique a infraestrutura do sistema, a aplicação melhorou sua interação com os serviços de saúde. |
 
-
-| ![Rafael Oliveira](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-1-e2-proj-int-t2-time4-forkfinder/blob/main/docs/img/Personas/4.png?raw=true) | **Rafael Oliveira** |
+ | ![Rafael Oliveira](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-1-e2-proj-int-t2-time4-forkfinder/blob/main/docs/img/Personas/4.png?raw=true) | **Rafael Oliveira** |
 | --- | --- |
-| **Idade:** 45 | **Ocupação:** Médico |
-| **Perfil:** Médico que encontrou no sistema do SUS uma maneira flexíviel para ver e solicitar dados dos seus pacientes |
-| **Motivações:** Forma rapida e eificaz sobre os dados do paciente . |
-| **Motivações:** Verificar resultados de exames online, Facilidade e comodidade na gestão da saúde. |
+| **Idade:** 35 | **Ocupação:** Agricultor |
+| **Perfil:** Agricultor que critica a falta de acessibilidade no SUS, mas ressalta uma aplicação que o auxilia a verificar o estoque de medicamentos, a fila de consultas e solicitar resultados de exames. Apesar das críticas ao sistema, a aplicação trouxe uma melhoria significativa à sua experiência. |
+
 | 
 > **Links Úteis**:
 > - [Rock Content](https://rockcontent.com/blog/personas/)
