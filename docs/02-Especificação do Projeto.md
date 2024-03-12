@@ -197,11 +197,5 @@ O processo de determinar o orçamento do projeto é uma tarefa que depende, alé
 Abaixo segue gerenciamento de custos do projeto:
 
 ### ORÇAMENTO
-| Recurso necessários | Valor estimado |
-|------------|----------------------|
-| Recursos Humanos | R$ 95.000,00 |
-| Hardware | R$ 7.000,00 |
-| Custos operacionais | R$ 2.500,00 |
-| Software | R$ 10.000,00 |
-| Serviço | R$ 5.000,00 |
-| TOTAL  | R$ 119.500,00 |
+![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e4-proj-dad-t2-pmv-ads-2024-1-e4-proj-dad-t2-grupo5/assets/90806252/3b28ca27-aa77-4e66-8f3a-54e759f6083f)
+
