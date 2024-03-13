@@ -1,19 +1,63 @@
-# Plano de Testes de Software
+# Plano de Testes de Software 
 
 <span style="color:red">Pré-requisitos: <a href="2-Especificação do Projeto.md"> Especificação do Projeto</a></span>, <a href="3-Projeto de Interface.md"> Projeto de Interface</a>
 
-Apresente os cenários de testes utilizados na realização dos testes da sua aplicação. Escolha cenários de testes que demonstrem os requisitos sendo satisfeitos.
+## Objetivos do Testes
+ - Garantir que a aplicação esteja funcionando corretamente nas plataformas esperadas (Web e Mobile).
+ - Verficiar se todas as funcionalidades estão funcionando conforme o esperado.
+ - Assegurar que a aplicação seja intuitiva e fácil de usar.
 
-Enumere quais cenários de testes foram selecionados para teste. Neste tópico o grupo deve detalhar quais funcionalidades avaliadas, o grupo de usuários que foi escolhido para participar do teste e as ferramentas utilizadas.
- 
-## Ferramentas de Testes (Opcional)
+## Grupos de Usuários
+ - **Atendentes**
+ - **Farmácia**
+ - **Médicos**
+ - **Pacientes**
+   
+## Casos de Teste dos Atendentes 
 
-Comente sobre as ferramentas de testes utilizadas.
- 
-> **Links Úteis**:
-> - [IBM - Criação e Geração de Planos de Teste](https://www.ibm.com/developerworks/br/local/rational/criacao_geracao_planos_testes_software/index.html)
-> - [Práticas e Técnicas de Testes Ágeis](http://assiste.serpro.gov.br/serproagil/Apresenta/slides.pdf)
-> -  [Teste de Software: Conceitos e tipos de testes](https://blog.onedaytesting.com.br/teste-de-software/)
-> - [Criação e Geração de Planos de Teste de Software](https://www.ibm.com/developerworks/br/local/rational/criacao_geracao_planos_testes_software/index.html)
-> - [Ferramentas de Test para Java Script](https://geekflare.com/javascript-unit-testing/)
-> - [UX Tools](https://uxdesign.cc/ux-user-research-and-user-testing-tools-2d339d379dc7)
+| Casos de Teste | Descrição 
+| --- | --- | 
+| `CT-001`| *Cadastro de pacientes* 
+| `CT-002`| *Criar fichas de atendimento* 
+| `CT-003`| *Gerenciamento de atendimentos* 
+| `CT-004`| *Consultar e Editar cadastro de pacientes* 
+| `CT-005`| *Criar e Preencher prontuários de pacientes* 
+| `CT-006`| *Visualizar histórico de atendimento do paciente* 
+| `CT-007`| *Emitir atestado médico* 
+| `CT-008`| *Visualizar inventário de medicamentos* 
+
+## Casos de Teste da Farmácia
+
+| Casos de Teste | Descrição 
+| --- | --- | 
+| `CT-001` | *Cadastrar medicamentos*  
+| `CT-002` | *Editar medicamentos*  
+| `CT-003` | *Gerenciar medicamentos*  
+| `CT-004` | *Visualizar medicamentos disponíveis*  
+
+## Casos de Teste do Médico
+
+| Casos de Teste | Descrição 
+| --- | --- | 
+| `CT-001` | *Consultar e Editar cadastro de pacientes*  
+| `CT-002` | *Consultar e Editar prontuário dos pacientes*  
+| `CT-004` | *Visualizar histórico de atendimento do paciente*  
+| `CT-005` | *Solicitar exame para o paciente*  
+| `CT-006` | *Emitir atestado médico*  
+| `CT-007` | *Emitir prescrição médica*  
+| `CT-008` | *Visualizar medicamentos disponíveis*  
+| `CT-009` | *Finalizar atendimento do paciente*  
+
+## Casos de Teste do Paciente
+
+| Casos de Teste | Descrição 
+| --- | --- | 
+| `CT-001` | *Criar Usuário*  
+| `CT-002` | *Recuperar Senha*  
+| `CT-003` | *Autenticar Usuário*  
+| `CT-004` | *Visualizar prontuários antigos*  
+| `CT-005` | *Visualizar atestados antigos*  
+| `CT-006` | *Visualizar medicamentos antigos*  
+
+
+
