@@ -43,11 +43,11 @@ etiquetas:
 ### Divisão de Papéis
 A equipe está organizada da seguinte maneira:
 
-Scrum Master: Leonardo Vilela Cardoso
+**Scrum Master:** Leonardo Vilela Cardoso
 
-Product Owner: Neemias Junio Anjos Lopes
+**Product Owner:** Neemias Junio Anjos Lopes
 
-Equipe de Desenvolvimento:
+**Equipe de Desenvolvimento:**
 
 Eryc Lisboa,
 Lucas Filipe dos Reis,
@@ -56,7 +56,7 @@ Wellington Andrade Rolim,
 Neemias Junio Anjos Lopes,
 Lucas G. Reis
 
-Equipe de Design:
+**Equipe de Design:**
 
 Eryc Lisboa,
 Lucas Filipe dos Reis,
