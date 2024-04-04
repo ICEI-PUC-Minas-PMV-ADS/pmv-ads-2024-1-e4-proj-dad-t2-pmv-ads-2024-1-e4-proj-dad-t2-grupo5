@@ -65,7 +65,6 @@ Wellington Andrade Rolim,
 Neemias Junio Anjos Lopes,
 Lucas G. Reis
 
-### Processo
 
 ### Processo
 
