@@ -43,15 +43,16 @@ As referências abaixo irão auxiliá-lo na geração do artefato “Diagramas d
 > **Tela de atendimentos por paciente**:
 ![Página de ](img/frames-VivaBem/atendimentos-por-paciente.png)
 
-> **Tela de**:
-![Página de ](img/frames-VivaBem/.png)
+> **Tela de estoque médico**:
+![Página de ](img/frames-VivaBem/estoque.png.png)
 
-> **Tela de**:
-![Página de ](img/frames-VivaBem/.png)
+> **Modal de adição de estoque**:
+![Página de ](img/frames-VivaBem/estoque-adicionar.png)
 
-> **Tela de**:
-![Página de ](img/frames-VivaBem/.png)
- 
+> **Modal de edição de estoque**:
+![Página de ](img/frames-VivaBem/estoque-editar.png)
+
+
 > **Links Úteis**:
 > - [Protótipos vs Wireframes](https://www.nngroup.com/videos/prototypes-vs-wireframes-ux-projects/)
 > - [Ferramentas de Wireframes](https://rockcontent.com/blog/wireframes/)
