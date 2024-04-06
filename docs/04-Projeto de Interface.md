@@ -38,7 +38,7 @@ As referências abaixo irão auxiliá-lo na geração do artefato “Diagramas d
 ![Página de pacientes](img/frames-VivaBem/editar-pacientes.png)
 
 > **Tela de Visualização do paciente**:
-![Página de ](img/frames-VivaBem/visualizar-paciente.png)
+![Página de ](img/frames-VivaBem/visualizar-paceinte.png)
 
 > **Tela de atendimentos por paciente**:
 ![Página de ](img/frames-VivaBem/atendimentos-por-paciente.png)
