@@ -1,4 +1,4 @@
-# TÍTULO DO PROJETO
+# Viva Bem
 
 `Análise e Desenvolvimento de Sistemas` 
 
@@ -46,8 +46,10 @@ Assim que a primeira versão do sistema estiver disponível, deverá complementa
 </ol>
 
 # Código
-
 <li><a href="src/README.md"> Código Fonte</a></li>
+
+# Video da entrega da etapa 2
+[Clique aqui para assistir no youtube](https://www.youtube.com/watch?v=XTf2Ft0BzwI&ab_channel=FilipeReis)
 
 # Apresentação
 
