@@ -22,9 +22,21 @@ As referências abaixo irão auxiliá-lo na geração do artefato “Diagramas d
 
 ## Wireframes
 
-![Exemplo de Wireframe](img/frames-VivaBem/LOGIN.png)
+> **Tela de login**:
+![Página de login](img/frames-VivaBem/LOGIN.png)
 
-São protótipos usados em design de interface para sugerir a estrutura de um site web e seu relacionamentos entre suas páginas. Um wireframe web é uma ilustração semelhante do layout de elementos fundamentais na interface.
+> **Fila de atendimentos**:
+![Página de atendimentos](img/frames-VivaBem/Fila-de-Atendimentos.png)
+
+> **Tela de pacientes**:
+![Página de pacientes](img/frames-VivaBem/pacientes.png)
+
+> **Tela de Visualização do paciente**:
+![Página de ](img/frames-VivaBem/visualizar-paciente.png)
+
+> **Tela de **:
+![Página de ](img/frames-VivaBem/.png)
+
  
 > **Links Úteis**:
 > - [Protótipos vs Wireframes](https://www.nngroup.com/videos/prototypes-vs-wireframes-ux-projects/)
