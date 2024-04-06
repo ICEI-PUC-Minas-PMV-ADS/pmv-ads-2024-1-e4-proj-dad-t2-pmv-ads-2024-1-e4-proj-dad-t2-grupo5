@@ -38,13 +38,13 @@ As referências abaixo irão auxiliá-lo na geração do artefato “Diagramas d
 ![Página de pacientes](img/frames-VivaBem/editar-pacientes.png)
 
 > **Tela de Visualização do paciente**:
-![Página de ](img/frames-VivaBem/visualizar-paceinte.png)
+![Página de ](img/frames-VivaBem/visualizar_paceinte.png)
 
 > **Tela de atendimentos por paciente**:
 ![Página de ](img/frames-VivaBem/atendimentos-por-paciente.png)
 
 > **Tela de estoque médico**:
-![Página de ](img/frames-VivaBem/estoque.png.png)
+![Página de ](img/frames-VivaBem/estoque.png)
 
 > **Modal de adição de estoque**:
 ![Página de ](img/frames-VivaBem/estoque-adicionar.png)
