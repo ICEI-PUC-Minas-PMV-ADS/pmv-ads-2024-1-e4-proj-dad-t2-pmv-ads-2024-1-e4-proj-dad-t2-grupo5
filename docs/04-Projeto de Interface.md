@@ -1,12 +1,6 @@
 
 # Projeto de Interface
 
-<span style="color:red">Pré-requisitos: <a href="2-Especificação do Projeto.md"> Documentação de Especificação</a></span>
-
-Visão geral da interação do usuário pelas telas do sistema e protótipo interativo das telas com as funcionalidades que fazem parte do sistema (wireframes).
-
- Apresente as principais interfaces da plataforma. Discuta como ela foi elaborada de forma a atender os requisitos funcionais, não funcionais e histórias de usuário abordados nas <a href="2-Especificação do Projeto.md"> Documentação de Especificação</a>.
-
 ## Diagramas de Fluxo
 ## Fluxo da recepção
 [![Fluxo da recepção](https://mermaid.ink/img/pako:eNqVksFOwzAMhl_FCpdN6i6My4oE2tqBOIAQ48S6g5e4LNAmVZIJ0LZ3AXHgxFP0xUjXbRSQQOQUO_9n_468YFwLYiFLM_3AZ2gcXMeJAn9Gzket1pkq37nU7TZ0OkfQH18Rp6J8K181CA2XyCUpR5Oa6a9Fg8U2DXflC3AUaJ1BoY9XtWxQyZYjmS8hGveF9PUVGiifIZUZgiAgW5DBSVN-4VsuIR5Hm3IGiq_N43XzqA6idTD8dCLISuvkvHKNjpSQuc_vLA0_LZ34GZ1sNgCBa2eTuqgSrdaJzNvtJlrbOx2fowcMKPw-yw-2pnmG1saUglTVP1RUFu6lvTTwQ-p7Cve63e7m3nmQws3Cg-Lx8BtcGM3J2i0-nf6C7__EBXFpcdf8n3Qq8w3ZS3t_kQ22XrHA_8lm-GZhGATDra8v-X4QBXFwuhvZP7KA5WRylMJv8qISJ8zNKKeEhf4q0NwnLFErr8O506MnxVnozJwCNi-E34ZY4q3BnIUpZtZnC1Q3Wm_j1Qc9jQtO?type=png)](https://mermaid.live/edit#pako:eNqVksFOwzAMhl_FCpdN6i6My4oE2tqBOIAQ48S6g5e4LNAmVZIJ0LZ3AXHgxFP0xUjXbRSQQOQUO_9n_468YFwLYiFLM_3AZ2gcXMeJAn9Gzket1pkq37nU7TZ0OkfQH18Rp6J8K181CA2XyCUpR5Oa6a9Fg8U2DXflC3AUaJ1BoY9XtWxQyZYjmS8hGveF9PUVGiifIZUZgiAgW5DBSVN-4VsuIR5Hm3IGiq_N43XzqA6idTD8dCLISuvkvHKNjpSQuc_vLA0_LZ34GZ1sNgCBa2eTuqgSrdaJzNvtJlrbOx2fowcMKPw-yw-2pnmG1saUglTVP1RUFu6lvTTwQ-p7Cve63e7m3nmQws3Cg-Lx8BtcGM3J2i0-nf6C7__EBXFpcdf8n3Qq8w3ZS3t_kQ22XrHA_8lm-GZhGATDra8v-X4QBXFwuhvZP7KA5WRylMJv8qISJ8zNKKeEhf4q0NwnLFErr8O506MnxVnozJwCNi-E34ZY4q3BnIUpZtZnC1Q3Wm_j1Qc9jQtO)
