@@ -31,12 +31,26 @@ As referências abaixo irão auxiliá-lo na geração do artefato “Diagramas d
 > **Tela de pacientes**:
 ![Página de pacientes](img/frames-VivaBem/pacientes.png)
 
+> **Modal adicionar paciente**:
+![Página de pacientes](img/frames-VivaBem/Adic-pacientes.png)
+
+> **Modal editar paciente**:
+![Página de pacientes](img/frames-VivaBem/editar-pacientes.png)
+
 > **Tela de Visualização do paciente**:
 ![Página de ](img/frames-VivaBem/visualizar-paciente.png)
 
-> **Tela de **:
+> **Tela de atendimentos por paciente**:
+![Página de ](img/frames-VivaBem/atendimentos-por-paciente.png)
+
+> **Tela de**:
 ![Página de ](img/frames-VivaBem/.png)
 
+> **Tela de**:
+![Página de ](img/frames-VivaBem/.png)
+
+> **Tela de**:
+![Página de ](img/frames-VivaBem/.png)
  
 > **Links Úteis**:
 > - [Protótipos vs Wireframes](https://www.nngroup.com/videos/prototypes-vs-wireframes-ux-projects/)
