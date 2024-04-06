@@ -7,18 +7,11 @@ Visão geral da interação do usuário pelas telas do sistema e protótipo inte
 
  Apresente as principais interfaces da plataforma. Discuta como ela foi elaborada de forma a atender os requisitos funcionais, não funcionais e histórias de usuário abordados nas <a href="2-Especificação do Projeto.md"> Documentação de Especificação</a>.
 
-## Diagrama de Fluxo
+## Diagramas de Fluxo
+[![Fluxo da recepção](https://mermaid.ink/img/pako:eNqVksFOwzAMhl_FCpdN6i6My4oE2tqBOIAQ48S6g5e4LNAmVZIJ0LZ3AXHgxFP0xUjXbRSQQPSS2P0_-3fkBeNaEAtZmukHPkPj4DpOFPhv5HzUap2p8p1L3W5Dp3ME_fEVcSrKt_JVg9BwiVyScjSpmf5aNFhs03BXvgBHgdYZFPp4VcsGlWw5kvkSonFfSF9foYHyGVKZIQgCsgUZnDTlF77lEuJxtClnoPjaPF43j-ogWgfDTyeCrLTVqQEdKSFzn945Gn46OvEjOtmsDwLXxiZ1TSVarROZt9tNtHZ3Oj5HDxhQ-H2UH2xN8wytjSkFqapnqKgs3Et7aeBn1PcU7nW73c298yCFm4UHxePhN7gwmpO1W3w6_QXf_4kL4tLirvk_6VTmG7KX9v4iG2y9YYF_k83wzcIwCIZbX1_y_SAK4uB0N7L_yQKWk8lRCr_Ii0qcMDejnBIW-qtAc5-wRK28DudOj54UZ6EzcwrYvBB-G2KJtwZzFqaYWZ8tUN1ovY1XH-ISCtU?type=png)](https://mermaid.live/edit#pako:eNqVksFOwzAMhl_FCpdN6i6My4oE2tqBOIAQ48S6g5e4LNAmVZIJ0LZ3AXHgxFP0xUjXbRSQQPSS2P0_-3fkBeNaEAtZmukHPkPj4DpOFPhv5HzUap2p8p1L3W5Dp3ME_fEVcSrKt_JVg9BwiVyScjSpmf5aNFhs03BXvgBHgdYZFPp4VcsGlWw5kvkSonFfSF9foYHyGVKZIQgCsgUZnDTlF77lEuJxtClnoPjaPF43j-ogWgfDTyeCrLTVqQEdKSFzn945Gn46OvEjOtmsDwLXxiZ1TSVarROZt9tNtHZ3Oj5HDxhQ-H2UH2xN8wytjSkFqapnqKgs3Et7aeBn1PcU7nW73c298yCFm4UHxePhN7gwmpO1W3w6_QXf_4kL4tLirvk_6VTmG7KX9v4iG2y9YYF_k83wzcIwCIZbX1_y_SAK4uB0N7L_yQKWk8lRCr_Ii0qcMDejnBIW-qtAc5-wRK28DudOj54UZ6EzcwrYvBB-G2KJtwZzFqaYWZ8tUN1ovY1XH-ISCtU)
 
-O diagrama apresenta o estudo do fluxo de interação do usuário com o sistema interativo e  muitas vezes sem a necessidade do desenho do design das telas da interface. Isso permite que o design das interações seja bem planejado e gere impacto na qualidade no design do wireframe interativo que será desenvolvido logo em seguida.
 
-O diagrama de fluxo pode ser desenvolvido com “boxes” que possuem internamente a indicação dos principais elementos de interface - tais como menus e acessos - e funcionalidades, tais como editar, pesquisar, filtrar, configurar - e a conexão entre esses boxes a partir do processo de interação. Você pode ver mais explicações e exemplos https://www.lucidchart.com/blog/how-to-make-a-user-flow-diagram.
 
-![Exemplo de Diagrama de Fluxo](img/diagramafluxo2.jpg)
-
-As referências abaixo irão auxiliá-lo na geração do artefato “Diagramas de Fluxo”.
-
-> **Links Úteis**:
-> - [Fluxograma online: seis sites para fazer gráfico sem instalar nada | Produtividade | TechTudo](https://www.techtudo.com.br/listas/2019/03/fluxograma-online-seis-sites-para-fazer-grafico-sem-instalar-nada.ghtml)
 
 ## Wireframes
 
