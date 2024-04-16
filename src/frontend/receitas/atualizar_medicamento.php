@@ -1,6 +1,6 @@
 <?php
 include '../conexao.php';
-
+//  comentário aleatório
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id = $_POST['id'];
     $nome = $_POST['nome'];
