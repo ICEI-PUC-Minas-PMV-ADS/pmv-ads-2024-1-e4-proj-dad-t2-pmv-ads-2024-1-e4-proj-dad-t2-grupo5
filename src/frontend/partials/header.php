@@ -16,7 +16,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-custom">
     <a class="navbar-brand" href="http://<?php echo $domain; ?>/prontuario">
-        <img src="img/logo.png" width="30" height="30" class="d-inline-block align-top" alt="Logotipo">
+        <img src="http://<?php echo $domain; ?>/img/logo.png" width="30" height="30" class="d-inline-block align-top" alt="Logotipo">
         Viva Bem
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
