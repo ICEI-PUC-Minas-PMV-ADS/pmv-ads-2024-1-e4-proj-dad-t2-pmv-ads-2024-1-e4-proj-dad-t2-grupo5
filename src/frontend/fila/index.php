@@ -72,11 +72,14 @@ if (!$estoque || curl_errno($ch)) {
                         newRow.append('<td>' + paciente.pacienteId.nome + '</td>');
                         newRow.append('<td>' + paciente.idade + '</td>');
                         newRow.append('<td>' + paciente.tipoAtendimento + '</td>');
-                        newRow.append('<td>' + new Date(paciente.dataHoraRecepcao).toLocaleString() + '</td>');
+                        var dataHora = new Date(paciente.dataHoraRecepcao);
+                        var dataFormatada = dataHora.toLocaleDateString('pt-BR');
+                        var horaFormatada = dataHora.toLocaleTimeString('pt-BR');
+                        newRow.append('<td>' + dataFormatada + '<br>' + horaFormatada + '</td>');
                         newRow.append('<td>' + paciente.profissional.nome + '</td>');
                         newRow.append('<td>' +
-                            '<button type="button" class="btn btn-primary chamarBtn" data-id="' + paciente._id + '">Chamar</button>' +
-                            '<button type="button" class="btn btn-danger cancelarBtn" data-id="' + paciente._id + '">Cancelar</button>' +
+                            '<button type="button" class="btn ml-2 btn-success chamarBtn" data-id="' + paciente._id + '">Chamar</button>' +
+                            '<button type="button" class="btn ml-2 btn-danger cancelarBtn" data-id="' + paciente._id + '">Cancelar</button>' +
                             '</td>');
                         $('#tabelaFila').append(newRow);
                     }
