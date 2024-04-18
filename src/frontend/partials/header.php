@@ -1,5 +1,6 @@
 <?php
-    $domain = $_SERVER['HTTP_HOST'];
+    $http = $_SERVER['HTTP_HOST'];
+    $domain = $http . "/prontuario/src/frontend";
 ?>
 
 <style>
