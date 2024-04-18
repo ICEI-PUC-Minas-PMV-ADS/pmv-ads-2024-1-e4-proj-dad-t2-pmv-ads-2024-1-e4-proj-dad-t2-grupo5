@@ -7,6 +7,7 @@ $dotenv->load();
 $apiKey = $_ENV['API_KEY'];
 
 include '../partials/header.php';
+include '../partials/footer.php';
 
 
 $ch = curl_init();
