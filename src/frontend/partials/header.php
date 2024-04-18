@@ -26,16 +26,16 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="http://<?php echo $domain; ?>/prontuario/frontend/fila/">Fila</a>
+                <a class="nav-link" href="http://<?php echo $domain; ?>/fila/">Fila</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="http://<?php echo $domain; ?>/prontuario/frontend/estoque/">Estoque</a>
+                <a class="nav-link" href="http://<?php echo $domain; ?>/estoque/">Estoque</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="http://<?php echo $domain; ?>/prontuario/frontend/pacientes/">Pacientes</a>
+                <a class="nav-link" href="http://<?php echo $domain; ?>/pacientes/">Pacientes</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="http://<?php echo $domain; ?>/prontuario/frontend/receitas/">Receitas</a>
+                <a class="nav-link" href="http://<?php echo $domain; ?>/receitas/">Receitas</a>
             </li>
         </ul>
     </div>
