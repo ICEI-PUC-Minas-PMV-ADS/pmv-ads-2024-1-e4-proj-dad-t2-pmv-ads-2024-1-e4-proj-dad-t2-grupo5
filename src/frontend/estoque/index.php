@@ -7,7 +7,6 @@ $dotenv->load();
 $apiKey = $_ENV['API_KEY'];
 
 include '../partials/header.php';
-include '../partials/footer.php';
 
 
 $ch = curl_init();
@@ -50,14 +49,20 @@ if (!$estoque || curl_errno($ch)) {
 
         <h2>Estoque</h2>
         <button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#adicionarMedicamentoModal">
-            Adicionar estoque
+            Adicionar Estoque
+        </button>
+        <button type="button" class="btn btn-danger mb-3" id="btnSolicitarReposicao">
+            Solicitar Reposição
+        </button>
+        <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="">
+            Solicitar Medicamento Excepcional
         </button>
         <table class="table">
             <thead>
                 <tr>
                     <th>Nome</th>
                     <th>Código</th>
-                    <th>Preço</th>
+                    
                     <th>Quantidade</th>
                     <th>Ações</th>
                 </tr>         
@@ -68,7 +73,7 @@ if (!$estoque || curl_errno($ch)) {
                         <tr>         
                             <td><?php echo htmlspecialchars($medicamento['nome']); ?></td>
                             <td><?php echo htmlspecialchars($medicamento['codigo']); ?></td>
-                            <td><?php echo htmlspecialchars($medicamento['preco']); ?></td>
+                            
                             <td style="color: <?php echo $medicamento['quantidade'] == 0 ? 'red' : 'green'; ?>">
                                 <?php echo htmlspecialchars($medicamento['quantidade']); ?>
                             </td>
@@ -110,10 +115,7 @@ if (!$estoque || curl_errno($ch)) {
                         <label for="editarCodigoMedicamento">Codigo:</label>
                         <input type="number" class="form-control" id="editarCodigoMedicamento" name="codigo">
                     </div>
-                    <div class="form-group">
-                        <label for="editarPrecoMedicamento">Preço:</label>
-                        <input type="number" class="form-control" id="editarPrecoMedicamento" name="preco">
-                    </div>
+             
                     <div class="form-group">
                         <label for="editarQuantidadeMedicamento">Quantidade:</label>
                         <input type="number" class="form-control" id="editarQuantidadeMedicamento" name="quantidade">
@@ -149,10 +151,7 @@ if (!$estoque || curl_errno($ch)) {
                 <label for="codigoMedicamento">Código</label>
                 <input type="text" class="form-control" id="codigoMedicamento" name="codigo">
             </div>
-            <div class="form-group">
-                <label for="precoMedicamento">Preço</label>
-                <input type="number" step="0.01" class="form-control" id="precoMedicamento" name="preco">
-            </div>
+   
             <div class="form-group">
                 <label for="quantidadeMedicamento">Quantidade</label>
                 <input type="number" class="form-control" id="quantidadeMedicamento" name="quantidade">
@@ -232,13 +231,13 @@ if (!$estoque || curl_errno($ch)) {
             var id = $(this).data('id');
             var nome = $(this).data('nome');
             var codigo = $(this).data('codigo');
-            var preco = $(this).data('preco');
+        
             var quantidade = $(this).data('quantidade');
 
             $('#editarIdMedicamento').val(id);
             $('#editarNomeMedicamento').val(nome);
             $('#editarCodigoMedicamento').val(codigo);
-            $('#editarPrecoMedicamento').val(preco);
+      
             $('#editarQuantidadeMedicamento').val(quantidade);
         });
 
@@ -246,7 +245,7 @@ if (!$estoque || curl_errno($ch)) {
         var id = $('#editarIdMedicamento').val();
         var nome = $('#editarNomeMedicamento').val();
         var codigo = $('#editarCodigoMedicamento').val();
-        var preco = $('#editarPrecoMedicamento').val();
+
         var quantidade = $('#editarQuantidadeMedicamento').val();
 
         $.ajax({
@@ -259,7 +258,6 @@ if (!$estoque || curl_errno($ch)) {
             data: JSON.stringify({
                 nome: nome,
                 codigo: codigo,
-                preco: preco,
                 quantidade: quantidade
             }),
             success: function(response) {
@@ -275,7 +273,6 @@ $('#salvarMedicamento').on('click', function() {
     var dados = {
         nome: $('#nomeMedicamento').val(),
         codigo: $('#codigoMedicamento').val(),
-        preco: $('#precoMedicamento').val(),
         quantidade: $('#quantidadeMedicamento').val(),
     };
 
@@ -326,12 +323,41 @@ $('#salvarMedicamento').on('click', function() {
         });
     });
 
+    document.getElementById('btnSolicitarReposicao').addEventListener('click', async () => {
+        try {
+            // Exibir um popup com a mensagem "Reposição Solicitada com Sucesso"
+            alert('Reposição Solicitada com Sucesso');
+
+            // Enviar uma requisição para a URL de solicitação de reposição
+            const response = await fetch('http://localhost:3001/reposicao/repor/6622c3ef98ae18494d3f25e5', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({}) // Se necessário, você pode enviar dados no corpo da requisição
+            });
+
+            if (response.ok) {
+                console.log('Reposição solicitada com sucesso!');
+            } else {
+                console.error('Erro ao solicitar reposição:', response.status);
+                alert('Erro ao solicitar reposição. Verifique o console para mais detalhes.');
+            }
+        } catch (error) {
+            console.error('Erro ao solicitar reposição:', error);
+            alert('Erro ao solicitar reposição. Verifique o console para mais detalhes.');
+        }
+    });
+
 </script>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
+<?php
+include '../partials/footer.php';
+?>
 
 </body>
 </html>
