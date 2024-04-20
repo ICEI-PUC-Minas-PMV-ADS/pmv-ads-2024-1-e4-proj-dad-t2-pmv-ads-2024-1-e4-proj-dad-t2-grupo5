@@ -37,8 +37,7 @@ if (!$pacientes || curl_errno($ch)) {
     />
     <script src="https://code.jquery.com/jquery-4.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-
-
+    <link rel="stylesheet" href="http://<?php echo $domain; ?>/style.css">
   </head>
 
   <style>

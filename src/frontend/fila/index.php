@@ -5,7 +5,7 @@ $dotenv->load();
 $apiKey = $_ENV['API_KEY'];
 
 include '../partials/header.php';
-include '../partials/footer.php';
+
 
 
 $ch = curl_init();
@@ -34,6 +34,7 @@ if (!$estoque || curl_errno($ch)) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fila de Pacientes</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://<?php echo $domain; ?>/style.css">
 </head>
 <body>
 
@@ -127,5 +128,8 @@ if (!$estoque || curl_errno($ch)) {
     });
 </script>
 
+<?php
+    include '../partials/footer.php';
+?>
 </body>
 </html>
