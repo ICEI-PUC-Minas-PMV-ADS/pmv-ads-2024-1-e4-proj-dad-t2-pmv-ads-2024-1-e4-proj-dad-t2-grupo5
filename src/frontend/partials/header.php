@@ -2,7 +2,7 @@
     $http = $_SERVER['HTTP_HOST'];
     $domain = $http . "/prontuario/src/frontend";
 ?>
-
+<!-- teste -->
 <style>
     .navbar-custom {
         background-color: #AF1717; 
