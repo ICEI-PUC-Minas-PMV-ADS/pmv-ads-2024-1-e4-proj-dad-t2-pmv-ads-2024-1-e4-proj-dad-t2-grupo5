@@ -5,7 +5,7 @@
 
 
 <nav class="navbar navbar-custom navbar-expand-lg">
-    <a class="navbar-brand" href="http://<?php echo $domain; ?>/prontuario">
+    <a class="navbar-brand" href="http://<?php echo $domain; ?>">
         <img src="http://<?php echo $domain; ?>/img/logo.png" width="30" height="30" class="d-inline-block align-top" alt="Logotipo">
         Viva Bem
     </a>
