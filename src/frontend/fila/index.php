@@ -71,7 +71,7 @@ if (!$estoque || curl_errno($ch)) {
                 response.forEach(function(paciente) {
                     if (!paciente.validacoes.atendido) {
                         var newRow = $('<tr>');
-                        newRow.append('<td>' + paciente.pacienteId.nome + '</td>');
+                        newRow.append('<td>' + paciente.nome + '</td>');
                         newRow.append('<td>' + paciente.idade + '</td>');
                         newRow.append('<td>' + paciente.tipoAtendimento + '</td>');
                         var dataHora = new Date(paciente.dataHoraRecepcao);

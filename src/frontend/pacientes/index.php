@@ -31,6 +31,7 @@ if (!$pacientes || curl_errno($ch)) {
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pacientes</title>
     <link
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -39,55 +40,21 @@ if (!$pacientes || curl_errno($ch)) {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <link rel="stylesheet" href="http://<?php echo $domain; ?>/style.css">
   </head>
-
-  <style>
-    body {
-      height: 100vh;
-    }
-    section {
-      display: grid;
-      grid-template-rows: repeat(2, 1fr);
-      grid-template-columns: repeat(2, 1fr);
-      height: 80vh;
-      margin: 0;
-      gap: 15px;
-    }
-
-    main {
-      margin: 20px 5%;
-    }
-
-    nav {
-      margin-bottom: 25px;
-      top: 0;
-    }
-
-    #calendar{
-      margin: 20px 50px;
-      height: 70%;
-    }
-
-    tbody tr{
-      height: 25px;
-    }
-  </style>
-
   <body>
-   
     <?php
-    require './modals/tabelaModal.php'
+        require './modals/tabelaModal.php'
     ?>
 
     <?php
-    require './modals/visualizarPacienteModal.php'
+        require './modals/visualizarPacienteModal.php'
     ?>
 
     <?php
-    require './modals/editarPacienteModal.php'
+        require './modals/editarPacienteModal.php'
     ?>
 
     <?php
-    require './modals/adicionarPacienteModal.php'
+        require './modals/adicionarPacienteModal.php'
     ?>
 
     <script>
