@@ -1,33 +1,6 @@
-<?php
-
-require __DIR__ . '/../vendor/autoload.php';
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/..');
-$dotenv->load();
-
-// Obtém a chave da API do ambiente
-$apiKey = $_ENV['API_KEY'];
-
-include '../partials/header.php';
-
-$ch = curl_init();
-
-curl_setopt($ch, CURLOPT_URL, "http://localhost:3001/receita");
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-    "x-api-key: $apiKey"
-));
-
-$resposta = curl_exec($ch);
-
-curl_close($ch);
-
-$receita = json_decode($resposta, true);
-
-if (!$receita || curl_errno($ch)) {
-    // die('Erro ao acessar a API: ' . curl_error($ch));
-}
-
-?>
+    <?php
+        include '../partials/header.php';
+    ?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -36,22 +9,23 @@ if (!$receita || curl_errno($ch)) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Controle de Receitas</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://<?php echo $domain; ?>/style.css">
+    <link rel="stylesheet" href="../style.css">
 </head>
 <body>
 
 <main>
+    
     <div class="container mt-4">
+        
+        <h2>Receita</h2>
         <!-- Filtro de texto -->
+        <button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#adicionarMedicamentoModal">
+            Adicionar Receita
+        </button>
         <div class="form-group">
             <label for="filtroTexto">Filtrar por texto:</label>
             <input type="text" class="form-control" id="filtroTexto">
         </div>
-
-        <h2>Receita</h2>
-        <button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#adicionarMedicamentoModal">
-            Adicionar Receita
-        </button>
         <table class="table">
             <thead>
                 <tr>
@@ -63,53 +37,28 @@ if (!$receita || curl_errno($ch)) {
                 </tr>         
             </thead>
             <tbody id="tabelaEstoque">
-                <?php if (!empty($receita)): ?>
-                    <?php foreach ($receita as $receitaAtendimento): ?>
-                        <tr>         
-                            <td><?php echo htmlspecialchars($receitaAtendimento['atendimentoRef']['pacienteId']['nome']); ?></td>
-                            <td><?php echo date('d/m/Y', strtotime($receitaAtendimento['dataInicio'])); ?></td>
-                            <td><?php echo date('d/m/Y', strtotime($receitaAtendimento['dataFim'])); ?></td>
-                            <td>
-                                <button type="button" class="btn btn-primary editarReceitaBtn">
-                                    Editar
-                                </button>
-                            </td>
-                            <td>
-                                <button type="button" class="btn btn-primary imprimirReceitaBtn" data-receita='<?php echo json_encode($receitaAtendimento); ?>'>
-                                    Imprimir Receita
-                                </button>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-
-                <?php else: ?>
-                    <tr>
-                        <td colspan="4">Nenhum medicamento encontrado.</td>
-                    </tr>
-                <?php endif; ?>
+                <!-- Os dados da tabela serão inseridos aqui via JavaScript -->
             </tbody>
         </table>
     </div>
 </main>
 
 <script>
-    $(document).ready(function() {
-        $('.imprimirReceitaBtn').click(function() {
-            var receita = $(this).data('receita');
-            var receitaTitulo = `Receita${receita._id}${receita.atendimentoRef.pacienteId.nome}`;
-
+    // Evento click para o botão imprimir
+    document.addEventListener('click', function(event) {
+        if (event.target.classList.contains('imprimirReceitaBtn')) {
+            var receita = JSON.parse(event.target.getAttribute('data-receita'));
+    
             var iframe = document.createElement('iframe');
             iframe.style.display = 'none';
             document.body.appendChild(iframe);
-
-            iframe.src = 'modelo_impressao.html';
-
-            var dataInicio = new Date(receita.dataInicio);
-            var dataFim = new Date(receita.dataFim);
-            var options = { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' };
-
-
+    
+            // Carrega o conteúdo do iframe antes da impressão
             iframe.onload = function() {
+                var dataInicio = new Date(receita.dataInicio);
+                var dataFim = new Date(receita.dataFim);
+                var options = { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' };
+    
                 var html = `
                     <h2>Detalhes da Receita</h2>
                     <p><strong>Paciente:</strong> ${receita.atendimentoRef.pacienteId.nome}</p>
@@ -124,25 +73,79 @@ if (!$receita || curl_errno($ch)) {
                     </ul>
                     <p><strong>Observações:</strong> ${receita.observacoes}</p>
                 `;
-
+    
                 var doc = iframe.contentWindow.document;
                 doc.open();
                 doc.write('<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">');
                 doc.write('<link rel="stylesheet" href="style.css">');
                 doc.write(html);
                 doc.close();
-
+    
+                // Espera antes da impressão
                 setTimeout(function() {
                     iframe.contentWindow.print();
-                }, 2000); 
-
-
-                setTimeout(function() {
-                    document.body.removeChild(iframe);
-                }, 20000);
+                    // Remove o iframe após a impressão
+                    setTimeout(function() {
+                        document.body.removeChild(iframe);
+                    }, 2000);
+                }, 1000); 
             };
-        });
+    
+            // Define o URL do iframe após a função onload
+            iframe.src = 'modelo_impressao.html';
+        }
     });
+    
+    document.addEventListener('DOMContentLoaded', () => {
+        // Função para carregar os dados da API e popular a tabela
+        const carregarDados = async () => {
+            try {
+                const response = await fetch('http://localhost:3001/receita');
+                const data = await response.json();
+
+                if (data && data.length > 0) {
+                    const tabelaEstoque = document.getElementById('tabelaEstoque');
+
+                    data.forEach(receitaAtendimento => {
+                        const tr = document.createElement('tr');
+
+                        tr.innerHTML = `
+                            <td>${receitaAtendimento.atendimentoRef.pacienteId.nome}</td>
+                            <td>${new Date(receitaAtendimento.dataInicio).toLocaleDateString('pt-BR')}</td>
+                            <td>${new Date(receitaAtendimento.dataFim).toLocaleDateString('pt-BR')}</td>
+                            <td>
+                                <button type="button" class="btn btn-primary editarReceitaBtn">
+                                    Editar
+                                </button>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-primary imprimirReceitaBtn" data-receita='${JSON.stringify(receitaAtendimento)}'>
+                                    Imprimir Receita
+                                </button>
+                            </td>
+                        `;
+
+                        tabelaEstoque.appendChild(tr);
+                    });
+                } else {
+                    const tabelaEstoque = document.getElementById('tabelaEstoque');
+                    tabelaEstoque.innerHTML = `
+                        <tr>
+                            <td colspan="5">Nenhum medicamento encontrado.</td>
+                        </tr>
+                    `;
+                }
+            } catch (error) {
+                console.error('Erro ao carregar os dados:', error);
+            }
+        };
+
+        // Chamar a função para carregar os dados
+        carregarDados();
+    });
+
+
+
 </script>
 
 
