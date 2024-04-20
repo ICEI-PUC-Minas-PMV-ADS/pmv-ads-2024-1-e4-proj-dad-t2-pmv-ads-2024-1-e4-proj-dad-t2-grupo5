@@ -1,0 +1,108 @@
+:root {
+    --cor-principal: #AF1717;
+    --cor-secundaria: #ffffff;
+    --cor-fonte: #000000;
+
+    --fonte-titulo: 19px;
+    --fonte-paragrafo: 12px;
+}
+
+body {
+    background-color: var(--cor-secundaria);
+    color: var(--cor-fonte);
+    height: 100vh;
+}
+
+.navbar-custom {
+    background-color: var(--cor-principal);
+}
+
+.navbar-custom .navbar-brand,
+.navbar-custom .navbar-nav .nav-link {
+    color: var(--cor-secundaria);
+    font-size: 20px;
+}
+
+section {
+    display: grid;
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+    height: 80vh;
+    margin: 0;
+    gap: 15px;
+}
+
+main {
+    margin: 20px 5%;
+}
+
+nav {
+    margin-bottom: 25px;
+    top: 0;
+}
+
+#calendar {
+    margin: 20px 50px;
+    height: 70%;
+}
+
+tbody tr {
+    height: 25px;
+}
+
+/* neemias - login */
+h3 {
+    text-align: right;
+    margin-right: 50px;
+    font-size: 15px;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+h4 {
+    text-align: right;
+    margin-right: 50px;
+    font-size: 13px;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.container-box {
+    max-width: 300px;
+    margin: 100px auto;
+    padding: 25px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    background-color: #f9f9f9;
+    margin-bottom: 100px;
+}
+
+.boxselect {
+    text-align: center;
+}
+
+.box {
+    margin-bottom: 25px;
+}
+
+.buttonconfirmar {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #ffffff;
+    background-color: #28a745;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 8px;
+}
+
+.buttonconfirmar:hover {
+    background-color: #218838;
+}
+
+h2 {
+    text-align: center;
+    color: #4169E1;
+    font-size: 15px;
+    font-family: Arial, sans-serif;
+}

@@ -1,24 +1,13 @@
 <?php
     $http = $_SERVER['HTTP_HOST'];
-    $domain = $http . "/prontuario/src/frontend";
+    $domain = $http . "/vivabem/pmv-ads-2024-1-e4-proj-dad-t2-pmv-ads-2024-1-e4-proj-dad-t2-grupo5/src/frontend/";
 ?>
-<!-- teste -->
-<style>
-    .navbar-custom {
-        background-color: #AF1717; 
-    }
-    .navbar-custom .navbar-brand,
-    .navbar-custom .navbar-nav .nav-link {
-        color: white; 
-        font-size: 20px;
-        font-weight: bold;
-    }
-</style>
 
-<nav class="navbar navbar-expand-lg navbar-custom">
+
+<nav class="navbar navbar-custom navbar-expand-lg">
     <a class="navbar-brand" href="http://<?php echo $domain; ?>/prontuario">
-        <img src="http://<?php echo $domain; ?>/img/logo.png" width="30" height="30" class="d-inline-block align-top" alt="Logotipo">
-        Viva Bem
+        <!-- <img src="seu-logotipo.png" width="30" height="30" class="d-inline-block align-top" alt="Logotipo"> -->
+        Logo
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -26,16 +15,16 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="http://<?php echo $domain; ?>/fila/">Fila</a>
+                <a class="nav-link" href="http://<?php echo $domain; ?>/prontuario/frontend/fila/">fila</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="http://<?php echo $domain; ?>/estoque/">Estoque</a>
+                <a class="nav-link" href="http://<?php echo $domain; ?>/prontuario/frontend/estoque/">Estoque</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="http://<?php echo $domain; ?>/pacientes/">Pacientes</a>
+                <a class="nav-link" href="http://<?php echo $domain; ?>/prontuario/frontend/pacientes/">Pacientes</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="http://<?php echo $domain; ?>/receitas/">Receitas</a>
+                <a class="nav-link" href="http://<?php echo $domain; ?>/prontuario/frontend/receitas/">Receitas</a>
             </li>
         </ul>
     </div>
