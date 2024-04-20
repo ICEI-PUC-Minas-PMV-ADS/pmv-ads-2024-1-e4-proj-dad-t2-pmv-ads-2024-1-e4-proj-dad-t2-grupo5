@@ -51,6 +51,13 @@ tbody tr {
 }
 
 /* neemias - login */
+h2 {
+    text-align: center;
+    color: #4169E1;
+    font-size: 15px;
+    font-family: Arial, sans-serif;
+}
+
 h3 {
     text-align: right;
     margin-right: 50px;
@@ -100,9 +107,3 @@ h4 {
     background-color: #218838;
 }
 
-h2 {
-    text-align: center;
-    color: #4169E1;
-    font-size: 15px;
-    font-family: Arial, sans-serif;
-}
