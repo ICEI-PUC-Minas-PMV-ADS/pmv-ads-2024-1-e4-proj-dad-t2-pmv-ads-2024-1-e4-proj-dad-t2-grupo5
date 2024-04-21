@@ -128,17 +128,18 @@
                             <select class="form-control" id="novopacienteEtnia" name="etnia">
                                 <option value="">Selecione uma etnia</option>
                                 <option value="Parda">Parda</option>
-                                <option value="Negro">Negro</option>
-                                <option value="Branco">Branco</option>
+                                <option value="Negra">Negra</option>
+                                <option value="Branca">Branca</option>
                             </select>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="novopacienteEstadoCivil">Estado civil</label>
                             <select class="form-control" id="novopacienteEstadoCivil" name="estadoCivil">
                                 <option value="">Selecione o estado civil</option>
-                                <option value="Solteiro">Solteiro</option>
-                                <option value="Casado">Casado</option>
-                                <option value="Divorciado">Divorciado</option>
+                                <option value="Solteiro">Solteiro(a)</option>
+                                <option value="Casado">Casado(a)</option>
+                                <option value="Divorciado">Divorciado(a)</option>
+                                <option value="Viuvo">Viúvo(a)</option>
                             </select>
                         </div>
                     </div>
