@@ -8,11 +8,8 @@
                 </button>
             </div>
             <div class="modal-body">
-                <!-- Dados do médico -->
                 <div id="dadosMedico"></div>
-                <!-- Dados do paciente -->
                 <div id="dadosPaciente"></div>
-                <!-- Descrição do atendimento -->
                 <div id="descricaoAtendimento"></div>
             </div>
         </div>

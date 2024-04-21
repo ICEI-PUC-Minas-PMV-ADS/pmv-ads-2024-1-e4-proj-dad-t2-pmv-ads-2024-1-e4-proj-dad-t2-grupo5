@@ -1,77 +1,50 @@
 <?php
-// carrega as variáveis de ambiente para poder fazer as requisições com segurança
+    require __DIR__ . '/../vendor/autoload.php';
+    use Dotenv\Dotenv;
+    $dotenv = Dotenv::createImmutable(__DIR__ . '/..');
+    $dotenv->load();                                                        
+    $apiKey = $_ENV['API_KEY'];//keys necessárias para requerer dados da API
 
 
-require __DIR__ . '/../vendor/autoload.php';
-use Dotenv\Dotenv;
-$dotenv = Dotenv::createImmutable(__DIR__ . '/..');
-$dotenv->load();                                                        
-$apiKey = $_ENV['API_KEY'];//keys necessárias para requerer dados da API
+// lógica da requisicao  ##############################################################
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, "http://localhost:3001/pacientes");
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, ["x-api-key: $apiKey"]);
 
+    $respostaPacientes = curl_exec($ch);
+    curl_close($ch);
 
-// ################################################################
+    $pacientes = json_decode($respostaPacientes, true);
 
-
-
-
-
-// lógica da requisição
-$ch = curl_init();
-
-// configurações da requisição
-curl_setopt($ch, CURLOPT_URL, "http://localhost:3001/pacientes");
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($ch, CURLOPT_HTTPHEADER, ["x-api-key: $apiKey"]);
-
-$respostaPacientes = curl_exec($ch);
-curl_close($ch);
-
-// Cria um json com todos os pacientes encontrados na API
-$pacientes = json_decode($respostaPacientes, true);
-
-
-
-
-
-
-
-
-// ################################################################
-
-// lógica para buscar todos os atendimentos de um paciente específico via API
-
-
+// lógica para buscar todos os atendimentos de um paciente específico via API  ##########
 
 // Aqui ele verifica se o Paciente ID está presente na URL
-if (isset($_GET['pacienteId'])) {
-    $pacienteId = $_GET['pacienteId'];
-} else if (isset($_POST['pacienteId'])) {
-    $pacienteId = $_POST['pacienteId'];
-}
-
-$atendimentos = [];
+    if (isset($_GET['pacienteId'])) {
+        $pacienteId = $_GET['pacienteId'];
+    } else if (isset($_POST['pacienteId'])) {
+        $pacienteId = $_POST['pacienteId'];
+    }
+    $atendimentos = [];
 
 // Verifica se o $pacienteId está definido antes de buscar os atendimentos do paciente
-if ($pacienteId !== null) {
-    $chAtendimentos = curl_init();
+    if ($pacienteId !== null) {
+        $chAtendimentos = curl_init();
 
-    curl_setopt($chAtendimentos, CURLOPT_URL, "http://localhost:3001/atendimentos/paciente/$pacienteId");
-    curl_setopt($chAtendimentos, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($chAtendimentos, CURLOPT_HTTPHEADER, ["x-api-key: $apiKey"]);
+        curl_setopt($chAtendimentos, CURLOPT_URL, "http://localhost:3001/atendimentos/paciente/$pacienteId");
+        curl_setopt($chAtendimentos, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($chAtendimentos, CURLOPT_HTTPHEADER, ["x-api-key: $apiKey"]);
 
-    $respostaAtendimentos = curl_exec($chAtendimentos);
+        $respostaAtendimentos = curl_exec($chAtendimentos);
 
-    $atendimentos = json_decode($respostaAtendimentos, true);
+        $atendimentos = json_decode($respostaAtendimentos, true);
 
-    curl_close($chAtendimentos);
-}
-
-
-
+        curl_close($chAtendimentos);
+    }
 
 // ################################################################
 
-include '../partials/header.php';
+    include '../partials/header.php';
 ?>
 
 <!DOCTYPE html>
@@ -139,83 +112,77 @@ include '../partials/header.php';
         </table>
     </div>
 
-    <!-- Modal de Visualização de Atendimento -->
-<?php include './modals/visualizarAtendimento.php' ?>
+    <?php include './modals/visualizarAtendimento.php' ?>
 
-<script>
-    
-
-    $('#selectPaciente').change(function() {
-        var pacienteId = $(this).val();
-        if (pacienteId !== '') {
-            // Aqui ele incrementa o ID do pacient ao link para facilitar a navegação entre os dados....
-            window.location.href = '?pacienteId=' + pacienteId;
-        } else {
-            $('#tabelaAtendimentos tbody').empty();
-        }
-    });
-
-function visualizarAtendimento(atendimentoId) {
-    console.log(atendimentoId);
-    $.ajax({
-        url: `http://localhost:3001/atendimentos/${atendimentoId}`,
-        type: 'GET',
-        headers: {
-            'x-api-key': '<?php echo $apiKey; ?>'
-        },
-        success: function(data) {
-            var atendimento = data[0]; // buscando pelo Id do atendiemento
-
-            if (atendimento) { 
-                var nomeMedico = atendimento.medico ? atendimento.medico.nome : 'Não informado';
-                var crmMedico = atendimento.medico ? atendimento.medico.crm : 'Não informado';
-                var nomePaciente = atendimento.paciente ? atendimento.paciente.nome : 'Não informado';
-                var sexoPaciente = atendimento.paciente ? atendimento.paciente.sexo : 'Não informado';
-                var susPaciente = atendimento.paciente ? atendimento.paciente.sus : 'Não informado';
-                var enderecoPaciente = atendimento.paciente ? `${atendimento.paciente.logradouro}, ${atendimento.paciente.numero} <br> ${atendimento.paciente.bairro} <br> ${atendimento.paciente.cidade} / ${atendimento.paciente.estado}` : 'Não informado';
-
-                if ($('#dadosMedico').length) {
-                    $('#dadosMedico').html(
-                        `<h5>Dados do médico</h5>
-                        <p>Nome: ${nomeMedico}</p>
-                        <p>CRM: ${crmMedico}</p>`
-                    );
-                }
-
-                if ($('#dadosPaciente').length) {
-                    $('#dadosPaciente').html(
-                        `<h5>Dados do paciente</h5>
-                        <p>Nome: ${nomePaciente}</p>
-                        <p>SUS: ${susPaciente}</p>
-                        <p>Sexo: ${sexoPaciente}</p>
-                        <p>Endereço: ${enderecoPaciente}</p>`
-                    );
-                }
-
-                if ($('#descricaoAtendimento').length) {
-                    $('#descricaoAtendimento').html(
-                        `<h5>Descrição do Atendimento</h5>
-                        <p>${atendimento.descricao || 'Não informado'}</p>`
-                    );
-                }
-
-                // Traz a modal com os dados
-                $('#visualizarAtendimentoModal').modal('show');
+    <script>
+        $('#selectPaciente').change(function() {
+            var pacienteId = $(this).val();
+            if (pacienteId !== '') {
+                // Aqui ele incrementa o ID do pacient ao link para facilitar a navegação entre os dados....
+                window.location.href = '?pacienteId=' + pacienteId;
             } else {
-                console.log('Nenhum atendimento encontrado para o ID fornecido.');
+                $('#tabelaAtendimentos tbody').empty();
             }
-        },
-        error: function(xhr, status, error) {
-            console.log('Erro ao carregar detalhes do atendimento: ' + error);
-            if ($('#visualizarAtendimentoModal .modal-body').length) {
-                $('#visualizarAtendimentoModal .modal-body').html(`<p>Erro ao carregar detalhes do atendimento: ${error}</p>`);
-            }
-            $('#visualizarAtendimentoModal').modal('show');
+        });
+
+        function visualizarAtendimento(atendimentoId) {
+            console.log(atendimentoId);
+            $.ajax({
+                url: `http://localhost:3001/atendimentos/${atendimentoId}`,
+                type: 'GET',
+                headers: {
+                    'x-api-key': '<?php echo $apiKey; ?>'
+                },
+                success: function(data) {
+                    var atendimento = data[0];
+
+                    if (atendimento) { 
+                        var nomeMedico = atendimento.medico ? atendimento.medico.nome : 'Não informado';
+                        var crmMedico = atendimento.medico ? atendimento.medico.crm : 'Não informado';
+                        var nomePaciente = atendimento.paciente ? atendimento.paciente.nome : 'Não informado';
+                        var sexoPaciente = atendimento.paciente ? atendimento.paciente.sexo : 'Não informado';
+                        var susPaciente = atendimento.paciente ? atendimento.paciente.sus : 'Não informado';
+                        var enderecoPaciente = atendimento.paciente ? `${atendimento.paciente.logradouro}, ${atendimento.paciente.numero} <br> ${atendimento.paciente.bairro} <br> ${atendimento.paciente.cidade} / ${atendimento.paciente.estado}` : 'Não informado';
+
+                        if ($('#dadosMedico').length) {
+                            $('#dadosMedico').html(
+                                `<h5>Dados do médico</h5>
+                                <p>Nome: ${nomeMedico}</p>
+                                <p>CRM: ${crmMedico}</p>`
+                            );
+                        }
+
+                        if ($('#dadosPaciente').length) {
+                            $('#dadosPaciente').html(
+                                `<h5>Dados do paciente</h5>
+                                <p>Nome: ${nomePaciente}</p>
+                                <p>SUS: ${susPaciente}</p>
+                                <p>Sexo: ${sexoPaciente}</p>
+                                <p>Endereço: ${enderecoPaciente}</p>`
+                            );
+                        }
+
+                        if ($('#descricaoAtendimento').length) {
+                            $('#descricaoAtendimento').html(
+                                `<h5>Descrição do Atendimento</h5>
+                                <p>${atendimento.descricao || 'Não informado'}</p>`
+                            );
+                        }
+
+                        $('#visualizarAtendimentoModal').modal('show');
+                    } else {
+                        console.log('Nenhum atendimento encontrado para o ID fornecido.');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.log('Erro ao carregar detalhes do atendimento: ' + error);
+                    if ($('#visualizarAtendimentoModal .modal-body').length) {
+                        $('#visualizarAtendimentoModal .modal-body').html(`<p>Erro ao carregar detalhes do atendimento: ${error}</p>`);
+                    }
+                    $('#visualizarAtendimentoModal').modal('show');
+                }
+            });
         }
-    });
-}
-
-</script>
-
+    </script>
 </body>
 </html>

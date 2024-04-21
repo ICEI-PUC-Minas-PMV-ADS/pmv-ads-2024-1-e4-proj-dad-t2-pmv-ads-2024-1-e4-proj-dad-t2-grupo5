@@ -95,7 +95,6 @@
                                 <option value="Nenhuma">Nenhuma</option>
                                 <option value="Alergia a medicamentos">Alergia a medicamentos</option>
                                 <option value="Alergia a alimentos">Alergia a alimentos</option>
-                                <!-- Adicione mais opções conforme necessário -->
                             </select>
                         </div>
                         <div class="form-group  col-md-6">
@@ -154,14 +153,11 @@
                             <input type="text" class="form-control" id="novopacienteProfissao" name="profissao">
                         </div>
                     </div>
-
                     
                     <div class="form-group">
                         <label for="novopacienteSenha">Senha</label>
                         <input type="password" class="form-control" id="novopacienteSenha" name="senha">
                     </div>
-                    <!-- Adicione mais campos conforme necessário -->
-
                 </form>
             </div>
             <div class="modal-footer">

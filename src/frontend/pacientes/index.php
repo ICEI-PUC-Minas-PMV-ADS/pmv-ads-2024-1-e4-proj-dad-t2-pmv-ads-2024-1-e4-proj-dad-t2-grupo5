@@ -108,15 +108,14 @@ if (!$pacientes || curl_errno($ch)) {
       });
 
       $('#adicionarPacienteForm').submit(function(event) {
-            var formData = $(this).serializeArray(); // Obtém os dados do formulário como um array
+            var formData = $(this).serializeArray();
 
             var jsonData = {};
-            // Converta o array de dados em um objeto JavaScript
             $.each(formData, function() {
                 jsonData[this.name] = this.value;
             });
 
-            console.log('Dados enviados para a API:', jsonData); // Registra os dados enviados no console
+            console.log('Dados enviados para a API:', jsonData); 
 
             $.ajax({
                 type: 'POST',
@@ -124,17 +123,15 @@ if (!$pacientes || curl_errno($ch)) {
                 headers: {
                     'x-api-key': '<?php echo $apiKey; ?>'
                 },
-                contentType: 'application/json', // Define o tipo de conteúdo como JSON
-                data: JSON.stringify(jsonData), // Converte os dados para JSON
+                contentType: 'application/json',
+                data: JSON.stringify(jsonData),
                 success: function(response) {
                     console.log('Paciente criado com sucesso:', response);
-                    // Limpar o formulário ou fazer outras ações, se necessário
-                    $('#adicionarPacienteModal').modal('hide'); // Fecha o modal após o sucesso
-                    location.reload(); // Recarrega a página para exibir o novo paciente adicionado
+                    $('#adicionarPacienteModal').modal('hide'); 
+                    location.reload(); 
                 },
                 error: function(xhr, status, error) {
                     console.error('Erro ao criar paciente:', error);
-                    // Exibir mensagem de erro ao usuário ou outras ações, se necessário
                 }
             });
         });
@@ -182,13 +179,13 @@ function atualizarPaciente(id, dados) {
 $('#editarPacienteForm').on('submit', function(event) {
     event.preventDefault();
     var pacienteId = $('#pacienteId').val(); 
-    var dados = $(this).serializeArray(); // Obtenha os dados serializados como array
+    var dados = $(this).serializeArray(); 
     var jsonData = {};
-    // Converta o array de dados em um objeto JavaScript
+
     $.each(dados, function() {
         jsonData[this.name] = this.value;
     });
-    atualizarPaciente(pacienteId, jsonData); // Chama a função para atualizar o paciente
+    atualizarPaciente(pacienteId, jsonData); 
 });
 
 $(document).ready(function() {

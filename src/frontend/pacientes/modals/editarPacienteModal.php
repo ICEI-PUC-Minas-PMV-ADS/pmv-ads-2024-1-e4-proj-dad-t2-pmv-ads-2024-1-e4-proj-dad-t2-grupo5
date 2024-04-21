@@ -96,7 +96,6 @@
                                 <option value="Nenhuma">Nenhuma</option>
                                 <option value="Alergia a medicamentos">Alergia a medicamentos</option>
                                 <option value="Alergia a alimentos">Alergia a alimentos</option>
-                                <!-- Adicione mais opções conforme necessário -->
                             </select>
                         </div>
                         <div class="form-group col-md-6">
@@ -155,7 +154,6 @@
                             <input type="text" class="form-control" id="pacienteProfissao" name="profissao">
                         </div>
                     </div>
-                    <!-- Adicione mais campos conforme necessário -->
 
                     <input type="hidden" id="pacienteId" name="id">
 
@@ -175,15 +173,15 @@
             .value.trim()
             .replace("-", "");
 
-        console.log("Buscando CEP:", cep); // Log de depuração
+        console.log("Buscando CEP:", cep);
 
         fetch(`https://viacep.com.br/ws/${cep}/json/`)
             .then((response) => {
-                console.log("Resposta da API:", response); // Log de depuração
+                console.log("Resposta da API:", response);
                 return response.json();
             })
             .then((data) => {
-                console.log("Dados do CEP:", data); // Log de depuração
+                console.log("Dados do CEP:", data);
                 
                 // Se rolar algum erro
                 if (data.erro) {
