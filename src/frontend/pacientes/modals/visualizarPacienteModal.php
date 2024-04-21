@@ -3,77 +3,157 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="visualizarPacienteModalLabel">Detalhes do Paciente</h5>
+                <h5 class="modal-title" id="visualizarPacienteModalLabel">Dados do Paciente</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
+            <style>
+                .secao{
+                    border: solid 1px; 
+                    border-color: #0e0e0e38 !important;
+                    margin: 0 15px;
+                    padding: 5px 0 0;
+                    border-radius: 7px;
+                    margin-bottom: 5px;
+                }
+            </style>
             <div class="modal-body">
-                <dl class="row">
-                    <dt class="col-sm-3">Nome:</dt>
-                    <dd class="col-sm-9" id="visualizarNome"></dd>
+                <div class="secao">
+                    <dl class="row mb-0">
+                        <div class="col-md-4">
+                            <dt class="col-12">Nome:</dt>
+                            <dd class="col-12" id="visualizarNome"></dd>
+                        </div>
 
-                    <dt class="col-sm-3" id="idLabel" style="display: none;">Id:</dt>
-                    <dd class="col-sm-9" id="id" style="display: none;"></dd>
+                        <div class="col-md-4" style="display: none;">
+                            <dt class="col-12" id="idLabel">Id:</dt>
+                            <dd class="col-12" id="id"></dd>
+                        </div>
 
-                    
-                    <dt class="col-sm-3">Nome da Mãe:</dt>
-                    <dd class="col-sm-9" id="visualizarNomeMae"></dd>
+                        <div class="col-md-4">
+                            <dt class="col-12">Nome da Mãe:</dt>
+                            <dd class="col-12" id="visualizarNomeMae"></dd>
+                        </div>
 
-                    <dt class="col-sm-3">Data de Nascimento:</dt>
-                    <dd class="col-sm-9" id="visualizarDataNascimento"></dd>
+                        <div class="col-md-4">
+                            <dt class="col-12">Data de Nascimento:</dt>
+                            <dd class="col-12" id="visualizarDataNascimento"></dd>
+                        </div>
+                    </dl>
+                
 
-                    <dt class="col-sm-3">Sexo:</dt>
-                    <dd class="col-sm-9" id="visualizarSexo"></dd>
+                    <dl class="row  mb-0">
+                        <div class="col-md-4">
+                            <dt class="col-12">Sexo:</dt>
+                            <dd class="col-12" id="visualizarSexo"></dd>
+                        </div>
 
-                    <dt class="col-sm-3">SUS:</dt>
-                    <dd class="col-sm-9" id="visualizarSUS"></dd>
+                        <div class="col-md-4">
+                            <dt class="col-12">SUS:</dt>
+                            <dd class="col-12" id="visualizarSUS"></dd>
+                        </div>
 
-                    <dt class="col-sm-3">PEC:</dt>
-                    <dd class="col-sm-9" id="visualizarPEC"></dd>
+                        <div class="col-md-4">
+                            <dt class="col-12">PEC:</dt>
+                            <dd class="col-12" id="visualizarPEC"></dd>
+                        </div>
+                    </dl>
+                </div>
 
-                    <dt class="col-sm-3">Logradouro:</dt>
-                    <dd class="col-sm-9" id="visualizarLogradouro"></dd>
+                <div class="secao">
+                    <h3 class="text-center mb-3">Endereço</h3>
+                    <dl class="row  mb-0">
+                        <div class="col-md-4">
+                            <dt class="col-12">CEP:</dt>
+                            <dd class="col-12" id="visualizarCEP"></dd>
+                        </div>
 
-                    <dt class="col-sm-3">Bairro:</dt>
-                    <dd class="col-sm-9" id="visualizarBairro"></dd>
+                        <div class="col-md-4">
+                            <dt class="col-12">Número:</dt>
+                            <dd class="col-12" id="visualizarNumero"></dd>
+                        </div>
 
-                    <dt class="col-sm-3">Número:</dt>
-                    <dd class="col-sm-9" id="visualizarNumero"></dd>
+                        <div class="col-md-4">
+                            <dt class="col-12">Logradouro:</dt>
+                            <dd class="col-12" id="visualizarLogradouro"></dd>
+                        </div>
+                    </dl>
 
-                    <dt class="col-sm-3">Cidade:</dt>
-                    <dd class="col-sm-9" id="visualizarCidade"></dd>
+                    <dl class="row  mb-0">
+                        <div class="col-md-4">
+                            <dt class="col-12">Bairro:</dt>
+                            <dd class="col-12" id="visualizarBairro"></dd>
+                        </div>
 
-                    <dt class="col-sm-3">Estado:</dt>
-                    <dd class="col-sm-9" id="visualizarEstado"></dd>
+                        <div class="col-md-4">
+                            <dt class="col-12">Cidade:</dt>
+                            <dd class="col-12" id="visualizarCidade"></dd>
+                        </div>
 
-                    <dt class="col-sm-3">ACS:</dt>
-                    <dd class="col-sm-9" id="visualizarACS"></dd>
+                        <div class="col-md-4">
+                            <dt class="col-12">Estado:</dt>
+                            <dd class="col-12" id="visualizarEstado"></dd>
+                        </div>
+                    </dl>
+                </div>
 
-                    <dt class="col-sm-3">Alergias:</dt>
-                    <dd class="col-sm-9" id="visualizarAlergias"></dd>
+                <div class="secao"> 
+                    <dl class="row mb-0">
+                        <div class="col-md-4">
+                            <dt class="col-12">ACS:</dt>
+                            <dd class="col-12" id="visualizarACS"></dd>
+                        </div>
+                        <div class="col-md-4">
+                            <dt class="col-12">Alergias:</dt>
+                            <dd class="col-12" id="visualizarAlergias"></dd>
+                        </div>
+                        <div class="col-md-4">
+                            <dt class="col-12">Comorbidades:</dt>
+                            <dd class="col-12" id="visualizarComorbidades"></dd>
+                        </div>
+                    </dl>
+                </div>
 
-                    <dt class="col-sm-3">Comorbidades:</dt>
-                    <dd class="col-sm-9" id="visualizarComorbidades"></dd>
+                <div class="secao">
+                    <h3 class="text-center mb-3">Contato</h3>
+                    <div class="row mb-0">
+                        <div class="col-md-4">
+                            <dt class="col-12">Telefone:</dt>
+                            <dd class="col-12" id="visualizarTelefone"></dd>
+                        </div>
+                        <div class="col-md-4">
+                            <dt class="col-12">Email:</dt>
+                            <dd class="col-12" id="visualizarEmail"></dd>
+                        </div>
+                    </div>
+                </div>
 
-                    <dt class="col-sm-3">Telefone:</dt>
-                    <dd class="col-sm-9" id="visualizarTelefone"></dd>
+                <div class="secao">
+                    <h3 class="text-center mb-3">Informações complementares</h3>
+                    <div class="row mb-0">
+                        <div class="col-md-6">
+                            <dt class="col-12">Etnia:</dt>
+                            <dd class="col-12" id="visualizarEtnia"></dd>
+                        </div>
+                        <div class="col-md-6">
+                            <dt class="col-12">Estado Civil:</dt>
+                            <dd class="col-12" id="visualizarEstadoCivil"></dd>
+                        </div>
+                    </div>
 
-                    <dt class="col-sm-3">Email:</dt>
-                    <dd class="col-sm-9" id="visualizarEmail"></dd>
-
-                    <dt class="col-sm-3">Etnia:</dt>
-                    <dd class="col-sm-9" id="visualizarEtnia"></dd>
-
-                    <dt class="col-sm-3">Estado Civil:</dt>
-                    <dd class="col-sm-9" id="visualizarEstadoCivil"></dd>
-
-                    <dt class="col-sm-3">Nacionalidade:</dt>
-                    <dd class="col-sm-9" id="visualizarNacionalidade"></dd>
-
-                    <dt class="col-sm-3">Profissão:</dt>
-                    <dd class="col-sm-9" id="visualizarProfissao"></dd>
-                </dl>
+                    <div class="row mb-0">
+                        <div class="col-md-6">
+                            <dt class="col-12">Nacionalidade:</dt>
+                            <dd class="col-12" id="visualizarNacionalidade"></dd>
+                        </div>
+                        <div class="col-md-6">
+                            <dt class="col-12">Profissão:</dt>
+                            <dd class="col-12" id="visualizarProfissao"></dd>
+                        </div>
+                    </div>
+                </div>
+             
             </div>
             <div class="modal-footer">
                 <a id="btnVisualizarAtendimentos" class="btn btn-primary">Visualizar Atendimentos</a>

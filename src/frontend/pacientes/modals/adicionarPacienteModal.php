@@ -10,124 +10,151 @@
             </div>
             <div class="modal-body">
                 <form id="adicionarPacienteForm" method="POST">
-                    <div class="form-group">
-                        <label for="novopacienteNome">Nome</label>
-                        <input type="text" class="form-control" id="novopacienteNome" name="nome" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="novopacienteNomeMae">Nome da Mãe</label>
-                        <input type="text" class="form-control" id="novopacienteNomeMae" name="nomeDaMae" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="novopacienteDataNascimento">Data de Nascimento</label>
-                        <input type="date" class="form-control" id="novopacienteDataNascimento" name="dataNascimento" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="novopacienteSexo">Sexo</label>
-                        <select class="form-control" id="novopacienteSexo" name="sexo" required>
-                            <option value="">Selecione o sexo</option>
-                            <option value="Masculino">Masculino</option>
-                            <option value="Feminino">Feminino</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="novopacienteSus">Número do SUS</label>
-                        <input type="text" class="form-control" id="novopacienteSus" name="sus">
-                    </div>
-                    <div class="form-group">
-                        <label for="novopacientePec">Número do PEC</label>
-                        <input type="text" class="form-control" id="novopacientePec" name="pec">
-                    </div>
-                    <div class="form-group">
-                        <label for="cepInput">CEP:</label>
-                        <input
-                            type="text"
-                            class="form-control"
-                            id="cepInput"
-                            placeholder="Digite o CEP"
-                            name="cep"
-                        />
-                    </div>
-                    <div class="form-group">
-                        <label for="novopacienteLogradouro">Logradouro</label>
-                        <input type="text" class="form-control" id="novopacienteLogradouro" name="logradouro">
-                    </div>
-                    <div class="form-group">
-                        <label for="novopacienteBairro">Bairro</label>
-                        <input type="text" class="form-control" id="novopacienteBairro" name="bairro">
-                    </div>
-                    <div class="form-group">
-                        <label for="novopacienteNumero">Número</label>
-                        <input type="text" class="form-control" id="novopacienteNumero" name="numero">
-                    </div>
-                    <div class="form-group">
-                        <label for="novopacienteCidade">Cidade</label>
-                        <input type="text" class="form-control" id="novopacienteCidade" name="cidade">
-                    </div>
-                    <div class="form-group">
-                        <label for="novopacienteEstado">Estado</label>
-                        <input type="text" class="form-control" id="novopacienteEstado" name="estado">
-                    </div>
-                    <div class="form-group">
-                        <label for="novopacienteACS">ACS</label>
-                        <input type="text" class="form-control" id="novopacienteACS" name="acs">
-                    </div>
-                    <div class="form-group">
-                        <label for="novopacienteAlergias">Alergias</label>
-                        <select class="form-control" id="novopacienteAlergias" name="alergias">
-                            <option value="">Selecione uma alergia</option>
-                            <option value="Nenhuma">Nenhuma</option>
-                            <option value="Alergia a medicamentos">Alergia a medicamentos</option>
-                            <option value="Alergia a alimentos">Alergia a alimentos</option>
-                            <!-- Adicione mais opções conforme necessário -->
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="novopacienteComorbidades">Comorbidades</label>
-                        <select class="form-control" id="novopacienteComorbidades" name="comorbidades">
-                            <option value="">Selecione uma comorbidade</option>
-                            <option value="Nenhuma">Nenhuma</option>
-                            <option value="Asma">Asma</option>
-                            <option value="Diabetes">Diabetes</option>
-                            <option value="Hipertensão">Hipertensão</option>
-                            <!-- ... -->
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="novopacienteTelefone">Telefone</label>
-                        <input type="text" class="form-control" id="novopacienteTelefone" name="telefone">
-                    </div>
-                    <div class="form-group">
-                        <label for="novopacienteEmail">Email</label>
-                        <input type="email" class="form-control" id="novopacienteEmail" name="email">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="novopacienteNome">Nome</label>
+                            <input type="text" class="form-control" id="novopacienteNome" name="nome" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="novopacienteNomeMae">Nome da Mãe</label>
+                            <input type="text" class="form-control" id="novopacienteNomeMae" name="nomeDaMae" required>
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="novopacienteEtnia">Etnia</label>
-                        <select class="form-control" id="novopacienteEtnia" name="etnia">
-                            <option value="">Selecione uma etnia</option>
-                            <option value="Parda">Parda</option>
-                            <option value="Negro">Negro</option>
-                            <option value="Branco">Branco</option>
-                        </select>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="novopacientePec">Número do PEC</label>
+                            <input type="text" class="form-control" id="novopacientePec" name="pec">
+                        </div>
+
+                        <div class="form-group   col-md-6">
+                            <label for="novopacienteSus">Número do SUS</label>
+                            <input type="text" class="form-control" id="novopacienteSus" name="sus">
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="novopacienteEstadoCivil">Estado civil</label>
-                        <select class="form-control" id="novopacienteEstadoCivil" name="estadoCivil">
-                            <option value="">Selecione o estado civil</option>
-                            <option value="Solteiro">Solteiro</option>
-                            <option value="Casado">Casado</option>
-                            <option value="Divorciado">Divorciado</option>
-                        </select>
+                    
+                    <div class="form-row">
+                        <div class="form-group  col-md-4">
+                            <label for="novopacienteDataNascimento">Data de Nascimento</label>
+                            <input type="date" class="form-control" id="novopacienteDataNascimento" name="dataNascimento" required>
+                        </div>
+                        <div class="form-group   col-md-4">
+                            <label for="novopacienteSexo">Sexo</label>
+                            <select class="form-control" id="novopacienteSexo" name="sexo" required>
+                                <option value="">Selecione o sexo</option>
+                                <option value="Masculino">Masculino</option>
+                                <option value="Feminino">Feminino</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="novopacienteACS">ACS</label>
+                            <input type="text" class="form-control" id="novopacienteACS" name="acs">
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="novopacienteNacionalidade">Nacionalidade</label>
-                        <input type="text" class="form-control" id="novopacienteNacionalidade" name="nacionalidade">
+
+                    <div class="form-row">
+                        <div class="form-group col-md-2">
+                            <label for="cepInput">CEP:</label>
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="cepInput"
+                                placeholder="Digite o CEP"
+                                name="cep"
+                            />
+                        </div>
+                        <div class="form-group  col-md-2">
+                            <label for="novopacienteNumero">Número</label>
+                            <input type="text" class="form-control" id="novopacienteNumero" name="numero">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="novopacienteLogradouro">Logradouro</label>
+                            <input type="text" class="form-control" id="novopacienteLogradouro" name="logradouro" readonly>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="novopacienteBairro">Bairro</label>
+                            <input type="text" class="form-control" id="novopacienteBairro" name="bairro" readonly>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="novopacienteProfissao">Profissão</label>
-                        <input type="text" class="form-control" id="novopacienteProfissao" name="profissao">
+                    
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="novopacienteCidade">Cidade</label>
+                            <input type="text" class="form-control" id="novopacienteCidade" name="cidade" readonly>
+                        </div>
+                        <div class="form-group  col-md-6">
+                            <label for="novopacienteEstado">Estado</label>
+                            <input type="text" class="form-control" id="novopacienteEstado" name="estado" readonly>
+                        </div>
                     </div>
+                    <div class="form-row">
+                        <div class="form-group  col-md-6">
+                            <label for="novopacienteAlergias">Alergias</label>
+                            <select class="form-control" id="novopacienteAlergias" name="alergias">
+                                <option value="">Selecione uma alergia</option>
+                                <option value="Nenhuma">Nenhuma</option>
+                                <option value="Alergia a medicamentos">Alergia a medicamentos</option>
+                                <option value="Alergia a alimentos">Alergia a alimentos</option>
+                                <!-- Adicione mais opções conforme necessário -->
+                            </select>
+                        </div>
+                        <div class="form-group  col-md-6">
+                            <label for="novopacienteComorbidades">Comorbidades</label>
+                            <select class="form-control" id="novopacienteComorbidades" name="comorbidades">
+                                <option value="">Selecione uma comorbidade</option>
+                                <option value="Nenhuma">Nenhuma</option>
+                                <option value="Asma">Asma</option>
+                                <option value="Diabetes">Diabetes</option>
+                                <option value="Hipertensão">Hipertensão</option>
+                                <!-- ... -->
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group   col-md-6">
+                            <label for="novopacienteTelefone">Telefone</label>
+                            <input type="text" class="form-control" id="novopacienteTelefone" name="telefone">
+                        </div>
+                        <div class="form-group   col-md-6">
+                            <label for="novopacienteEmail">Email</label>
+                            <input type="email" class="form-control" id="novopacienteEmail" name="email">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="novopacienteEtnia">Etnia</label>
+                            <select class="form-control" id="novopacienteEtnia" name="etnia">
+                                <option value="">Selecione uma etnia</option>
+                                <option value="Parda">Parda</option>
+                                <option value="Negro">Negro</option>
+                                <option value="Branco">Branco</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="novopacienteEstadoCivil">Estado civil</label>
+                            <select class="form-control" id="novopacienteEstadoCivil" name="estadoCivil">
+                                <option value="">Selecione o estado civil</option>
+                                <option value="Solteiro">Solteiro</option>
+                                <option value="Casado">Casado</option>
+                                <option value="Divorciado">Divorciado</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="novopacienteNacionalidade">Nacionalidade</label>
+                            <input type="text" class="form-control" id="novopacienteNacionalidade" name="nacionalidade">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="novopacienteProfissao">Profissão</label>
+                            <input type="text" class="form-control" id="novopacienteProfissao" name="profissao">
+                        </div>
+                    </div>
+
+                    
                     <div class="form-group">
                         <label for="novopacienteSenha">Senha</label>
                         <input type="password" class="form-control" id="novopacienteSenha" name="senha">
@@ -179,12 +206,7 @@
           });
       }
 
-      document
-        .getElementById("cepInput")
-        .addEventListener("input", function () {
-          const cep = this.value.replace("-", "");
-          if (cep.length === 8) {
-            buscarEnderecoPorCep();
-          }
-        });
+      document.getElementById("cepInput").addEventListener("blur", function () {
+        buscarEnderecoPorCep();
+});
     </script>

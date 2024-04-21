@@ -69,6 +69,7 @@ if (!$pacientes || curl_errno($ch)) {
           var sexo = $(this).data('sexo');
           var sus = $(this).data('sus');
           var pec = $(this).data('pec');
+          var cep = $(this).data('cep');
           var logradouro = $(this).data('logradouro');
           var bairro = $(this).data('bairro');
           var numero = $(this).data('numero');
@@ -86,6 +87,7 @@ if (!$pacientes || curl_errno($ch)) {
           $('#pacienteEmail').val(email);
           $('#pacienteTelefone').val(telefone);
           $('#pacienteId').val(id);
+          $('#cepEditar').val(cep);
           $('#pacienteNomeMae').val(nomeMae);
           $('#pacienteDataNascimento').val(dataNascimento);
           $('#pacienteSexo').val(sexo);
@@ -197,6 +199,7 @@ $(document).ready(function() {
         var sexo = $(this).data('sexo');
         var sus = $(this).data('sus');
         var pec = $(this).data('pec');
+        var cep = $(this).data('cep');
         var logradouro = $(this).data('logradouro');
         var bairro = $(this).data('bairro');
         var numero = $(this).data('numero');
@@ -219,6 +222,7 @@ $(document).ready(function() {
         $('#visualizarSexo').text(sexo);
         $('#visualizarSUS').text(sus);
         $('#visualizarPEC').text(pec);
+        $('#visualizarCEP').text(cep);
         $('#visualizarLogradouro').text(logradouro);
         $('#visualizarBairro').text(bairro);
         $('#visualizarNumero').text(numero);

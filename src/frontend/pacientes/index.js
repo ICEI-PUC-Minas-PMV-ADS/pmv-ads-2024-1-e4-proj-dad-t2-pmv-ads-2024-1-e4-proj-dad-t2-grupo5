@@ -6,6 +6,7 @@ $(document).ready(function() {
         var sexo = $(this).data('sexo');
         var sus = $(this).data('sus');
         var pec = $(this).data('pec');
+        var cep = $(this).data('cep');
         var logradouro = $(this).data('logradouro');
         var bairro = $(this).data('bairro');
         var numero = $(this).data('numero');
@@ -26,6 +27,7 @@ $(document).ready(function() {
         $('#visualizarNome').text(nome);
         $('#visualizarDataNascimento').text(dataNascimento);
         $('#visualizarSexo').text(sexo);
+        $('#visualizarCEP').text(cep);
         $('#visualizarSUS').text(sus);
         $('#visualizarPEC').text(pec);
         $('#visualizarLogradouro').text(logradouro);
