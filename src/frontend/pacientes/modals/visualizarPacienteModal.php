@@ -17,6 +17,10 @@
                     border-radius: 7px;
                     margin-bottom: 5px;
                 }
+                #btnVisualizarAtendimentos{
+                    text-decoration: none;
+                    color: #ffffff;
+                }
             </style>
             <div class="modal-body">
                 <div class="secao">
@@ -165,11 +169,8 @@
 </div>
 
 <script>
-    // Adiciona um evento de clique ao botão "Visualizar Atendimentos"
     document.getElementById('btnVisualizarAtendimentos').addEventListener('click', function () {
-        // Obtém o ID do paciente atualmente visualizado
         const pacienteId = document.getElementById('id').textContent;
-        // Redireciona para a página de atendimentos com o ID do paciente incluído no URL
         window.location.href = `atendimentos.php?pacienteId=${pacienteId}`;
     });
 </script>

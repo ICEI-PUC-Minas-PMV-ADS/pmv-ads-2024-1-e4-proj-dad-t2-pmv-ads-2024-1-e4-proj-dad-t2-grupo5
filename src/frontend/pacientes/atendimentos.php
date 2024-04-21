@@ -84,6 +84,7 @@ include '../partials/header.php';
   <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="http://<?php echo $domain; ?>/style.css">
 </head>
 
 <style>
@@ -100,8 +101,8 @@ include '../partials/header.php';
 </style>
 
 <body>
-    <div class="container">
-        <h1>Selecione um Paciente</h1>
+    <div class="container mb-3">
+        <h2>Selecione um Paciente</h2>
         <select id="selectPaciente" class="form-control">
             <option value="">Selecione um paciente</option>
             <?php foreach ($pacientes as $paciente): ?>
@@ -113,7 +114,7 @@ include '../partials/header.php';
     <div class="container">
         <h1>Atendimentos do Paciente</h1>
         <table class="table">
-            <thead class="thead-dark">
+            <thead>
                 <tr>
                     <th scope="col">Paciente</th>
                     <th scope="col">Médico</th>
@@ -121,7 +122,7 @@ include '../partials/header.php';
                     <th scope="col">Ações</th>
                 </tr>
             </thead>
-            <tbody id="tabelaAtendimentos">
+            <tbody>
                 <?php if (isset($atendimentos) && !empty($atendimentos)): ?>
                     <?php foreach ($atendimentos as $atendimento): ?>
                         <tr>
