@@ -12,13 +12,15 @@ const ReceitaMedicaSchema = new Schema({
         },
         medicoId: {
             type: mongoose.Types.ObjectId,
-            ref: 'usuario',
+            ref: 'Usuario',
             required: true,
+            autopopulate: true,
         },
-        pacienteId: {
+        paciente: {
             type: mongoose.Types.ObjectId,
-            ref: 'paciente',
+            ref: 'Paciente',
             required: true,
+            autopopulate: true,
         },
     },
     medicamentos: [{
@@ -31,6 +33,7 @@ const ReceitaMedicaSchema = new Schema({
     }
 });
 
-
+// Habilita o autopopulate globalmente no esquema
+ReceitaMedicaSchema.plugin(require('mongoose-autopopulate'));
 
 module.exports = mongoose.model('ReceitaMedica', ReceitaMedicaSchema);

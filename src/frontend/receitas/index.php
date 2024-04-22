@@ -61,7 +61,7 @@
     
                 var html = `
                     <h2>Detalhes da Receita</h2>
-                    <p><strong>Paciente:</strong> ${receita.atendimentoRef.pacienteId.nome}</p>
+                    <p><strong>Paciente:</strong> ${receita.atendimentoRef.paciente.nome}</p>
                     <p><strong>Médico:</strong> ${receita.atendimentoRef.medicoId.nome}</p>
                     <p><strong>Data Início:</strong> ${dataInicio.toLocaleDateString('pt-BR', options)}</p>
                     <p><strong>Data Fim:</strong> ${dataFim.toLocaleDateString('pt-BR', options)}</p>
@@ -110,7 +110,7 @@
                         const tr = document.createElement('tr');
 
                         tr.innerHTML = `
-                            <td>${receitaAtendimento.atendimentoRef.pacienteId.nome}</td>
+                            <td>${receitaAtendimento.atendimentoRef.paciente.nome}</td>
                             <td>${new Date(receitaAtendimento.dataInicio).toLocaleDateString('pt-BR')}</td>
                             <td>${new Date(receitaAtendimento.dataFim).toLocaleDateString('pt-BR')}</td>
                             <td>
