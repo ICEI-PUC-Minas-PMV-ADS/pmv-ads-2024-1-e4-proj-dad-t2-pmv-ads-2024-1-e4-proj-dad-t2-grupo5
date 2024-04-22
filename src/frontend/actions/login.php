@@ -22,10 +22,10 @@ if(isset($_POST['email']) || isset($_POST['senha'])){
     if ($user) {
         $_SESSION['email'] = $user['email'];
         $_SESSION['nome'] = $user['nome'];
-        echo "Login successful.";
+        echo "<script>alert('Login successful.')</script>";
         header('Location: ../pacientes/index.php');
     } else {
-        echo "Invalid email or password.";
+        echo "<script>alert('Login Failed, Please check Email and/or password and try again.')</script>";
     }
 }
 
