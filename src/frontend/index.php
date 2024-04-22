@@ -1,7 +1,8 @@
 <?php
+include 'actions/login.php';
 include 'partials/header.php';
-require './vendor/autoload.php';
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -22,22 +23,24 @@ require './vendor/autoload.php';
 <div class="container-box">
     <div class="container">
         <div class="boxselect">
-            <div class="box">
-                <select class="form-control">
-                    <option disabled selected hidden>Setor</option>
-                    <option>Farmácia</option>
-                    <option>Enfermagem</option>
-                    <option>Médicos</option>
-                </select>
-            </div>
-            <div class="box">
-                <input type="text" class="form-control" placeholder="Usuário">
-            </div>
-            <div class="box">
-                <input type="password" class="form-control" placeholder="Senha">
-            </div>
-            <button class="buttonconfirmar">Confirmar</button>
-            <p></p>
+            <form action="" method="post">
+                <div class="box">
+                    <select class="form-control">
+                        <option disabled selected hidden>Setor</option>
+                        <option>Farmácia</option>
+                        <option>Enfermagem</option>
+                        <option>Médicos</option>
+                    </select>
+                </div>
+                <div class="box">
+                    <input type="text" name="email" class="form-control" placeholder="Email">
+                </div>
+                <div class="box">
+                    <input type="password" name="senha" class="form-control" placeholder="Senha">
+                </div>
+                <input type="submit" name="login" value="Login" class="buttonconfirmar">
+                <p></p>
+            </form>
         </div>
     </div>
 </div>
