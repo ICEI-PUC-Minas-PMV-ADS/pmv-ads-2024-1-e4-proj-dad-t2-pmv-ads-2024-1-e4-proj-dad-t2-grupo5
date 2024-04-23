@@ -170,7 +170,7 @@ function atualizarPaciente(id, dados) {
         data: JSON.stringify(dados),
         success: function(result) {
             console.log('Paciente atualizado com sucesso.', result);
-            // location.reload();
+            location.reload();
         },
         error: function(error) {
             console.error('Erro ao atualizar o paciente:', error);
