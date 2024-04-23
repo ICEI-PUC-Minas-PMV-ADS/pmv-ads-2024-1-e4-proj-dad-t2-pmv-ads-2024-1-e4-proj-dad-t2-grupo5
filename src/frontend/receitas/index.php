@@ -96,6 +96,7 @@
         }
     });
     
+    
     document.addEventListener('DOMContentLoaded', () => {
         // Função para carregar os dados da API e popular a tabela
         const carregarDados = async () => {

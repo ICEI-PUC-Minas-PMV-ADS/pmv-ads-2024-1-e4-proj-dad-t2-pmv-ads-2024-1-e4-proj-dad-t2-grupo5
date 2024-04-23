@@ -26,4 +26,9 @@ const pacienteSchema = new Schema({
   senha: { type: String, default: 123456 }
 });
 
+// Definir o formato de data padrão como YYYY-MM-DD
+pacienteSchema.path('dataNascimento').get(function(date) {
+    return date.toISOString().substring(0, 10);
+});
+
 module.exports = mongoose.model('Paciente', pacienteSchema);

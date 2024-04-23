@@ -34,9 +34,9 @@
                     </div>
 
                     <div class="form-row">
-                        <div class="form-group  col-md-4">
+                        <div class="form-group col-md-4">
                             <label for="pacienteDataNascimento">Data de Nascimento</label>
-                            <input type="date" class="form-control" id="pacienteDataNascimento" name="data_nascimento">
+                            <input type="date" class="form-control" id="pacienteDataNascimento" name="dataNascimento">
                         </div>
                         <div class="form-group  col-md-4">
                             <label for="pacienteSexo">Sexo</label>

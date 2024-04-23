@@ -32,7 +32,7 @@
                                 data-nome="<?php echo !empty($paciente['nome']) ? htmlspecialchars($paciente['nome']) : 'Não informado'; ?>" 
                                 data-cep="<?php echo !empty($paciente['cep']) ? htmlspecialchars($paciente['cep']) : 'Não informado'; ?>" 
                                 data-nome="<?php echo !empty($paciente['nomeDaMae']) ? htmlspecialchars($paciente['nomeDaMae']) : 'Não informado'; ?>" 
-                                data-data-nascimento="<?php echo !empty($paciente['dataNascimento']) ? htmlspecialchars(date('d/m/Y', strtotime($paciente['dataNascimento']))) : 'Não informado'; ?>"
+                                data-data-nascimento="<?php echo !empty($paciente['dataNascimento']) ? htmlspecialchars(date('d-m-Y', strtotime($paciente['dataNascimento']))) : 'Não informado'; ?>"
                                 data-sexo="<?php echo !empty($paciente['sexo']) ? htmlspecialchars($paciente['sexo']) : 'Não informado'; ?>" 
                                 data-sus="<?php echo !empty($paciente['sus']) ? htmlspecialchars($paciente['sus']) : 'Não informado'; ?>" 
                                 data-pec="<?php echo !empty($paciente['pec']) ? htmlspecialchars($paciente['pec']) : 'Não informado'; ?>" 

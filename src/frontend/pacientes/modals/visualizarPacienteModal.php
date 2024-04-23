@@ -102,22 +102,11 @@
                     </dl>
                 </div>
 
-                <div class="secao"> 
+                <!-- <div class="secao"> 
                     <dl class="row mb-0">
-                        <div class="col-md-4">
-                            <dt class="col-12">ACS:</dt>
-                            <dd class="col-12" id="visualizarACS"></dd>
-                        </div>
-                        <div class="col-md-4">
-                            <dt class="col-12">Alergias:</dt>
-                            <dd class="col-12" id="visualizarAlergias"></dd>
-                        </div>
-                        <div class="col-md-4">
-                            <dt class="col-12">Comorbidades:</dt>
-                            <dd class="col-12" id="visualizarComorbidades"></dd>
-                        </div>
+                        
                     </dl>
-                </div>
+                </div> -->
 
                 <div class="secao">
                     <h3 class="text-center mb-3">Contato</h3>
@@ -126,7 +115,7 @@
                             <dt class="col-12">Telefone:</dt>
                             <dd class="col-12" id="visualizarTelefone"></dd>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-4 ">
                             <dt class="col-12">Email:</dt>
                             <dd class="col-12" id="visualizarEmail"></dd>
                         </div>
@@ -156,8 +145,25 @@
                             <dd class="col-12" id="visualizarProfissao"></dd>
                         </div>
                     </div>
+
+                    <div class="row mb-0">
+                        <div class="col-md-6">
+                            <dt class="col-12">ACS:</dt>
+                            <dd class="col-12" id="visualizarACS"></dd>
+                        </div>
+                        <div class="col-md-6">
+                            <dt class="col-12">Alergias:</dt>
+                            <dd class="col-12" id="visualizarAlergias"></dd>
+                        </div>
+                    </div>
+
+                    <div class="row mb-0">
+                        <div class="col-md-12">
+                            <dt class="col-12">Comorbidades:</dt>
+                            <dd class="col-12" id="visualizarComorbidades"></dd>
+                        </div>
+                    </div>
                 </div>
-             
             </div>
             <div class="modal-footer">
                 <a id="btnVisualizarAtendimentos" class="btn btn-primary">Visualizar Atendimentos</a>

@@ -65,7 +65,7 @@ if (!$pacientes || curl_errno($ch)) {
           var email = $(this).data('email');
           var telefone = $(this).data('telefone');
           var nomeMae = $(this).data('nome-mae');
-          var dataNascimento = $(this).data('data-nascimento');
+          var dataNascimento = $(this).data('dataNascimento');
           var sexo = $(this).data('sexo');
           var sus = $(this).data('sus');
           var pec = $(this).data('pec');
@@ -82,6 +82,8 @@ if (!$pacientes || curl_errno($ch)) {
           var estadoCivil = $(this).data('estado-civil');
           var nacionalidade = $(this).data('nacionalidade');
           var profissao = $(this).data('profissao');
+          // Convert para o input
+            var dataFormatada = dataNascimento.split('-').reverse().join('-'); 
 
           $('#pacienteNome').val(nome);
           $('#pacienteEmail').val(email);
@@ -89,7 +91,7 @@ if (!$pacientes || curl_errno($ch)) {
           $('#pacienteId').val(id);
           $('#cepEditar').val(cep);
           $('#pacienteNomeMae').val(nomeMae);
-          $('#pacienteDataNascimento').val(dataNascimento);
+          $('#pacienteDataNascimento').val(dataFormatada);
           $('#pacienteSexo').val(sexo);
           $('#pacienteSUS').val(sus);
           $('#pacientePEC').val(pec);
@@ -168,7 +170,7 @@ function atualizarPaciente(id, dados) {
         data: JSON.stringify(dados),
         success: function(result) {
             console.log('Paciente atualizado com sucesso.', result);
-            location.reload();
+            // location.reload();
         },
         error: function(error) {
             console.error('Erro ao atualizar o paciente:', error);
@@ -258,5 +260,8 @@ $(document).ready(function() {
     </script>
 
 
+<!-- <?php
+include '../partials/footer.php'
+?> -->
   </body>
 </html>
