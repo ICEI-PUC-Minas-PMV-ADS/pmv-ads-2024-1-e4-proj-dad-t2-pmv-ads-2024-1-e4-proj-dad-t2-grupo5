@@ -121,10 +121,8 @@ if (!$pacientes || curl_errno($ch)) {
 
             $.ajax({
                 type: 'POST',
-                url: 'http://localhost:3001/pacientes/criar',
-                headers: {
-                    'x-api-key': '<?php echo $apiKey; ?>'
-                },
+                url: 'http://localhost:3001/pacientes/login',
+
                 contentType: 'application/json',
                 data: JSON.stringify(jsonData),
                 success: function(response) {
@@ -133,7 +131,7 @@ if (!$pacientes || curl_errno($ch)) {
                     location.reload(); 
                 },
                 error: function(xhr, status, error) {
-                    console.error('Erro ao criar paciente:', error);
+                    console.error('Erro:', error);
                 }
             });
         });

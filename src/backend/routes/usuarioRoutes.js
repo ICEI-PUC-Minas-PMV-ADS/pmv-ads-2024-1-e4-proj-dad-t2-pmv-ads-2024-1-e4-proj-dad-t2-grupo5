@@ -13,30 +13,32 @@ router.post('/criar/multiplos', async (req, res) => {
     }
 });
 
-// Add new user
 router.post('/criar', async (req, res) => {
     try {
       const { cpf, email, crm } = req.body;
-      const usuarioExistente = await Usuario.findOne({ $or: [{ cpf }, { email }, {crm}] });
-      if(usuarioExistente.cpf === cpf){
-        res.status(400).send({ error: 'Usuário já cadastrado com este CPF'});
+      const usuarioExistente = await Usuario.findOne({ $or: [{ cpf }, { email }, { crm }] });
+      
+      if (usuarioExistente) {
+        if (usuarioExistente.cpf === cpf) {
+          return res.status(400).send({ error: 'Usuário já cadastrado com este CPF' });
+        }
+        if (usuarioExistente.email === email) {
+          return res.status(400).send({ error: 'Usuário já cadastrado com este email' });
+        }
+        if (usuarioExistente.crm === crm) {
+          return res.status(400).send({ error: 'Usuário já cadastrado com este CRM' });
+        }
       }
-      else if(usuarioExistente.email === email){
-        res.status(400).send({ error: 'Usuário já cadastrado com este email'});
-      }
-      else if(usuarioExistente.crm === crm){
-        res.status(400).send({ error: 'Usuário já cadastrado com este CRM'});
-      }
-      else{
-        const novoUsuario = new Usuario(req.body);
-        await novoUsuario.save();
-        res.status(201).send({ message: 'Usuário adicionado com sucesso!' });
-      }
+      
+      const novoUsuario = new Usuario(req.body);
+      await novoUsuario.save();
+      res.status(201).send({ message: 'Usuário adicionado com sucesso!' });
       
     } catch (error) {
         res.status(400).send({ error: 'Falha ao adicionar usuário', details: error });
     }
 });
+
 
 // Get all users
 router.get('/', async (req, res) => {
