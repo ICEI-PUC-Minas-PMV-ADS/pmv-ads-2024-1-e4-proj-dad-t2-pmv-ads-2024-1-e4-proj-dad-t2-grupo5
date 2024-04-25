@@ -20,27 +20,71 @@ require './vendor/autoload.php';
 </head>
 <body>
 <div class="container-box">
-    <div class="container">
-        <div class="boxselect">
-            <div class="box">
-                <select class="form-control">
-                    <option disabled selected hidden>Setor</option>
-                    <option>Farmácia</option>
-                    <option>Enfermagem</option>
-                    <option>Médicos</option>
-                </select>
+   <div class="container">
+        <form id="loginForm">
+            <div class="boxselect">
+                <div class="box">
+                    <select class="form-control" name="setor">
+                        <option disabled selected hidden>Setor</option>
+                        <option value="Farmacia">Fármacia</option>
+                        <option value="Enfermagem">Enfermagem</option>
+                        <option value="Medico">Médico</option>
+                        <option value="Pediatria">Pediatria</option>
+                    </select>
+                </div>
+                <div class="box">
+                    <input type="text" class="form-control" name="cpf" placeholder="CPF">
+                </div>
+                <div class="box">
+                    <input type="password" class="form-control" name="senha" placeholder="Senha">
+                </div>
+                <button type="submit" class="buttonconfirmar">Confirmar</button>
+                <p id="errorMessage"></p>
             </div>
-            <div class="box">
-                <input type="text" class="form-control" placeholder="Usuário">
-            </div>
-            <div class="box">
-                <input type="password" class="form-control" placeholder="Senha">
-            </div>
-            <button class="buttonconfirmar">Confirmar</button>
-            <p></p>
-        </div>
+        </form>
     </div>
 </div>
+
+
+<script>
+    document.getElementById('loginForm').addEventListener('submit', async (event) => {
+        event.preventDefault();
+        
+        const formData = new FormData(event.target);
+        const requestData = Object.fromEntries(formData.entries());
+        
+        try {
+            const response = await fetch('http://localhost:3001/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(requestData)
+            });
+
+            if (!response.ok) {
+                const errorMessage = await response.json();
+                document.getElementById('errorMessage').innerText = errorMessage.error;
+            } else {
+                const usuarioDados = await response.json();
+                window.location.href = 'home.php';
+
+                const formData = new FormData();
+                formData.append('usuarioDados', JSON.stringify(userData));
+
+                await fetch('salvar_usuario.php', {
+                    method: 'POST',
+                    body: formData
+                });
+            }
+            
+        } catch (error) {
+            console.error('Erro ao realizar o login', error);
+            document.getElementById('errorMessage').innerText = 'Erro ao realizar o login, tente novamente mais tarde'            
+        }
+    });
+</script>
+
 
 <?php
     include 'partials/footer.php';
