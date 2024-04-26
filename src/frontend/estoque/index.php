@@ -36,7 +36,6 @@ if (!$estoque || curl_errno($ch)) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Controle de Estoque</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://<?php echo $domain; ?>/style.css">
 </head>
 <body>
 
@@ -49,9 +48,9 @@ if (!$estoque || curl_errno($ch)) {
         </div>
 
         <h2>Estoque</h2>
-        <button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#adicionarMedicamentoModal">
+        <!-- <button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#adicionarMedicamentoModal">
             Adicionar Estoque
-        </button>
+        </button> -->
         <button type="button" class="btn btn-danger mb-3" id="btnSolicitarReposicao">
             Solicitar Reposição
         </button>
@@ -65,7 +64,7 @@ if (!$estoque || curl_errno($ch)) {
                     <th>Código</th>
                     
                     <th>Quantidade</th>
-                    <th>Ações</th>
+                    <!-- <th>Ações</th> -->
                 </tr>         
             </thead>
             <tbody id="tabelaEstoque">
@@ -78,11 +77,11 @@ if (!$estoque || curl_errno($ch)) {
                             <td style="color: <?php echo $medicamento['quantidade'] == 0 ? 'red' : 'green'; ?>">
                                 <?php echo htmlspecialchars($medicamento['quantidade']); ?>
                             </td>
-                            <td>
+                            <!-- <td>
                                 <button type="button" class="btn btn-primary editarMedicamentoBtn" data-toggle="modal" data-target="#editarMedicamentoModal" data-id="<?php echo $medicamento['_id']; ?>" data-nome="<?php echo htmlspecialchars($medicamento['nome']); ?>" data-codigo="<?php echo htmlspecialchars($medicamento['codigo']); ?>" data-preco="<?php echo htmlspecialchars($medicamento['preco']); ?>"data-quantidade="<?php echo htmlspecialchars($medicamento['quantidade']); ?>">
                                     Editar
                                 </button>
-                            </td>
+                            </td> -->
                         </tr>
                     <?php endforeach; ?>
                 <?php else: ?>
@@ -323,14 +322,14 @@ $('#salvarMedicamento').on('click', function() {
             }
         });
     });
-
+// solicitação de reposição de medicamento 
     document.getElementById('btnSolicitarReposicao').addEventListener('click', async () => {
         try {
             // Exibir um popup com a mensagem "Reposição Solicitada com Sucesso"
             alert('Reposição Solicitada com Sucesso');
 
             // Enviar uma requisição para a URL de solicitação de reposição
-            const response = await fetch('http://localhost:3001/reposicao/repor/6622c3ef98ae18494d3f25e5', {
+            const response = await fetch('http://localhost:3001/reposicao/repor-medicamentos/6622c3ef98ae18494d3f25e5', {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
@@ -342,6 +341,7 @@ $('#salvarMedicamento').on('click', function() {
                 console.log('Reposição solicitada com sucesso!');
             } else {
                 console.error('Erro ao solicitar reposição:', response.status);
+                console.error('Detalhes do erro:', await response.text());
                 alert('Erro ao solicitar reposição. Verifique o console para mais detalhes.');
             }
         } catch (error) {
