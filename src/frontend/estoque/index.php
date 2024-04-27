@@ -48,9 +48,7 @@ if (!$estoque || curl_errno($ch)) {
         </div>
 
         <h2>Estoque</h2>
-        <!-- <button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#adicionarMedicamentoModal">
-            Adicionar Estoque
-        </button> -->
+
         <button type="button" class="btn btn-danger mb-3" id="btnSolicitarReposicao">
             Solicitar Reposição
         </button>
@@ -64,7 +62,6 @@ if (!$estoque || curl_errno($ch)) {
                     <th>Código</th>
                     
                     <th>Quantidade</th>
-                    <!-- <th>Ações</th> -->
                 </tr>         
             </thead>
             <tbody id="tabelaEstoque">
@@ -77,11 +74,6 @@ if (!$estoque || curl_errno($ch)) {
                             <td style="color: <?php echo $medicamento['quantidade'] == 0 ? 'red' : 'green'; ?>">
                                 <?php echo htmlspecialchars($medicamento['quantidade']); ?>
                             </td>
-                            <!-- <td>
-                                <button type="button" class="btn btn-primary editarMedicamentoBtn" data-toggle="modal" data-target="#editarMedicamentoModal" data-id="<?php echo $medicamento['_id']; ?>" data-nome="<?php echo htmlspecialchars($medicamento['nome']); ?>" data-codigo="<?php echo htmlspecialchars($medicamento['codigo']); ?>" data-preco="<?php echo htmlspecialchars($medicamento['preco']); ?>"data-quantidade="<?php echo htmlspecialchars($medicamento['quantidade']); ?>">
-                                    Editar
-                                </button>
-                            </td> -->
                         </tr>
                     <?php endforeach; ?>
                 <?php else: ?>
@@ -131,41 +123,6 @@ if (!$estoque || curl_errno($ch)) {
     </div>
 </div>
 
-<!-- Modal para adicionar Medicamento -->
-<div class="modal fade" id="adicionarMedicamentoModal" tabindex="-1" aria-labelledby="adicionarMedicamentoModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="adicionarMedicamentoModalLabel">Adicionar Medicamento</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form id="adicionarMedicamentoForm">
-            <div class="form-group">
-                <label for="nomeMedicamento">Nome do Medicamento</label>
-                <input type="text" class="form-control" id="nomeMedicamento" name="nome">
-            </div>
-            <div class="form-group">
-                <label for="codigoMedicamento">Código</label>
-                <input type="text" class="form-control" id="codigoMedicamento" name="codigo">
-            </div>
-   
-            <div class="form-group">
-                <label for="quantidadeMedicamento">Quantidade</label>
-                <input type="number" class="form-control" id="quantidadeMedicamento" name="quantidade">
-            </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-        <button type="button" class="btn btn-primary" id="salvarMedicamento">Salvar</button>
-      </div>
-    </div>
-  </div>
-</div>
-
 <!-- Modal de Erro -->
 <div class="modal fade" id="erroModal" tabindex="-1" aria-labelledby="erroModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -207,134 +164,18 @@ if (!$estoque || curl_errno($ch)) {
         });
     });
 
-    
-    $('#excluirMedicamento').click(function() {
-        var id = $('#editarIdMedicamento').val();
-        console.log(id)
-
-        $.ajax({
-            url: 'http://localhost:3001/estoque/excluir/' + id,
-            method: 'DELETE', 
-            headers: {
-                'x-api-key': '<?php echo $apiKey; ?>'
-            },
-            success: function(response) {
-                location.reload();
-            },
-            error: function(xhr, status, error) {
-            }
-        });
-    });    
-
-    $(document).ready(function() {
-        $('.editarMedicamentoBtn').click(function() {
-            var id = $(this).data('id');
-            var nome = $(this).data('nome');
-            var codigo = $(this).data('codigo');
-        
-            var quantidade = $(this).data('quantidade');
-
-            $('#editarIdMedicamento').val(id);
-            $('#editarNomeMedicamento').val(nome);
-            $('#editarCodigoMedicamento').val(codigo);
-      
-            $('#editarQuantidadeMedicamento').val(quantidade);
-        });
-
-        $('#salvarEdicaoMedicamento').click(function() {
-        var id = $('#editarIdMedicamento').val();
-        var nome = $('#editarNomeMedicamento').val();
-        var codigo = $('#editarCodigoMedicamento').val();
-
-        var quantidade = $('#editarQuantidadeMedicamento').val();
-
-        $.ajax({
-            url: `http://localhost:3001/estoque/medicamento/${id}`, // Ajuste a URL conforme necessário
-            method: 'PUT', // Método HTTP apropriado para atualizações
-                headers: {
-                'x-api-key': '<?php echo $apiKey; ?>'
-            },
-            contentType: "application/json",
-            data: JSON.stringify({
-                nome: nome,
-                codigo: codigo,
-                quantidade: quantidade
-            }),
-            success: function(response) {
-                window.location.reload();
-            },
-            error: function(xhr, status, error) {
-            }
-        });
-    });
-    });
-
-$('#salvarMedicamento').on('click', function() {
-    var dados = {
-        nome: $('#nomeMedicamento').val(),
-        codigo: $('#codigoMedicamento').val(),
-        quantidade: $('#quantidadeMedicamento').val(),
-    };
-
-    $.ajax({
-        url: 'http://localhost:3001/estoque/medicamentos',
-        type: 'POST',
-        headers: {
-            'x-api-key': '<?php echo $apiKey; ?>'
-        },
-        contentType: 'application/json',
-        data: JSON.stringify(dados),
-        success: function(response) {
-            window.location.reload();
-        },
-        error: function(xhr) {
-            try {
-                var resposta = JSON.parse(xhr.responseText);
-                var mensagemErro = resposta.message;
-                $('#mensagemErro').text(mensagemErro);
-            } catch(e) {
-                $('#mensagemErro').text("Ocorreu um erro desconhecido ao adicionar o Medicamento.");
-            }
-
-            $('#erroModal').modal('show');
-        }
-    });
-});
-
-
-    
-
-    $('#filtro').change(function() {
-        var filtro = $(this).val();
-        var filtroTexto = $('#filtroTexto').val(); 
-        window.location.href = 'index.php?filtro=' + filtro + '&filtroTexto=' + filtroTexto;
-    });
-
-    $('#filtroTexto').on('input', function() {
-        var filtroTexto = $(this).val().toLowerCase();
-        $('#tabelaEstoque tr').each(function() {
-            var nome = $(this).find('td:nth-child(1)').text().toLowerCase();
-            var codigo = $(this).find('td:nth-child(2)').text().toLowerCase();
-            if (nome.includes(filtroTexto) || codigo.includes(filtroTexto)) {
-                $(this).show();
-            } else {
-                $(this).hide();
-            }
-        });
-    });
 // solicitação de reposição de medicamento 
     document.getElementById('btnSolicitarReposicao').addEventListener('click', async () => {
         try {
-            // Exibir um popup com a mensagem "Reposição Solicitada com Sucesso"
+
             alert('Reposição Solicitada com Sucesso');
 
-            // Enviar uma requisição para a URL de solicitação de reposição
             const response = await fetch('http://localhost:3001/reposicao/repor-medicamentos/6622c3ef98ae18494d3f25e5', {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({}) // Se necessário, você pode enviar dados no corpo da requisição
+                body: JSON.stringify({}) 
             });
 
             if (response.ok) {
