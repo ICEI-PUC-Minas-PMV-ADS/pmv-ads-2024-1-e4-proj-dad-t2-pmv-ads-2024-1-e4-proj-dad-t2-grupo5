@@ -1,12 +1,11 @@
 <?php
     $http = $_SERVER['HTTP_HOST'];
-    $domain = $http . "/vivabem/pmv-ads-2024-1-e4-proj-dad-t2-pmv-ads-2024-1-e4-proj-dad-t2-grupo5/src/frontend";
+    $domain = "http://$http/vivabem/pmv-ads-2024-1-e4-proj-dad-t2-pmv-ads-2024-1-e4-proj-dad-t2-grupo5/src/frontend";
 ?>
 
-
 <nav class="navbar navbar-custom navbar-expand-lg">
-    <a class="navbar-brand" href="http://<?php echo $domain; ?>">
-        <img src="http://<?php echo $domain; ?>/img/logo.png" width="30" height="30" class="d-inline-block align-top" alt="Logotipo">
+    <a class="navbar-brand" href="<?php echo $domain; ?>">
+        <img src="<?php echo $domain; ?>/img/logo.png" width="30" height="30" class="d-inline-block align-top" alt="Logotipo">
         Viva Bem
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -14,18 +13,22 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="http://<?php echo $domain; ?>/fila/">Fila</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="http://<?php echo $domain; ?>/estoque/">Estoque</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="http://<?php echo $domain; ?>/pacientes/">Pacientes</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="http://<?php echo $domain; ?>/receitas/">Receitas</a>
-            </li>
+            <?php if (isset($_SESSION['usuario'])): ?>
+                <?php $usuario = $_SESSION['usuario']; ?>
+                <?php if ($usuario['setor'] === 'Medico'): ?>
+                    <!-- Adicione aqui os itens de menu específicos para Médico -->
+                <?php elseif ($usuario['setor'] === 'Enfermeiro'): ?>
+                    <!-- Adicione aqui os itens de menu específicos para Enfermeiro -->
+                <?php elseif ($usuario['setor'] === 'Administrativo'): ?>
+                    <!-- Adicione aqui os itens de menu específicos para Administrativo -->
+                <?php endif; ?>
+            <?php else: ?>
+                <li class="nav-item"><a class="nav-link" href="<?php echo $domain; ?>/fila/">Fila</a></li>
+                <li class="nav-item"><a class="nav-link" href="<?php echo $domain; ?>/estoque/">Estoque</a></li>
+                <li class="nav-item"><a class="nav-link" href="<?php echo $domain; ?>/pacientes/">Pacientes</a></li>
+                <li class="nav-item"><a class="nav-link" href="<?php echo $domain; ?>/receitas/">Receitas</a></li>
+                <li class="nav-item"><a class="nav-link login" href="<?php echo $domain; ?>/login/">Login</a></li>
+            <?php endif; ?>
         </ul>
     </div>
 </nav>

@@ -82,6 +82,18 @@ require './vendor/autoload.php';
                     default:
                         window.location.href = "pagina_padrao.html";
                 }
+
+                const userData = {
+                    usuario: usuario
+                };
+
+                await fetch('salvar_usuario.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(userData)
+                });
             }
             
         } catch (error) {
@@ -90,6 +102,7 @@ require './vendor/autoload.php';
         }
     });
 </script>
+
 
 
 
