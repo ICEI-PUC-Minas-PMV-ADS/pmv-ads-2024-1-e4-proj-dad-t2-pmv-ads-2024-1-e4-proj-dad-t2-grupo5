@@ -12,8 +12,8 @@
 ### Fluxo da farmácia
 ![Fluxo da farmácia](img/frames-VivaBem/fluxos/rotaDaFarmacia.png)
 
-### Fluxo da farmácia
-![Fluxo da secretária](img/frames-VivaBem/fluxos/rotaDaSecretaria.png)
+### Fluxo da secretária
+![Fluxo da secretária](img/frames-VivaBem/fluxos/RotaDaSecretaria.png)
 
 
 
