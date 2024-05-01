@@ -8,7 +8,6 @@ const filaAtendimentoSchema = new Schema({
     required: true,
     autopopulate: true,
   },
-  idade: { type: Number, required: true },
   tipoAtendimento: {
     type: String,
     enum: ['Eletivo', 'Prioritário', 'Emergencial'],
@@ -27,7 +26,15 @@ const filaAtendimentoSchema = new Schema({
   }
 });
 
-// Habilita o autopopulate globalmente no esquema
 filaAtendimentoSchema.plugin(require('mongoose-autopopulate'));
 
-module.exports = mongoose.model('FilaAtendimento', filaAtendimentoSchema);
+const FilaAtendimento = mongoose.model('FilaAtendimento', filaAtendimentoSchema);
+
+
+async function testFilaAtendimento() {
+  const fila = await FilaAtendimento.findOne({}).populate('paciente');
+  console.log(fila.paciente.idade); 
+}
+
+
+module.exports = FilaAtendimento;

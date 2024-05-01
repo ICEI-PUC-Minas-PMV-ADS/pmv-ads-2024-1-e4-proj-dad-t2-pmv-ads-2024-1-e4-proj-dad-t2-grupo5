@@ -36,7 +36,13 @@ if (!$estoque || curl_errno($ch)) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Controle de Estoque</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        main {
+            margin-bottom: 50px; 
+        }
+    </style>
 </head>
+
 <body>
 
 <main>
@@ -56,33 +62,35 @@ if (!$estoque || curl_errno($ch)) {
             Solicitar Medicamento Excepcional
         </button>
         <table class="table">
-            <thead>
-                <tr>
-                    <th>Nome</th>
-                    <th>Código</th>
-                    
-                    <th>Quantidade</th>
-                </tr>         
-            </thead>
-            <tbody id="tabelaEstoque">
-                <?php if (!empty($estoque)): ?>
-                    <?php foreach ($estoque as $medicamento): ?>
-                        <tr>         
-                            <td><?php echo htmlspecialchars($medicamento['nome']); ?></td>
-                            <td><?php echo htmlspecialchars($medicamento['codigo']); ?></td>
-                            
-                            <td style="color: <?php echo $medicamento['quantidade'] == 0 ? 'red' : 'green'; ?>">
-                                <?php echo htmlspecialchars($medicamento['quantidade']); ?>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-                <?php else: ?>
-                    <tr>
-                        <td colspan="4">Nenhum medicamento encontrado.</td>
-                    </tr>
-                <?php endif; ?>
-            </tbody>
-        </table>
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Código</th>
+            <th>Quantidade</th>
+            <th>Ações</th>
+        </tr>         
+    </thead>
+    <tbody id="tabelaEstoque">
+    <?php if (!empty($estoque)): ?>
+        <?php foreach ($estoque as $medicamento): ?>
+            <tr>
+                <td><?php echo htmlspecialchars($medicamento['nome']); ?></td>
+                <td><?php echo htmlspecialchars($medicamento['codigo']); ?></td>
+                <td style="color: <?php echo $medicamento['quantidade'] < 5 ? 'red' : 'green'; ?>">
+                    <?php echo htmlspecialchars($medicamento['quantidade']); ?>
+                </td>
+                <td>
+                    <button class="btn btn-info btn-sm editarBtn" data-id="<?php echo $medicamento['_id']; ?>" data-nome="<?php echo htmlspecialchars($medicamento['nome']); ?>" data-codigo="<?php echo htmlspecialchars($medicamento['codigo']); ?>" data-quantidade="<?php echo htmlspecialchars($medicamento['quantidade']); ?>">Editar</button>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    <?php else: ?>
+        <tr>
+            <td colspan="4">Nenhum medicamento encontrado.</td>
+        </tr>
+    <?php endif; ?>
+</tbody>
+</table>
     </div>
 </main>
 
@@ -190,6 +198,63 @@ if (!$estoque || curl_errno($ch)) {
             alert('Erro ao solicitar reposição. Verifique o console para mais detalhes.');
         }
     });
+
+    $(document).ready(function(){
+    $('.editarBtn').on('click', function() {
+        var id = $(this).data('id');
+        var nome = $(this).data('nome');
+        var codigo = $(this).data('codigo');
+        var quantidade = $(this).data('quantidade');
+
+        $('#editarIdMedicamento').val(id);
+        $('#editarNomeMedicamento').val(nome);
+        $('#editarCodigoMedicamento').val(codigo);
+        $('#editarQuantidadeMedicamento').val(quantidade);
+
+        $('#editarMedicamentoModal').modal('show');
+    });
+}); 
+
+$(document).ready(function(){
+    $('#salvarEdicaoMedicamento').on('click', async function() {
+        var id = $('#editarIdMedicamento').val();
+        var nome = $('#editarNomeMedicamento').val();
+        var codigo = $('#editarCodigoMedicamento').val();
+        var quantidade = $('#editarQuantidadeMedicamento').val();
+
+        var dadosMedicamento = {
+            nome: nome,
+            codigo: codigo,
+            quantidade: parseInt(quantidade),
+        };
+
+        // URL da API
+        var url = 'http://localhost:3001/estoque/medicamento/' + id;
+
+        try {
+            const response = await fetch(url, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(dadosMedicamento)
+            });
+
+            if (response.ok) {
+                const resultado = await response.json();
+                alert('Medicamento atualizado com sucesso!');
+                $('#editarMedicamentoModal').modal('hide');
+                location.reload();
+            } else {
+                const erroMsg = await response.text();
+                throw new Error(erroMsg);
+            }
+        } catch (error) {
+            console.error('Erro ao atualizar o medicamento:', error);
+            alert('Erro ao atualizar o medicamento. Verifique o console para mais detalhes.');
+        }
+    });
+});
 
 </script>
 

@@ -25,11 +25,10 @@ router.get('/', async (req, res) => {
 // Rota para excluir um item da fila de atendimento por ID
 router.delete('/:id', async (req, res) => {
   try {
-    const itemFila = await FilaAtendimento.findById(req.params.id);
-    if (!itemFila) {
+    const result = await FilaAtendimento.deleteOne({ _id: req.params.id });
+    if (result.deletedCount === 0) {
       return res.status(404).json({ message: 'Item não encontrado' });
     }
-    await itemFila.remove();
     res.json({ message: 'Item removido com sucesso' });
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -47,6 +46,10 @@ router.put('/editar/:id', async (req, res) => {
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
+});
+
+module.exports = router;
+
 });
 
 module.exports = router;
