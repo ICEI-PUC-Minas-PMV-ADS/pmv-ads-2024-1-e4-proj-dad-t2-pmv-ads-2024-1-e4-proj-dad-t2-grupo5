@@ -15,8 +15,7 @@
 ### Fluxo da secretária
 ![Fluxo da secretária](img/frames-VivaBem/fluxos/RotaDaSecretaria.png)
 
-
-
+[Veja o nosso fluxo de telas dinâmico diretamente no Figma](https://www.figma.com/proto/eXtFcN8slkQEhD9ZuvvfAZ/DESIGN?type=design&node-id=2-1037&t=0CdsvPvFhTF9BcZC-1&scaling=min-zoom&page-id=0%3A1&starting-point-node-id=103%3A597&mode=design)
 
 ## Wireframes
 
