@@ -67,7 +67,8 @@ require './vendor/autoload.php';
                 document.getElementById('errorMessage').innerText = errorMessage.error;
             } else {
                 const usuarioDados = await response.json();
-                window.location.href = 'home.php';
+
+                
 
                 const formData = new FormData();
                 formData.append('usuarioDados', JSON.stringify(userData));
@@ -76,6 +77,21 @@ require './vendor/autoload.php';
                     method: 'POST',
                     body: formData
                 });
+
+                switch (usuarioDados.setor) {
+                    case 'Farmácia':
+                        window.location.href = 'farmacia.php';
+                        break;
+                    case 'Enfermagem':
+                        window.location.href = 'enfermagem.php';
+                        break;
+                    case 'Medico':
+                        window.location.href = 'medico.php';
+                        break;
+                    // default:
+                    //     window.location.href = 'dashboard.php';
+                    //     break;
+                }
             }
             
         } catch (error) {
