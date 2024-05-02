@@ -1,102 +1,102 @@
 <div class="modal fade" id="criarReceitaModal" tabindex="-1" role="dialog" aria-labelledby="criarReceitaModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="criarReceitaModalLabel">Criar Receita</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form id="formReceita">
-                        <input type="hidden" id="atendimentoRef" name="atendimentoRef[AtendimentoId]">
-                        <input type="hidden" id="medicoId" name="atendimentoRef[medicoId]">
-                        <input type="hidden" id="pacienteId" name="atendimentoRef[paciente]">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="criarReceitaModalLabel">Criar Receita</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="formReceita">
+                    <input type="hidden" id="atendimentoRef" name="atendimentoRef[AtendimentoId]">
+                    <input type="hidden" id="medicoId" name="atendimentoRef[medicoId]">
+                    <input type="hidden" id="pacienteId" name="atendimentoRef[paciente]">
 
-                        <input type="hidden" id="atendimentoRef" name="atendimentoRef[AtendimentoId]">
-                        <input type="hidden" id="medicoId" name="atendimentoRef[medicoId]">
-                        <input type="hidden" id="pacienteId" name="atendimentoRef[paciente]">
+                    <input type="hidden" id="atendimentoRef" name="atendimentoRef[AtendimentoId]">
+                    <input type="hidden" id="medicoId" name="atendimentoRef[medicoId]">
+                    <input type="hidden" id="pacienteId" name="atendimentoRef[paciente]">
 
-                        <label for="dataFim">Data de Fim:</label>
-                        <input type="date" id="dataFim" name="dataFim" required><br>
+                    <label for="dataFim">Data de Fim:</label>
+                    <input type="date" id="dataFim" name="dataFim" required><br>
 
-                        <label for="observacoes">Observações:</label>
-                        <textarea id="observacoes" name="observacoes"></textarea><br>
+                    <label for="observacoes">Observações:</label>
+                    <textarea id="observacoes" name="observacoes"></textarea><br>
 
-                        <div id="medicamentos">
-                            <!-- Campos de medicamentos serão adicionados aqui -->
-                        </div>
-                        <button type="button" class="btn btn-secondary" onclick="adicionarMedicamento()">Adicionar Medicamento</button><br><br>
+                    <div id="medicamentos">
+                        <!-- Campos de medicamentos serão adicionados aqui -->
+                    </div>
+                    <button type="button" class="btn btn-secondary" onclick="adicionarMedicamento()">Adicionar Medicamento</button><br><br>
 
-                        <button type="submit" class="btn btn-primary">Salvar Receita</button>
-                    </form>
-                </div>
+                    <button type="submit" class="btn btn-primary">Salvar Receita</button>
+                </form>
             </div>
         </div>
     </div>
+</div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            adicionarMedicamento();  // Isso garante que pelo menos um conjunto de campos para medicamento seja criado ao carregar.
-        });
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        adicionarMedicamento();
+    });
 
-        function adicionarMedicamento() {
-            const container = document.getElementById('medicamentos');
-            const index = container.children.length;
+    function adicionarMedicamento() {
+        const container = document.getElementById('medicamentos');
+        const index = container.children.length;
 
-            const html = `
-                <div class="medicamento-group">
-                    <label for="medicamento_${index}_nome">Nome do Medicamento:</label>
-                    <input type="text" id="medicamento_${index}_nome" name="medicamentos[${index}][nome]" required>
+        const html = `
+            <div class="medicamento-group">
+                <label for="medicamento_${index}_nome">Nome do Medicamento:</label>
+                <input type="text" id="medicamento_${index}_nome" name="medicamentos[${index}][nome]" required>
 
-                    <label for="medicamento_${index}_quantidade">Quantidade:</label>
-                    <input type="number" id="medicamento_${index}_quantidade" name="medicamentos[${index}][quantidade]" required>
+                <label for="medicamento_${index}_quantidade">Quantidade:</label>
+                <input type="number" id="medicamento_${index}_quantidade" name="medicamentos[${index}][quantidade]" required>
 
-                    <label for="medicamento_${index}_periodo">Período:</label>
-                    <input type="text" id="medicamento_${index}_periodo" name="medicamentos[${index}][periodo]" required>
-                    <button type="button" class="btn btn-danger" onclick="removerMedicamento(this)">Remover</button>
-                </div>
-            `;
+                <label for="medicamento_${index}_periodo">Período:</label>
+                <input type="text" id="medicamento_${index}_periodo" name="medicamentos[${index}][periodo]" required>
+                <button type="button" class="btn btn-danger" onclick="removerMedicamento(this)">Remover</button>
+            </div>
+        `;
 
-            container.insertAdjacentHTML('beforeend', html);
-        }
+        container.insertAdjacentHTML('beforeend', html);
+    }
 
-        function removerMedicamento(button) {
-            const medicamentoGroup = button.closest('.medicamento-group');
-            medicamentoGroup.remove();
-        }
+    function removerMedicamento(button) {
+        const medicamentoGroup = button.closest('.medicamento-group');
+        medicamentoGroup.remove();
+    }
 
-        function emitirReceita(atendimentoId) {
-            $.ajax({
-                url: `http://localhost:3001/atendimentos/${atendimentoId}`,
-                type: 'GET',
-                headers: {
-                    'x-api-key': '<?php echo $apiKey; ?>'
-                },
-                success: function(data) {
-                    if (data.length > 0) {
-                        var atendimento = data[0]; 
+    function emitirReceita(atendimentoId) {
+        $.ajax({
+            url: `http://localhost:3001/atendimentos/${atendimentoId}`,
+            type: 'GET',
+            headers: {
+                'x-api-key': '<?php echo $apiKey; ?>'
+            },
+            success: function(data) {
+                if (data.length > 0) {
+                    var atendimento = data[0]; 
 
-                        console.log("Dados do atendimento:", atendimento);
+                    console.log("Dados do atendimento:", atendimento);
 
-                        $('#atendimentoRef').val(atendimento._id);
-                        $('#medicoId').val(atendimento.medico._id);
-                        $('#pacienteId').val(atendimento.paciente._id);
+                    $('#atendimentoRef').val(atendimento._id);
+                    $('#medicoId').val(atendimento.medico._id);
+                    $('#pacienteId').val(atendimento.paciente._id);
 
-                        $('#criarReceitaModal').modal('show');
-                    } else {
-                        console.error("Nenhum atendimento encontrado.");
-                    }
-                },
-                error: function(xhr, status, error) {
-                    console.log('Erro ao carregar dados do atendimento: ' + error);
+                    $('#criarReceitaModal').modal('show');
+                } else {
+                    console.error("Nenhum atendimento encontrado.");
                 }
-            });
-        }
+            },
+            error: function(xhr, status, error) {
+                console.log('Erro ao carregar dados do atendimento: ' + error);
+            }
+        });
+    }
 
 
 
-        $('#formReceita').on('submit', function(e) {
+    $('#formReceita').on('submit', function(e) {
     e.preventDefault();
 
     function formatDate(date) {
@@ -130,8 +130,6 @@
         });
     });
 
-    console.log("Dados do formulário como JSON:", formDataJson);
-
     $.ajax({
         url: 'http://localhost:3001/receita',
         type: 'POST',
@@ -143,12 +141,14 @@
         success: function(response) {
             console.log('Receita criada com sucesso!');
             $('#criarReceitaModal').modal('hide');
+            setTimeout(function() {
+                location.reload();
+            }, 1000);
         },
         error: function(xhr, status, error) {
             console.log('Erro ao criar receita: ' + error);
             console.log('Resposta do erro:', xhr.responseText);
         }
+        });
     });
-});
-
-    </script>
+</script>

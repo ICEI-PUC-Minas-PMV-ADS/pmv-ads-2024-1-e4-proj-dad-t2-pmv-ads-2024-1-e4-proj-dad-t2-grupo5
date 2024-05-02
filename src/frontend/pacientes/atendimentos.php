@@ -105,8 +105,10 @@
                             <td><?php echo !empty($atendimento['paciente']['nome']) ? htmlspecialchars($atendimento['paciente']['nome']) : 'Não informado'; ?></td>
                             <td><?php echo !empty($atendimento['medico']['nome']) ? htmlspecialchars($atendimento['medico']['nome']) : 'Não informado'; ?></td>
                             <td><?php echo !empty($atendimento['data']) ? htmlspecialchars(date('d/m/Y', strtotime($atendimento['data']))) : 'Não informado'; ?></td>
-                            <td><button class="btn btn-primary" onclick="visualizarAtendimento('<?php echo $atendimento['_id']; ?>')">Visualizar</button></td>
-                            <td><button class="btn btn-primary" onclick="receitaMedica('<?php echo $atendimento['_id']; ?>')">Receita</button></td>
+                            <td>
+                                <button class="btn btn-primary" onclick="visualizarAtendimento('<?php echo $atendimento['_id']; ?>')">Visualizar</button>
+                                <button class="btn btn-primary" onclick="receitaMedica('<?php echo $atendimento['_id']; ?>')">Receita</button>
+                            </td>
                         </tr>
                     <?php endforeach; ?>
                 <?php else: ?>
@@ -141,13 +143,14 @@
                 url: `http://localhost:3001/receita/atendimento/${atendimentoId}`,
                 type: 'GET',
                 headers: {
-                    'x-api-key': '<?php echo $apiKey; ?>'
+                    'x-api-key': '<?php echo addslashes($apiKey); ?>'
                 },
                 success: function(data) {
                     var modalBody = $('#receitaMedicaModal .modal-body');
                     modalBody.empty();
                     if (data && data.length > 0) {
-                        modalBody.append(`<button class="btn btn-primary" onclick="imprimirReceita()">Imprimir</button>`);
+                        var receita = data[0];
+                        modalBody.append(`<button class="btn btn-primary imprimirReceitaBtn" data-receita='${JSON.stringify(receita)}'>Imprimir</button>`);
                     } else {
                         modalBody.append(`<button class="btn btn-primary" onclick="emitirReceita('${atendimentoId}')">Emitir</button>`);
                     }
@@ -159,9 +162,48 @@
             });
         }
 
-        function imprimirReceita() {
-            // Implemente a lógica para imprimir a receita
-            console.log("Imprimindo receita...");
+        document.addEventListener('click', function(event) {
+            if (event.target.classList.contains('imprimirReceitaBtn')) {
+                var receita = JSON.parse(event.target.getAttribute('data-receita'));
+                imprimirReceita(receita);
+            }
+        });
+
+
+        function imprimirReceita(receita) {
+            var iframe = document.createElement('iframe');
+            iframe.style.display = 'none';
+            document.body.appendChild(iframe);
+
+            iframe.onload = function() {
+                var doc = iframe.contentDocument || iframe.contentWindow.document;
+                var dataInicio = new Date(receita.dataInicio).toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+                var dataFim = new Date(receita.dataFim).toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+
+                var html = `
+                    <h2>Detalhes da Receita</h2>
+                    <p><strong>Paciente:</strong> ${receita.atendimentoRef.paciente.nome}</p>
+                    <p><strong>Médico:</strong> ${receita.atendimentoRef.medicoId.nome}</p>
+                    <p><strong>Data Início:</strong> ${dataInicio}</p>
+                    <p><strong>Data Fim:</strong> ${dataFim}</p>
+                    <h3>Medicamentos:</h3>
+                    <ul>
+                        ${receita.medicamentos.map(medic => `<li>${medic.nome} | Quantidade: ${medic.quantidade} | Período: ${medic.periodo}</li>`).join('')}
+                    </ul>
+                    <p><strong>Observações:</strong> ${receita.observacoes}</p>
+                `;
+
+                doc.open();
+                doc.write(html);
+                doc.close();
+
+                setTimeout(function() {
+                    iframe.contentWindow.print();
+                    document.body.removeChild(iframe);
+                }, 500);
+            };
+
+            iframe.srcdoc = "about:blank";
         }
 
 
