@@ -38,7 +38,7 @@ if (!$estoque || curl_errno($ch)) {
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <style>
         main {
-            margin-bottom: 50px; 
+            margin-bottom: 100px; 
         }
     </style>
 </head>
@@ -58,7 +58,7 @@ if (!$estoque || curl_errno($ch)) {
         <button type="button" class="btn btn-danger mb-3" id="btnSolicitarReposicao">
             Solicitar Reposição
         </button>
-        <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="">
+        <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#solicitarMedicamentoModal">
             Solicitar Medicamento Excepcional
         </button>
         <table class="table">
@@ -126,6 +126,36 @@ if (!$estoque || curl_errno($ch)) {
                 <button type="button" class="btn btn-danger" id="excluirMedicamento">Excluir</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                 <button type="button" class="btn btn-primary" id="salvarEdicaoMedicamento">Salvar Alterações</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para Solicitar Medicamento Excepcional -->
+<div class="modal fade" id="solicitarMedicamentoModal" tabindex="-1" role="dialog" aria-labelledby="solicitarMedicamentoModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="solicitarMedicamentoModalLabel">Solicitar Medicamento Excepcional</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="solicitarMedicamentoForm">
+                    <div class="form-group">
+                        <label for="nomeMedicamento">Nome do Medicamento:</label>
+                        <input type="text" class="form-control" id="nomeMedicamento" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="codigoMedicamento">Código:</label>
+                        <input type="text" class="form-control" id="codigoMedicamento" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="enviarMedicamentoExcepcional">Enviar Solicitação</button>
             </div>
         </div>
     </div>
@@ -256,6 +286,40 @@ $(document).ready(function(){
     });
 });
 
+$('#enviarMedicamentoExcepcional').on('click', async function() {
+    var nome = $('#nomeMedicamento').val();
+    var codigo = $('#codigoMedicamento').val();
+
+    var dadosMedicamento = {
+        nome: nome,
+        codigo: codigo,
+        quantidade: 0 // quantidade inicial será zero
+    };
+
+    try {
+        const response = await fetch('http://localhost:3001/estoque/medicamentos', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(dadosMedicamento)
+        });
+
+        if (response.ok) {
+            alert('Medicamento excepcional solicitado com sucesso!');
+            $('#solicitarMedicamentoModal').modal('hide');
+            location.reload(); // Recarrega a página para mostrar o novo medicamento
+        } else {
+            const erroMsg = await response.text();
+            throw new Error(erroMsg);
+        }
+    } catch (error) {
+        console.error('Erro ao solicitar o medicamento excepcional:', error);
+        alert('Erro ao solicitar o medicamento excepcional. Verifique o console para mais detalhes.');
+    }
+});
+
+
 </script>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -268,3 +332,4 @@ include '../partials/footer.php';
 
 </body>
 </html>
+
