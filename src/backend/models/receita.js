@@ -23,6 +23,13 @@ const ReceitaMedicaSchema = new Schema({
             autopopulate: true,
         },
     },
+    dataInicio: {
+        type: Date,
+        default: Date.now
+    },
+    dataFim: {
+        type: Date,
+    },
     medicamentos: [{
         nome: { type: String, required: true },
         quantidade: { type: Number, required: true },

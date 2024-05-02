@@ -17,9 +17,6 @@
                         <input type="hidden" id="medicoId" name="atendimentoRef[medicoId]">
                         <input type="hidden" id="pacienteId" name="atendimentoRef[paciente]">
 
-                        <label for="dataInicio">Data de Início:</label>
-                        <input type="date" id="dataInicio" name="dataInicio" required><br>
-
                         <label for="dataFim">Data de Fim:</label>
                         <input type="date" id="dataFim" name="dataFim" required><br>
 
@@ -39,8 +36,8 @@
     </div>
 
     <script>
-         document.addEventListener('DOMContentLoaded', function() {
-            adicionarMedicamento();
+        document.addEventListener('DOMContentLoaded', function() {
+            adicionarMedicamento();  // Isso garante que pelo menos um conjunto de campos para medicamento seja criado ao carregar.
         });
 
         function adicionarMedicamento() {
@@ -61,7 +58,7 @@
                 </div>
             `;
 
-            container.innerHTML += html;
+            container.insertAdjacentHTML('beforeend', html);
         }
 
         function removerMedicamento(button) {
@@ -100,46 +97,58 @@
 
 
         $('#formReceita').on('submit', function(e) {
-            e.preventDefault();
+    e.preventDefault();
 
-            var formDataJson = {
-                atendimentoRef: {
-                    AtendimentoId: $('#atendimentoRef').val(),
-                    medicoId: $('#medicoId').val(),
-                    paciente: $('#pacienteId').val()
-                },
-                dataInicio: $('#dataInicio').val(),
-                dataFim: $('#dataFim').val(),
-                observacoes: $('#observacoes').val(),
-                medicamentos: []
-            };
+    function formatDate(date) {
+        var d = new Date(date),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear();
 
-            $('.medicamento-group').each(function(index, elem) {
-                formDataJson.medicamentos.push({
-                    nome: $(elem).find('[name*="[nome]"]').val(),
-                    quantidade: $(elem).find('[name*="[quantidade]"]').val(),
-                    periodo: $(elem).find('[name*="[periodo]"]').val(),
-                });
-            });
+        if (month.length < 2) month = '0' + month;
+        if (day.length < 2) day = '0' + day;
 
-            console.log("Dados do formulário como JSON:", formDataJson);
+        return [year, month, day].join('-');
+    }
 
-            $.ajax({
-                url: 'http://localhost:3001/receita',
-                type: 'POST',
-                contentType: 'application/json',
-                data: JSON.stringify(formDataJson),
-                headers: {
-                    'x-api-key': '<?php echo $apiKey; ?>'
-                },
-                success: function(response) {
-                    console.log('Receita criada com sucesso!');
-                    $('#criarReceitaModal').modal('hide');
-                },
-                error: function(xhr, status, error) {
-                    console.log('Erro ao criar receita: ' + error);
-                    console.log('Resposta do erro:', xhr.responseText);
-                }
-            });
+    var formDataJson = {
+        atendimentoRef: {
+            AtendimentoId: $('#atendimentoRef').val(),
+            medicoId: $('#medicoId').val(),
+            paciente: $('#pacienteId').val()
+        },
+        dataFim: formatDate($('#dataFim').val()),
+        observacoes: $('#observacoes').val(),
+        medicamentos: []
+    };
+
+    $('.medicamento-group').each(function(index, elem) {
+        formDataJson.medicamentos.push({
+            nome: $(elem).find('[name*="[nome]"]').val(),
+            quantidade: $(elem).find('[name*="[quantidade]"]').val(),
+            periodo: $(elem).find('[name*="[periodo]"]').val(),
         });
+    });
+
+    console.log("Dados do formulário como JSON:", formDataJson);
+
+    $.ajax({
+        url: 'http://localhost:3001/receita',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(formDataJson),
+        headers: {
+            'x-api-key': '<?php echo $apiKey; ?>'
+        },
+        success: function(response) {
+            console.log('Receita criada com sucesso!');
+            $('#criarReceitaModal').modal('hide');
+        },
+        error: function(xhr, status, error) {
+            console.log('Erro ao criar receita: ' + error);
+            console.log('Resposta do erro:', xhr.responseText);
+        }
+    });
+});
+
     </script>

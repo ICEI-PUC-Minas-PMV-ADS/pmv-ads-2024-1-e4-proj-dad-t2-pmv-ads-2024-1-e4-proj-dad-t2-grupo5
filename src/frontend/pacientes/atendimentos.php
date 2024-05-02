@@ -132,11 +132,6 @@
         </div>
     </div>
 
-
-    
-
-
-
     <?php include './modals/criarReceita.php' ?>
     <?php include './modals/visualizarAtendimento.php' ?>
 
