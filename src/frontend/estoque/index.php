@@ -36,6 +36,7 @@ if (!$estoque || curl_errno($ch)) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Controle de Estoque</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?php echo $domain; ?>/style.css">
 </head>
 
 <body>
@@ -241,31 +242,28 @@ if (!$estoque || curl_errno($ch)) {
 
 
 <script>
-    $('#filtro').change(function() {
-        var filtro = $(this).val();
-        var filtroTexto = $('#filtroTexto').val(); 
-        window.location.href = 'index.php?filtro=' + filtro + '&filtroTexto=' + filtroTexto;
-    });
+    // $('#filtro').change(function() {
+    //     var filtro = $(this).val();
+    //     var filtroTexto = $('#filtroTexto').val(); 
+    //     window.location.href = 'index.php?filtro=' + filtro + '&filtroTexto=' + filtroTexto;
+    // });
 
-    $('#filtroTexto').on('input', function() {
-        var filtroTexto = $(this).val().toLowerCase();
-        $('#tabelaEstoque tr').each(function() {
-            var nome = $(this).find('td:nth-child(1)').text().toLowerCase();
-            var codigo = $(this).find('td:nth-child(2)').text().toLowerCase();
-            if (nome.includes(filtroTexto) || codigo.includes(filtroTexto)) {
-                $(this).show();
-            } else {
-                $(this).hide();
-            }
-        });
-    });
+    // $('#filtroTexto').on('input', function() {
+    //     var filtroTexto = $(this).val().toLowerCase();
+    //     $('#tabelaEstoque tr').each(function() {
+    //         var nome = $(this).find('td:nth-child(1)').text().toLowerCase();
+    //         var codigo = $(this).find('td:nth-child(2)').text().toLowerCase();
+    //         if (nome.includes(filtroTexto) || codigo.includes(filtroTexto)) {
+    //             $(this).show();
+    //         } else {
+    //             $(this).hide();
+    //         }
+    //     });
+    // });
 
 // solicitação de reposição de medicamento 
     document.getElementById('btnSolicitarReposicao').addEventListener('click', async () => {
         try {
-
-            alert('Reposição Solicitada com Sucesso');
-
             const response = await fetch('http://localhost:3001/reposicao/repor-medicamentos/6622c3ef98ae18494d3f25e5', {
                 method: 'PUT',
                 headers: {
@@ -273,8 +271,9 @@ if (!$estoque || curl_errno($ch)) {
                 },
                 body: JSON.stringify({}) 
             });
-
+            
             if (response.ok) {
+                alert('Reposição Solicitada com Sucesso');
                 console.log('Reposição solicitada com sucesso!');
             } else {
                 console.error('Erro ao solicitar reposição:', response.status);

@@ -1,7 +1,3 @@
-<?php
-    $domain = $_SERVER['HTTP_HOST'];
-?>
-
 <style>
     footer {
         position: fixed;
