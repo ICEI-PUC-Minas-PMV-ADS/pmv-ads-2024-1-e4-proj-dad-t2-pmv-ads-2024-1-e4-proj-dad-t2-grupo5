@@ -2,6 +2,17 @@ const express = require('express');
 const router = express.Router();
 const FilaAtendimento = require('../models/filaAtendimento');
 
+// Rota para listar itens na fila de atendimento por ID do profissional
+router.get('/profissional/:profissionalId', async (req, res) => {
+  const profissionalId = req.params.profissionalId;
+  try {
+    const itensFila = await FilaAtendimento.find({ "profissional": profissionalId });
+    res.json(itensFila);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
 // Rota para adicionar um novo item à fila de atendimento
 router.post('/adicionar', async (req, res) => {
   try {
@@ -21,6 +32,8 @@ router.get('/', async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
+
+
 
 // Rota para excluir um item da fila de atendimento por ID
 router.delete('/:id', async (req, res) => {

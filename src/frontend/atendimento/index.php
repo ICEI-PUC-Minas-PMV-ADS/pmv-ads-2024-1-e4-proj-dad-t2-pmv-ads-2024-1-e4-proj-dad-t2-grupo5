@@ -24,6 +24,8 @@ $estoque = json_decode($resposta, true);
 if (!$estoque || curl_errno($ch)) {
 }
 
+$usuarioId = isset($_SESSION['usuario']['id']) ? $_SESSION['usuario']['id'] : null;
+
 ?>
 
 <!DOCTYPE html>
