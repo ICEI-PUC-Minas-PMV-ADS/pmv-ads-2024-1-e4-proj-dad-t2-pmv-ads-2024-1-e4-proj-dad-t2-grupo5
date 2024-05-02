@@ -39,7 +39,6 @@
                     <!-- Recepção -->
                     <li class="nav-item"><a class="nav-link" href="<?php echo $domain; ?>/fila/">Fila</a></li>
             <?php endif; ?>
-            <!-- Dropdown com o nome do usuário -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <?php echo $usuario['nome']; ?>
@@ -52,7 +51,7 @@
                 </li>
                     
             <?php else: ?>
-                    <li class="nav-item"><a class="nav-link login" href="<?php echo $domain; ?>/login/">Login</a></li>
+                    <li class="nav-item"><a class="nav-link login" href="<?php echo $domain; ?>">Login</a></li>
             <?php endif; ?>
         </ul>
     </div>
