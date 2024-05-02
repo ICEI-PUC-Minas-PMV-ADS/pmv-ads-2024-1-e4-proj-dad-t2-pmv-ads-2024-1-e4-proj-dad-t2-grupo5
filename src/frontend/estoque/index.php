@@ -36,12 +36,6 @@ if (!$estoque || curl_errno($ch)) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Controle de Estoque</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="<?php echo $domain; ?>/style.css">
-    <style>
-        main {
-            margin-bottom: 100px; 
-        }
-    </style>
 </head>
 
 <body>
@@ -62,6 +56,10 @@ if (!$estoque || curl_errno($ch)) {
         <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#solicitarMedicamentoModal">
             Solicitar Medicamento Excepcional
         </button>
+        <button type="button" class="btn btn-warning mb-3" data-toggle="modal" data-target="#saidaMedicamentoModal">
+            Saída de Medicamento
+        </button>
+
         <table class="table">
     <thead>
         <tr>
@@ -148,10 +146,6 @@ if (!$estoque || curl_errno($ch)) {
                         <label for="nomeMedicamento">Nome do Medicamento:</label>
                         <input type="text" class="form-control" id="nomeMedicamento" required>
                     </div>
-                    <div class="form-group">
-                        <label for="codigoMedicamento">Código:</label>
-                        <input type="text" class="form-control" id="codigoMedicamento" required>
-                    </div>
                 </form>
             </div>
             <div class="modal-footer">
@@ -180,6 +174,69 @@ if (!$estoque || curl_errno($ch)) {
       </div>
     </div>
   </div>
+</div>
+
+<!-- Modal de saída de medicamento -->
+<div class="modal fade" id="saidaMedicamentoModal" tabindex="-1" role="dialog" aria-labelledby="saidaMedicamentoModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="saidaMedicamentoModalLabel">Saída de Medicamento</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="saidaMedicamentoForm">
+                    <div class="form-group">
+                        <label for="medicamentoId">Medicamento:</label>
+                        <select class="form-control" id="medicamentoId" required>
+                            <?php foreach ($estoque as $item): ?>
+                                <option value="<?= htmlspecialchars($item['_id']) ?>"><?= htmlspecialchars($item['nome']) ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="quantidadeSaida">Quantidade:</label>
+                        <input type="number" class="form-control" id="quantidadeSaida" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="pacienteId">Paciente:</label>
+                         <select class="form-control" id="pacienteId" required></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="nomeMedico">Nome do Médico:</label>
+                        <input type="text" class="form-control" id="nomeMedico" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="crmMedico">CRM do Médico:</label>
+                        <input type="text" class="form-control" id="crmMedico" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="dataReceita">Data da Receita:</label>
+                        <input type="date" class="form-control" id="dataReceita" required>
+                    </div>
+                    <div class="form-group">
+                    <label for="dataSaida">Data da Saída:</label>
+                         <input type="text" class="form-control" id="dataSaida" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="horaSaida">Hora da Saída:</label>
+                        <input type="text" class="form-control" id="horaSaida" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="numeroReceita">Número da Receita:</label>
+                        <input type="text" class="form-control" id="numeroReceita" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-primary" id="finalizarSaidaMedicamento">Salvar</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 
@@ -293,7 +350,7 @@ $('#enviarMedicamentoExcepcional').on('click', async function() {
 
     var dadosMedicamento = {
         nome: nome,
-        codigo: codigo,
+        codigo: "excepcional",
         quantidade: 0 // quantidade inicial será zero
     };
 
@@ -318,6 +375,101 @@ $('#enviarMedicamentoExcepcional').on('click', async function() {
         console.error('Erro ao solicitar o medicamento excepcional:', error);
         alert('Erro ao solicitar o medicamento excepcional. Verifique o console para mais detalhes.');
     }
+});
+
+$(document).ready(function() {
+    // Função para carregar pacientes
+    function carregarPacientes() {
+        fetch('http://localhost:3001/pacientes')
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                }
+                throw new Error('Erro ao buscar pacientes.');
+            })
+            .then(data => {
+                const pacienteSelect = $('#pacienteId');
+                pacienteSelect.empty();
+                data.forEach(paciente => {
+                    pacienteSelect.append(`<option value="${paciente._id}">${paciente.nome}</option>`);
+                });
+            })
+            .catch(error => {
+                console.error('Erro ao carregar os pacientes:', error);
+                alert('Erro ao carregar os pacientes. Verifique o console para mais detalhes.');
+            });
+    }
+
+    // Preparar data e hora ao abrir a modal
+    $('#saidaMedicamentoModal').on('show.bs.modal', function(e) {
+        carregarPacientes();
+        const now = new Date();
+        $('#dataSaida').val(now.toLocaleDateString('pt-BR'));
+        $('#horaSaida').val(now.toLocaleTimeString('pt-BR'));
+    });
+
+    $('#finalizarSaidaMedicamento').on('click', async function() {
+        var idMedicamento = $('#medicamentoId').val();
+        var quantidadeSaida = parseInt($('#quantidadeSaida').val());
+        // até aqui funfou
+        var dadosSaida = {
+            medicamento: $('#medicamentoId').val(),
+            quantidade: parseInt($('#quantidadeSaida').val()),
+            paciente: $('#pacienteId').val(),
+            nomeMedico: $('#nomeMedico').val(),
+            crmMedico: $('#crmMedico').val(),
+            dataReceita: $('#dataReceita').val(),
+            numeroReceita: $('#numeroReceita').val(),
+            dataSaida: $('#dataSaida').val(),
+            horaSaida: $('#horaSaida').val()
+        };
+        try {
+            const responseSaida = await fetch('http://localhost:3001/saidamed', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(dadosSaida)
+            });
+            const estoqueResponse = await fetch(`http://localhost:3001/estoque/medicamento/${idMedicamento}`);
+            const medicamentoResposta = await estoqueResponse.json();
+            const medicamento = medicamentoResposta[0]
+            
+            
+            console.log('medicamento fora do array', medicamento)
+
+            if (medicamento.quantidade < quantidadeSaida) {
+                alert('Quantidade em estoque insuficiente para a saída.');
+                return;
+            }
+
+            var dadosAtualizados = {
+                nome: medicamento.nome,
+                codigo: medicamento.codigo,
+                quantidade: medicamento.quantidade - quantidadeSaida,
+            };
+
+            const response = await fetch(`http://localhost:3001/estoque/medicamento/${idMedicamento}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(dadosAtualizados)
+            });
+
+            if (response.ok) {
+                alert('Saída de medicamento registrada e estoque atualizado com sucesso!');
+                $('#saidaMedicamentoModal').modal('hide');
+                location.reload();
+            } else {
+                const erroMsg = await response.text();
+                throw new Error(erroMsg);
+            }
+        } catch (error) {
+            console.error('Erro ao registrar a saída de medicamento:', error);
+            alert('Erro ao registrar a saída de medicamento. Verifique o console para mais detalhes.');
+        }
+    });
 });
 
 
