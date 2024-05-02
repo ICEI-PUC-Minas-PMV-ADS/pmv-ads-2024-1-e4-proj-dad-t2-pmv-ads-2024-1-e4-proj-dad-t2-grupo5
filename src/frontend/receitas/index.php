@@ -104,17 +104,19 @@
                             <td>${receitaAtendimento.atendimentoRef.paciente.nome}</td>
                             <td>${new Date(receitaAtendimento.dataInicio).toLocaleDateString('pt-BR')}</td>
                             <td>${new Date(receitaAtendimento.dataFim).toLocaleDateString('pt-BR')}</td>
-                            <td>
-                                <button type="button" class="btn btn-primary editarReceitaBtn">
-                                    Editar
-                                </button>
-                            </td>
+
                             <td>
                                 <button type="button" class="btn btn-primary imprimirReceitaBtn" data-receita='${JSON.stringify(receitaAtendimento)}'>
                                     Imprimir Receita
                                 </button>
                             </td>
                         `;
+
+                            // <td>
+                            //     <button type="button" class="btn btn-primary editarReceitaBtn">
+                            //         Editar
+                            //     </button>
+                            // </td>
 
                         tabelaEstoque.appendChild(tr);
                     });
