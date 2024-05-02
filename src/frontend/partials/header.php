@@ -6,11 +6,13 @@
 
     if (isset($_GET['logout']) && $_GET['logout'] == '1') {
         session_unset();
-
         session_destroy();
         header("Location: " . $domain);
         exit();
     }
+
+    include_once __DIR__ . '/../funcoes.php';
+    
 ?>
 
 <nav class="navbar navbar-custom navbar-expand-lg">

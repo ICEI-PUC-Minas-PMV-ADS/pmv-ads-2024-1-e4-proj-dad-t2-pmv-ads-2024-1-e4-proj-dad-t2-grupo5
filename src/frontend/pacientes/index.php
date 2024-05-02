@@ -24,6 +24,9 @@ $pacientes = json_decode($resposta, true);
 if (!$pacientes || curl_errno($ch)) {
     // die('Erro ao acessar a API: ' . curl_error($ch));
 }
+
+verificarAutenticacao($domain);
+    
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">

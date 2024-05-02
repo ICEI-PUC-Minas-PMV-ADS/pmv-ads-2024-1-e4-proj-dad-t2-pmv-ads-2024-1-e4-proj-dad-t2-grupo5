@@ -1,6 +1,13 @@
 <?php
 include 'partials/header.php';
 require './vendor/autoload.php';
+
+// // Inclui o arquivo de funções
+// include_once 'funcoes.php';
+
+// // Verifica a autenticação antes de continuar
+// verificarAutenticacao($domain);
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
