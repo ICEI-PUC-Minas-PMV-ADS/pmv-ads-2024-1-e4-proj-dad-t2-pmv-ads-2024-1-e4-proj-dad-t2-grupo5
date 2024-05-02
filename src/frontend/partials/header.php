@@ -1,6 +1,8 @@
 <?php
     $http = $_SERVER['HTTP_HOST'];
     $domain = "http://$http/vivabem/pmv-ads-2024-1-e4-proj-dad-t2-pmv-ads-2024-1-e4-proj-dad-t2-grupo5/src/frontend";
+
+    session_start();
 ?>
 
 <nav class="navbar navbar-custom navbar-expand-lg">

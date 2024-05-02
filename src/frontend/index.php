@@ -16,7 +16,7 @@ require './vendor/autoload.php';
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 <!-- Adicionando Font Awesome para ícones -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-<link rel="stylesheet" href="http://<?php echo $domain; ?>/style.css">
+<link rel="stylesheet" href="<?php echo $domain; ?>/style.css">
 </head>
 <body>
 <div class="container-box">
@@ -69,39 +69,41 @@ require './vendor/autoload.php';
                 const { usuario } = await response.json();
                 console.log(usuario);
 
-                switch (usuario.setor) {
-                    case "Medico":
-                        window.location.href = "pagina_medico.html";
-                        break;
-                    case "Enfermeiro":
-                        window.location.href = "pagina_enfermeiro.html";
-                        break;
-                    case "Administrativo":
-                        window.location.href = "pagina_administrativo.html";
-                        break;
-                    default:
-                        window.location.href = "pagina_padrao.html";
-                }
-
-                const userData = {
-                    usuario: usuario
-                };
-
-                await fetch('salvar_usuario.php', {
+                const saveResponse = await fetch('salvar_usuario.php', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify(userData)
+                    body: JSON.stringify({ userData: usuario })
                 });
+
+                const saveResult = await saveResponse.json();
+                
+                if (saveResult.success) {
+                    switch (usuario.setor) {
+                        case "Medico":
+                            window.location.href = "<?php echo $domain; ?>/pacientes/";
+                            break;
+                        case "Enfermeiro":
+                            window.location.href = "pagina_enfermeiro.html";
+                            break;
+                        case "Administrativo":
+                            window.location.href = "pagina_administrativo.html";
+                            break;
+                        default:
+                            window.location.href = "pagina_padrao.html";
+                    }
+                } else {
+                    document.getElementById('errorMessage').innerText = 'Erro ao salvar o usuário, por favor, tente novamente.';
+                }
             }
-            
         } catch (error) {
             console.error('Erro ao realizar o login', error);
-            document.getElementById('errorMessage').innerText = 'Erro ao realizar o login, tente novamente mais tarde'            
+            document.getElementById('errorMessage').innerText = 'Erro ao realizar o login, tente novamente mais tarde';
         }
     });
 </script>
+
 
 
 

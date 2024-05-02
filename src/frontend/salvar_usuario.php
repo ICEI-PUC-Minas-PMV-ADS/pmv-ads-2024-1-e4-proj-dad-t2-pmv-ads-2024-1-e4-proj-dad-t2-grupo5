@@ -1,14 +1,15 @@
 <?php
 session_start();
 
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['userData'])) {
-    $userData = json_decode($_POST['userData'], true);
+$inputJSON = file_get_contents('php://input');
+$input = json_decode($inputJSON, true); // Decodificar como array associativo
 
-    // Salvar apenas os dados do usuário na sessão, sem um array adicional
-    $_SESSION['usuario'] = $userData['usuario']; // Aqui estamos acessando diretamente o array 'usuario'
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($input['userData'])) {
+    $usuario = $input['userData'];
+    $_SESSION['usuario'] = $usuario; // Salvar usuário na sessão
 
-    echo json_encode(array('success' => true));
+    echo json_encode(array('success' => true)); // Simplesmente retorne sucesso
 } else {
-    echo json_encode(array('error' => 'Dados do usuário não recebidos.'));
+    echo json_encode(array('error' => 'Dados do usuário não recebidos.')); // Retorne erro se não houver dados
 }
 ?>
