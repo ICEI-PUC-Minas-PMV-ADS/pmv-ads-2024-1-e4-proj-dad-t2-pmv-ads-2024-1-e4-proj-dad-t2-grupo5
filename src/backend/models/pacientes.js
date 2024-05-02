@@ -31,4 +31,17 @@ pacienteSchema.path('dataNascimento').get(function(date) {
     return date.toISOString().substring(0, 10);
 });
 
+pacienteSchema.virtual('idade').get(function() {
+  const hoje = new Date();
+  const nascimento = new Date(this.dataNascimento);
+  let idade = hoje.getFullYear() - nascimento.getFullYear();
+  const m = hoje.getMonth() - nascimento.getMonth();
+  if (m < 0 || (m === 0 && hoje.getDate() < nascimento.getDate())) {
+    idade--;
+  }
+  return idade;
+});
+
+pacienteSchema.set('toJSON', { virtuals: true });
+pacienteSchema.set('toObject', { virtuals: true });
 module.exports = mongoose.model('Paciente', pacienteSchema);
