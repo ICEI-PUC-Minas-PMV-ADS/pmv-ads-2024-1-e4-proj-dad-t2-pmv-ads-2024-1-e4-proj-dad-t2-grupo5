@@ -346,11 +346,9 @@ $(document).ready(function(){
 
 $('#enviarMedicamentoExcepcional').on('click', async function() {
     var nome = $('#nomeMedicamento').val();
-    var codigo = $('#codigoMedicamento').val();
 
     var dadosMedicamento = {
         nome: nome,
-        codigo: "excepcional",
         quantidade: 0 // quantidade inicial será zero
     };
 
