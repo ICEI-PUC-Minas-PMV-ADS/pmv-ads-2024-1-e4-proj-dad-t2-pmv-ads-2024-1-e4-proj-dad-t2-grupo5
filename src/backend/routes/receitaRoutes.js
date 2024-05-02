@@ -12,16 +12,30 @@ router.get('/', async (req, res) => {
     }
 });
 
-// Listar todas as receitas médicas de um médico específico por ID
-router.get('/medico/:medicoId', async (req, res) => {
-    const medicoId = req.params.medicoId;
+router.get('/atendimento/:AtendimentoId', async (req, res) => {
+    const AtendimentoId = req.params.AtendimentoId;
     try {
-        const receitas = await ReceitaMedica.find({ medicoId });
+        const receitas = await ReceitaMedica.find({ 'atendimentoRef.AtendimentoId': AtendimentoId });
         res.json(receitas);
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
 });
+
+// Listar todas as receitas médicas de um médico específico por ID
+router.get('/medico/:medicoId', async (req, res) => {
+    const medicoId = req.params.medicoId;
+    try {
+        const receitas = await ReceitaMedica.find({ 'atendimentoRef.medicoId': medicoId });
+        res.json(receitas);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+
+
+
 
 
 // Criar uma nova receita médica

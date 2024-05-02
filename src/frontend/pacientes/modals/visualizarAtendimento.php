@@ -10,7 +10,8 @@
             <div class="modal-body">
                 <div id="dadosMedico"></div>
                 <div id="dadosPaciente"></div>
-                <div id="descricaoAtendimento"></div>
+                <div id="descricaoAtendimento"></div><br>
+                <div id="idAtendimento"></div>
             </div>
         </div>
     </div>

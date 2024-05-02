@@ -106,6 +106,7 @@
                             <td><?php echo !empty($atendimento['medico']['nome']) ? htmlspecialchars($atendimento['medico']['nome']) : 'Não informado'; ?></td>
                             <td><?php echo !empty($atendimento['data']) ? htmlspecialchars(date('d/m/Y', strtotime($atendimento['data']))) : 'Não informado'; ?></td>
                             <td><button class="btn btn-primary" onclick="visualizarAtendimento('<?php echo $atendimento['_id']; ?>')">Visualizar</button></td>
+                            <td><button class="btn btn-primary" onclick="receitaMedica('<?php echo $atendimento['_id']; ?>')">Receita</button></td>
                         </tr>
                     <?php endforeach; ?>
                 <?php else: ?>
@@ -115,9 +116,59 @@
         </table>
     </div>
 
+    <div class="modal fade" id="receitaMedicaModal" tabindex="-1" role="dialog" aria-labelledby="receitaMedicaModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="receitaMedicaModalLabel">Receita</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Btn dinâmico -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    
+
+
+
     <?php include './modals/visualizarAtendimento.php' ?>
 
     <script>
+        function receitaMedica(atendimentoId) {
+            $.ajax({
+                url: `http://localhost:3001/receita/atendimento/${atendimentoId}`,
+                type: 'GET',
+                headers: {
+                    'x-api-key': '<?php echo $apiKey; ?>'
+                },
+                success: function(data) {
+                    var modalBody = $('#receitaMedicaModal .modal-body');
+                    modalBody.empty();
+                    if (data && data.length > 0) {
+                        modalBody.append(`<button class="btn btn-primary" onclick="imprimirReceita()">Imprimir</button>`);
+                    } else {
+                        modalBody.append(`<button class="btn btn-primary" onclick="emitirReceita('${atendimentoId}')">Emitir</button>`);
+                    }
+                    $('#receitaMedicaModal').modal('show');
+                },
+                error: function(xhr, status, error) {
+                    console.log('Erro ao carregar as receitas: ' + error);
+                }
+            });
+        }
+
+        function imprimirReceita() {
+            // Implemente a lógica para imprimir a receita
+            console.log("Imprimindo receita...");
+        }
+
+
         $('#selectPaciente').change(function() {
             var pacienteId = $(this).val();
             if (pacienteId !== '') {
@@ -129,7 +180,6 @@
         });
 
         function visualizarAtendimento(atendimentoId) {
-            console.log(atendimentoId);
             $.ajax({
                 url: `http://localhost:3001/atendimentos/${atendimentoId}`,
                 type: 'GET',
