@@ -29,6 +29,17 @@
                     <!-- Recepção -->
                     <li class="nav-item"><a class="nav-link" href="<?php echo $domain; ?>/fila/">Fila</a></li>
             <?php endif; ?>
+            <!-- Dropdown com o nome do usuário -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <?php echo $usuario['nome']; ?>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Perfil</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="<?php echo $domain; ?>/logout/">Logout</a>
+                    </div>
+                </li>
                     
             <?php else: ?>
                     <li class="nav-item"><a class="nav-link login" href="<?php echo $domain; ?>/login/">Login</a></li>
@@ -37,6 +48,5 @@
     </div>
 </nav>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
