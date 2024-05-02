@@ -18,18 +18,20 @@
             <?php if (isset($_SESSION['usuario'])): ?>
                 <?php $usuario = $_SESSION['usuario']; ?>
                 <?php if ($usuario['setor'] === 'Medico'): ?>
-                    <!-- Adicione aqui os itens de menu específicos para Médico -->
+                    <!-- Médicos -->
+                    <li class="nav-item"><a class="nav-link" href="<?php echo $domain; ?>/pacientes/">Pacientes</a></li>
+                    <li class="nav-item"><a class="nav-link" href="<?php echo $domain; ?>/receitas/">Receitas</a></li>
                 <?php elseif ($usuario['setor'] === 'Enfermeiro'): ?>
-                    <!-- Adicione aqui os itens de menu específicos para Enfermeiro -->
-                <?php elseif ($usuario['setor'] === 'Administrativo'): ?>
-                    <!-- Adicione aqui os itens de menu específicos para Administrativo -->
-                <?php endif; ?>
+                    <!-- Enfermaria -->
+                    <li class="nav-item"><a class="nav-link" href="<?php echo $domain; ?>/estoque/">Estoque</a></li>
+                    <li class="nav-item"><a class="nav-link" href="<?php echo $domain; ?>/receitas/">Receitas</a></li>
+                <?php elseif ($usuario['setor'] === 'Recepcao'): ?>
+                    <!-- Recepção -->
+                    <li class="nav-item"><a class="nav-link" href="<?php echo $domain; ?>/fila/">Fila</a></li>
+            <?php endif; ?>
+                    
             <?php else: ?>
-                <li class="nav-item"><a class="nav-link" href="<?php echo $domain; ?>/fila/">Fila</a></li>
-                <li class="nav-item"><a class="nav-link" href="<?php echo $domain; ?>/estoque/">Estoque</a></li>
-                <li class="nav-item"><a class="nav-link" href="<?php echo $domain; ?>/pacientes/">Pacientes</a></li>
-                <li class="nav-item"><a class="nav-link" href="<?php echo $domain; ?>/receitas/">Receitas</a></li>
-                <li class="nav-item"><a class="nav-link login" href="<?php echo $domain; ?>/login/">Login</a></li>
+                    <li class="nav-item"><a class="nav-link login" href="<?php echo $domain; ?>/login/">Login</a></li>
             <?php endif; ?>
         </ul>
     </div>

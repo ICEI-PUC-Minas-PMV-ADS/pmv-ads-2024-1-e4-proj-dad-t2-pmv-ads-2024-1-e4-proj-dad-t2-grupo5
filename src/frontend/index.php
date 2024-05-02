@@ -30,6 +30,7 @@ require './vendor/autoload.php';
                         <option value="Enfermagem">Enfermagem</option>
                         <option value="Medico">Médico</option>
                         <option value="Pediatria">Pediatria</option>
+                        <option value="Recepcao">Recepção</option>
                     </select>
                 </div>
                 <div class="box">
@@ -82,13 +83,15 @@ require './vendor/autoload.php';
                 if (saveResult.success) {
                     switch (usuario.setor) {
                         case "Medico":
+                        case "Pediatria":
+                        case "Enfermagem":
                             window.location.href = "<?php echo $domain; ?>/pacientes/";
                             break;
-                        case "Enfermeiro":
-                            window.location.href = "pagina_enfermeiro.html";
+                        case "Farmacia":
+                            window.location.href = "<?php echo $domain; ?>/estoque/";
                             break;
-                        case "Administrativo":
-                            window.location.href = "pagina_administrativo.html";
+                        case "Recepcao":
+                            window.location.href = "<?php echo $domain; ?>/fila/";
                             break;
                         default:
                             window.location.href = "pagina_padrao.html";
