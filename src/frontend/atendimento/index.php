@@ -42,7 +42,6 @@ $usuarioId = isset($_SESSION['usuario']['id']) ? $_SESSION['usuario']['id'] : nu
 
 <main class="container mt-4">
     <h2>Minha fila de Pacientes</h2>
-    <button type="button" class="btn btn-primary mb-2" id="adicionarBtn">Adicionar à Fila</button>
     <table class="table">
     <thead>
         <tr>
@@ -62,6 +61,7 @@ $usuarioId = isset($_SESSION['usuario']['id']) ? $_SESSION['usuario']['id'] : nu
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script>
+    var usuarioId = <?php echo json_encode($usuarioId); ?>;
 
 $(document).ready(function() {
     carregarFila();
@@ -98,7 +98,7 @@ $(document).ready(function() {
 
 function carregarFila() {
     $.ajax({
-        url: 'http://localhost:3001/fila',
+        url: 'http://localhost:3001/fila/profissional/' + usuarioId,
         method: 'GET',
         success: function(response) {
             $('#tabelaFila').empty();

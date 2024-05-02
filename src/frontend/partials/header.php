@@ -13,9 +13,9 @@
 
     include_once __DIR__ . '/../funcoes.php';
 
-    echo "<pre>";
-        var_dump($_SESSION['usuario']['id']);
-    echo "</pre>";
+    // echo "<pre>";
+    //     var_dump($_SESSION['usuario']['id']);
+    // echo "</pre>";
     
 ?>
 
