@@ -74,6 +74,9 @@
   .descricao td {
     vertical-align: middle;
   }
+  .acs{
+    width: 100%;
+  }
 </style>
 
 <body>
@@ -119,7 +122,7 @@
     </div>
 
     <div class="modal fade" id="receitaMedicaModal" tabindex="-1" role="dialog" aria-labelledby="receitaMedicaModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="receitaMedicaModalLabel">Receita</h5>
@@ -150,9 +153,9 @@
                     modalBody.empty();
                     if (data && data.length > 0) {
                         var receita = data[0];
-                        modalBody.append(`<button class="btn btn-primary imprimirReceitaBtn" data-receita='${JSON.stringify(receita)}'>Imprimir</button>`);
+                        modalBody.append(`<button class="btn btn-primary imprimirReceitaBtn acs" data-receita='${JSON.stringify(receita)}'>Imprimir</button>`);
                     } else {
-                        modalBody.append(`<button class="btn btn-primary" onclick="emitirReceita('${atendimentoId}')">Emitir</button>`);
+                        modalBody.append(`<button class="btn btn-primary acs" onclick="emitirReceita('${atendimentoId}')">Emitir</button>`);
                     }
                     $('#receitaMedicaModal').modal('show');
                 },
