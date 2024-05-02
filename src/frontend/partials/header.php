@@ -12,6 +12,10 @@
     }
 
     include_once __DIR__ . '/../funcoes.php';
+
+    // echo "<pre>";
+    //     var_dump($_SESSION['usuario']);
+    // echo "</pre>";
     
 ?>
 
