@@ -168,7 +168,7 @@ function carregarFila() {
                 newRow.append('<td>' + dataHora.toLocaleDateString('pt-BR') + ' ' + dataHora.toLocaleTimeString('pt-BR') + '</td>');
                 newRow.append('<td>' + nomeProfissional + '</td>');
                 newRow.append('<td>' +
-                    '<button type="button" class="btn btn-danger cancelarBtn" data-id="' + item._id + '">Cancelar</button>' +
+                    '<button type="button" class="btn btn-danger cancelarBtn" data-id="' + item._id + '">Tirar da Fila</button>' +
                 '</td>');
                 $('#tabelaFila').append(newRow);
             });
