@@ -15,6 +15,7 @@ router.post('/', async (req, res) =>
                 return res.status(401).json({ error: 'Usuario ou senha incorreta'});
             }
             const dadosUsuario = {
+                id: usuarioExistente._id,
                 cpf: usuarioExistente.cpf,
                 setor: usuarioExistente.setor,
                 nome: usuarioExistente.nome,
