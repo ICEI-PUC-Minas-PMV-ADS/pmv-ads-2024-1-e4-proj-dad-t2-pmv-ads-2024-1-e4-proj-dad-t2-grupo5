@@ -22,7 +22,8 @@ const filaAtendimentoSchema = new Schema({
   },
   validacoes: {
     escuta: { type: Boolean, default: false },
-    atendido: { type: Boolean, default: false }
+    atendido: { type: Boolean, default: false },
+    chamado: { type: Boolean, default: false }
   }
 });
 

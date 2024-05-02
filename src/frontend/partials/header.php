@@ -3,6 +3,14 @@
     $domain = "http://$http/vivabem/pmv-ads-2024-1-e4-proj-dad-t2-pmv-ads-2024-1-e4-proj-dad-t2-grupo5/src/frontend";
 
     session_start();
+
+    if (isset($_GET['logout']) && $_GET['logout'] == '1') {
+        session_unset();
+
+        session_destroy();
+        header("Location: " . $domain);
+        exit();
+    }
 ?>
 
 <nav class="navbar navbar-custom navbar-expand-lg">
@@ -37,7 +45,7 @@
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="#">Perfil</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="<?php echo $domain; ?>/logout/">Logout</a>
+                        <a class="dropdown-item" href="?logout=1">Sair</a>
                     </div>
                 </li>
                     
