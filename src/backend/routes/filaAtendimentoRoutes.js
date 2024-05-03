@@ -19,12 +19,11 @@ router.get('/profissional/:profissionalId', async (req, res) => {
 // Rota para atualizar o status de atendimento de um item na fila
 router.put('/atualizar/:filaId', async (req, res) => {
     const filaId = req.params.filaId;
-    const { atendido } = req.body; 
 
     try {
         const updatedItem = await FilaAtendimento.findByIdAndUpdate(
             filaId,
-            { $set: { "validacoes.atendido": atendido } },
+            { $set: { "validacoes.atendido": true } }, 
             { new: true }
         );
         res.json(updatedItem);
@@ -32,6 +31,7 @@ router.put('/atualizar/:filaId', async (req, res) => {
         res.status(500).json({ message: err.message });
     }
 });
+
 
 
 // Rota para adicionar um novo item à fila de atendimento

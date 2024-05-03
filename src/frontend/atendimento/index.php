@@ -52,6 +52,7 @@ $usuarioId = isset($_SESSION['usuario']['id']) ? $_SESSION['usuario']['id'] : nu
             </div>
             <div class="modal-body">
                 <form id="formAtendimento">
+                    <input type="hidden" id="pacienteSus" value="">
                     <div class="form-group">
                         <label for="descricao">Descrição</label>
                         <textarea class="form-control" id="descricao" required></textarea>
@@ -79,15 +80,15 @@ $usuarioId = isset($_SESSION['usuario']['id']) ? $_SESSION['usuario']['id'] : nu
     var usuarioId = <?php echo json_encode($usuarioId); ?>;
 
         $(document).on('click', '.cancelarBtn', function() {
-            var filaId = $(this).data('fila-id'); // ID do registro na fila
-            var pacienteId = $(this).data('paciente-id'); // ID do paciente
+            var filaId = $(this).data('fila-id'); 
+            var pacienteId = $(this).data('paciente-id');
+            var pacientesus = $(this).data('paciente-sus');
 
-            console.log('fila', filaId)
-            console.log('paciente', pacienteId)
-            
-            // Armazena os IDs em inputs ocultos ou em variáveis
-            $('#filaId').val(filaId); // Supõe que existe um input oculto para filaId
-            $('#pacienteId').val(pacienteId); // Input onde já estava armazenando o ID do paciente
+            console.log('sus', pacientesus)
+
+            $('#filaId').val(filaId); 
+            $('#pacienteId').val(pacienteId);
+            $('#pacienteSus').val(pacientesus);
 
             $('#modalAtendimento').modal('show');
         });
@@ -96,13 +97,14 @@ $('#enviarAtendimento').click(function() {
     var descricao = $('#descricao').val();
     var exameSolicitado = $('#exameSolicitado').is(':checked');
     var medicoId = $('#medicoId').val();
-    var pacienteId = $('#pacienteId').val(); // Este é o ID do registro na fila, não o ID do paciente
+    var pacienteId = $('#pacienteId').val();
+    var pacientesus = $('#pacienteSus').val();
 
     var dadosAtendimento = {
         descricao: descricao,
         exameSolicitado: exameSolicitado,
         medico: medicoId,
-        paciente: pacienteId  // Aqui deve ser o ID do paciente, então ajuste conforme necessário
+        paciente: pacienteId
     };
 
     $.ajax({
@@ -111,8 +113,7 @@ $('#enviarAtendimento').click(function() {
         contentType: 'application/json',
         data: JSON.stringify(dadosAtendimento),
         success: function(response) {
-            // Atualizando o status na fila
-            atualizarStatusFila(pacienteId, true); // Use o ID correto do registro na fila
+            atualizarStatusFila(pacienteId, true, pacientesus);
         },
         error: function() {
             alert('Erro ao adicionar atendimento');
@@ -120,16 +121,15 @@ $('#enviarAtendimento').click(function() {
     });
 });
 
-function atualizarStatusFila(filaId, atendido) {
+function atualizarStatusFila(filaId, atendido, pacientesus) {
     $.ajax({
         url: `http://localhost:3001/fila/atualizar/${filaId}`,
         method: 'PUT',
         contentType: 'application/json',
-        data: JSON.stringify({ atendido }),
         success: function(response) {
             $('#modalAtendimento').modal('hide');
             alert('Atendimento adicionado e fila atualizada com sucesso!');
-            window.location.href = '<?php echo $domain; ?>/pacientes/atendimentos.php?pacienteId=' + pacienteId; 
+            window.location.href = '<?php echo $domain; ?>/pacientes/atendimentos.php?pacienteId=' + pacientesus; // Usar pacientesus aqui
             carregarFila();
         },
         error: function() {
@@ -182,7 +182,7 @@ function carregarFila() {
                 newRow.append('<td>' + dataHora.toLocaleDateString('pt-BR') + ' ' + dataHora.toLocaleTimeString('pt-BR') + '</td>');
                 newRow.append('<td>' + nomeProfissional + '</td>');
                 newRow.append('<td>' +
-                    '<button type="button" class="btn btn-success cancelarBtn" data-fila-id="' + item._id + '" data-paciente-id="' + item.paciente._id + '">Chamar</button>' +
+                    '<button type="button" class="btn btn-success cancelarBtn" data-paciente-sus="' + item.paciente.sus + '" data-fila-id="' + item._id + '" data-paciente-id="' + item.paciente._id + '">Chamar</button>' +
                 '</td>');
                 $('#tabelaFila').append(newRow);
             });
