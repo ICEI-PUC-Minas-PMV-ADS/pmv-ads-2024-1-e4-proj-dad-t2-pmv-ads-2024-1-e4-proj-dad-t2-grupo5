@@ -8,6 +8,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Controle de Receitas</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="../style.css">
 </head>
@@ -20,7 +21,7 @@
         <h2>Receita</h2>
         <div class="form-group">
             <label for="filtroTexto">Filtrar por texto:</label>
-            <input type="text" class="form-control" id="filtroTexto">
+            <input type="text" class="form-control" id="filtroTexto" placeholder="Digite para filtrar...">
         </div>
         <table class="table">
             <thead>
@@ -39,7 +40,14 @@
     </div>
 </main>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
 <script>
+   
+
+
     document.addEventListener('click', function(event) {
         if (event.target.classList.contains('imprimirReceitaBtn')) {
             var receita = JSON.parse(event.target.getAttribute('data-receita'));
@@ -136,11 +144,21 @@
         carregarDados();
     });
 
-</script>
+     $(document).ready(function() {
+        $('#filtroTexto').on('input', function() {
+            var filtroTexto = $(this).val().toLowerCase();
+            $('#tabelaEstoque tr').each(function() {
+                var linhaTexto = $(this).find('td').text().toLowerCase();
+                if (linhaTexto.includes(filtroTexto)) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        });
+    });
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</script>
 
 <?php
     include '../partials/footer.php'
