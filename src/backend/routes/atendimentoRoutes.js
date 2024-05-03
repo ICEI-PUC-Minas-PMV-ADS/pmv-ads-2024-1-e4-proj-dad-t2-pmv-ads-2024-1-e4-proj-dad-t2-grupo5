@@ -18,12 +18,14 @@ router.get('/', async (req, res) => {
 router.get('/paciente/:pacienteId', async (req, res) => {
     const pacienteId = req.params.pacienteId;
     try {
-        const atendimentos = await Atendimento.find({ 'paciente': pacienteId });
+        const atendimentos = await Atendimento.find({ 'paciente': pacienteId })
+        .sort({ 'data': -1 });
         res.json(atendimentos);
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
 });
+
 
 // Listar atendimento específico por id
 router.get('/:atendimentoId', async (req, res) => {
