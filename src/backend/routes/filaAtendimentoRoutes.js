@@ -2,16 +2,37 @@ const express = require('express');
 const router = express.Router();
 const FilaAtendimento = require('../models/filaAtendimento');
 
-// Rota para listar itens na fila de atendimento por ID do profissional
+// Rota para listar itens na fila de atendimento por ID do profissional onde atendido é false
 router.get('/profissional/:profissionalId', async (req, res) => {
   const profissionalId = req.params.profissionalId;
   try {
-    const itensFila = await FilaAtendimento.find({ "profissional": profissionalId });
+    const itensFila = await FilaAtendimento.find({
+      "profissional": profissionalId,
+      "validacoes.atendido": false
+    });
     res.json(itensFila);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 });
+
+// Rota para atualizar o status de atendimento de um item na fila
+router.put('/atualizar/:filaId', async (req, res) => {
+    const filaId = req.params.filaId;
+    const { atendido } = req.body; 
+
+    try {
+        const updatedItem = await FilaAtendimento.findByIdAndUpdate(
+            filaId,
+            { $set: { "validacoes.atendido": atendido } },
+            { new: true }
+        );
+        res.json(updatedItem);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
+
 
 // Rota para adicionar um novo item à fila de atendimento
 router.post('/adicionar', async (req, res) => {

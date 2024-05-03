@@ -1,5 +1,5 @@
 <div class="modal fade" id="criarReceitaModal" tabindex="-1" role="dialog" aria-labelledby="criarReceitaModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-m" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="criarReceitaModalLabel">Criar Receita</h5>
@@ -17,17 +17,18 @@
                     <input type="hidden" id="medicoId" name="atendimentoRef[medicoId]">
                     <input type="hidden" id="pacienteId" name="atendimentoRef[paciente]">
 
-                    <label for="dataFim">Data de Fim:</label>
-                    <input type="date" id="dataFim" name="dataFim" required><br>
-
-                    <label for="observacoes">Observações:</label>
-                    <textarea id="observacoes" name="observacoes"></textarea><br>
-
+                    <div class="form-group">
+                        <label for="dataFim">Data de Fim:</label>
+                        <input type="date" id="dataFim" class="form-control" name="dataFim" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="observacoes">Observações:</label>
+                        <textarea id="observacoes" class="form-control" name="observacoes"></textarea>
+                    </div>
                     <div id="medicamentos">
                         <!-- Campos de medicamentos serão adicionados aqui -->
                     </div>
                     <button type="button" class="btn btn-secondary" onclick="adicionarMedicamento()">Adicionar Medicamento</button><br><br>
-
                     <button type="submit" class="btn btn-primary">Salvar Receita</button>
                 </form>
             </div>
@@ -45,16 +46,22 @@
         const index = container.children.length;
 
         const html = `
-            <div class="medicamento-group">
-                <label for="medicamento_${index}_nome">Nome do Medicamento:</label>
-                <input type="text" id="medicamento_${index}_nome" name="medicamentos[${index}][nome]" required>
-
-                <label for="medicamento_${index}_quantidade">Quantidade:</label>
-                <input type="number" id="medicamento_${index}_quantidade" name="medicamentos[${index}][quantidade]" required>
-
-                <label for="medicamento_${index}_periodo">Período:</label>
-                <input type="text" id="medicamento_${index}_periodo" name="medicamentos[${index}][periodo]" required>
-                <button type="button" class="btn btn-danger" onclick="removerMedicamento(this)">Remover</button>
+           <div class="medicamento-group row">
+                <div class="col-md-4">
+                    <label for="medicamento_${index}_nome">Nome do Medicamento:</label>
+                    <input type="text" id="medicamento_${index}_nome" class="form-control" name="medicamentos[${index}][nome]" required>
+                </div>
+                <div class="col-md-3">
+                    <label for="medicamento_${index}_quantidade">Quantidade:</label>
+                    <input type="number" id="medicamento_${index}_quantidade" class="form-control" name="medicamentos[${index}][quantidade]" required>
+                </div>
+                <div class="col-md-4">
+                    <label for="medicamento_${index}_periodo">Período:</label>
+                    <input type="text" id="medicamento_${index}_periodo" class="form-control" name="medicamentos[${index}][periodo]" required>
+                </div>
+                <div class="col-md-1 mt-2">
+                    <button type="button" class="btn btn-danger" style="margin-top: 30px;" onclick="removerMedicamento(this)">Remover</button>
+                </div>
             </div>
         `;
 

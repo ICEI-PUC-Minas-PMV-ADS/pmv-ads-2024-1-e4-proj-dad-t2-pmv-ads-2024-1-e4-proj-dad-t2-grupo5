@@ -6,24 +6,6 @@ $apiKey = $_ENV['API_KEY'];
 
 include '../partials/header.php';
 
-
-$ch = curl_init();
-
-curl_setopt($ch, CURLOPT_URL, "http://localhost:3001/fila");
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-    "x-api-key: $apiKey"
-));
-
-$resposta = curl_exec($ch);
-
-curl_close($ch);
-
-$estoque = json_decode($resposta, true);
-
-if (!$estoque || curl_errno($ch)) {
-}
-
 $usuarioId = isset($_SESSION['usuario']['id']) ? $_SESSION['usuario']['id'] : null;
 
 ?>
@@ -58,10 +40,105 @@ $usuarioId = isset($_SESSION['usuario']['id']) ? $_SESSION['usuario']['id'] : nu
 </table>
 </main>
 
+<!-- Modal de Atendimento -->
+<div class="modal fade" id="modalAtendimento" tabindex="-1" role="dialog" aria-labelledby="modalAtendimentoLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalAtendimentoLabel">Adicionar Atendimento</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="formAtendimento">
+                    <div class="form-group">
+                        <label for="descricao">Descrição</label>
+                        <textarea class="form-control" id="descricao" required></textarea>
+                    </div>
+                    <div class="form-group form-check">
+                        <input type="checkbox" class="form-check-input" id="exameSolicitado">
+                        <label class="form-check-label" for="exameSolicitado">Solicitar Exame?</label>
+                    </div>
+                    <input type="hidden" id="medicoId" value="<?php echo $usuarioId; ?>">
+                    <input type="hidden" id="pacienteId">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="enviarAtendimento">Enviar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script>
     var usuarioId = <?php echo json_encode($usuarioId); ?>;
+
+        $(document).on('click', '.cancelarBtn', function() {
+            var filaId = $(this).data('fila-id'); // ID do registro na fila
+            var pacienteId = $(this).data('paciente-id'); // ID do paciente
+
+            console.log('fila', filaId)
+            console.log('paciente', pacienteId)
+            
+            // Armazena os IDs em inputs ocultos ou em variáveis
+            $('#filaId').val(filaId); // Supõe que existe um input oculto para filaId
+            $('#pacienteId').val(pacienteId); // Input onde já estava armazenando o ID do paciente
+
+            $('#modalAtendimento').modal('show');
+        });
+
+$('#enviarAtendimento').click(function() {
+    var descricao = $('#descricao').val();
+    var exameSolicitado = $('#exameSolicitado').is(':checked');
+    var medicoId = $('#medicoId').val();
+    var pacienteId = $('#pacienteId').val(); // Este é o ID do registro na fila, não o ID do paciente
+
+    var dadosAtendimento = {
+        descricao: descricao,
+        exameSolicitado: exameSolicitado,
+        medico: medicoId,
+        paciente: pacienteId  // Aqui deve ser o ID do paciente, então ajuste conforme necessário
+    };
+
+    $.ajax({
+        url: 'http://localhost:3001/atendimentos',
+        method: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(dadosAtendimento),
+        success: function(response) {
+            // Atualizando o status na fila
+            atualizarStatusFila(pacienteId, true); // Use o ID correto do registro na fila
+        },
+        error: function() {
+            alert('Erro ao adicionar atendimento');
+        }
+    });
+});
+
+function atualizarStatusFila(filaId, atendido) {
+    $.ajax({
+        url: `http://localhost:3001/fila/atualizar/${filaId}`,
+        method: 'PUT',
+        contentType: 'application/json',
+        data: JSON.stringify({ atendido }),
+        success: function(response) {
+            $('#modalAtendimento').modal('hide');
+            alert('Atendimento adicionado e fila atualizada com sucesso!');
+            window.location.href = '<?php echo $domain; ?>/pacientes/atendimentos.php?pacienteId=' + pacienteId; 
+            carregarFila();
+        },
+        error: function() {
+            alert('Erro ao atualizar status na fila');
+        }
+    });
+}
+
+
 
 $(document).ready(function() {
     carregarFila();
@@ -85,15 +162,6 @@ $(document).ready(function() {
     $(document).on('change input', '#searchPaciente, #tipoAtendimento, #selecaoProfissional', function() {
         checkForm();
     });
-
-    $(document).on('click', '.cancelarBtn', function() {
-        var itemId = $(this).data('id');
-        excluirItemFila(itemId);
-    });
-
-    $('#btnAdicionarPaciente').on('click', function() {
-        adicionarPacienteAFila();
-    });
 });
 
 function carregarFila() {
@@ -114,7 +182,7 @@ function carregarFila() {
                 newRow.append('<td>' + dataHora.toLocaleDateString('pt-BR') + ' ' + dataHora.toLocaleTimeString('pt-BR') + '</td>');
                 newRow.append('<td>' + nomeProfissional + '</td>');
                 newRow.append('<td>' +
-                    '<button type="button" class="btn btn-success cancelarBtn" data-id="' + item._id + '">Chamar</button>' +
+                    '<button type="button" class="btn btn-success cancelarBtn" data-fila-id="' + item._id + '" data-paciente-id="' + item.paciente._id + '">Chamar</button>' +
                 '</td>');
                 $('#tabelaFila').append(newRow);
             });
