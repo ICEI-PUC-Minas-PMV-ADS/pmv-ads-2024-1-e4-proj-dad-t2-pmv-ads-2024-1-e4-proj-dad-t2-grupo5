@@ -13,7 +13,7 @@ Ao abranger uma ampla gama de públicos-alvo, desde cidadãos em geral até pess
 ## Integrantes
 
 * Wellington Andrade
-* Lucas Felipe
+* Lucas Filipe
 * Lucas Guilherme
 * Neemias Cândido
 * Natan Fonseca
