@@ -36,6 +36,7 @@ if (!$estoque || curl_errno($ch)) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Controle de Estoque</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="<?php echo $domain; ?>/style.css">
 </head>
 
@@ -242,24 +243,7 @@ if (!$estoque || curl_errno($ch)) {
 
 
 <script>
-    // $('#filtro').change(function() {
-    //     var filtro = $(this).val();
-    //     var filtroTexto = $('#filtroTexto').val(); 
-    //     window.location.href = 'index.php?filtro=' + filtro + '&filtroTexto=' + filtroTexto;
-    // });
-
-    // $('#filtroTexto').on('input', function() {
-    //     var filtroTexto = $(this).val().toLowerCase();
-    //     $('#tabelaEstoque tr').each(function() {
-    //         var nome = $(this).find('td:nth-child(1)').text().toLowerCase();
-    //         var codigo = $(this).find('td:nth-child(2)').text().toLowerCase();
-    //         if (nome.includes(filtroTexto) || codigo.includes(filtroTexto)) {
-    //             $(this).show();
-    //         } else {
-    //             $(this).hide();
-    //         }
-    //     });
-    // });
+    
 
 // solicitação de reposição de medicamento 
     document.getElementById('btnSolicitarReposicao').addEventListener('click', async () => {
@@ -287,40 +271,73 @@ if (!$estoque || curl_errno($ch)) {
     });
 
     $(document).ready(function(){
-    $('.editarBtn').on('click', function() {
-        var id = $(this).data('id');
-        var nome = $(this).data('nome');
-        var codigo = $(this).data('codigo');
-        var quantidade = $(this).data('quantidade');
+        $('.editarBtn').on('click', function() {
+            var id = $(this).data('id');
+            var nome = $(this).data('nome');
+            var codigo = $(this).data('codigo');
+            var quantidade = $(this).data('quantidade');
 
-        $('#editarIdMedicamento').val(id);
-        $('#editarNomeMedicamento').val(nome);
-        $('#editarCodigoMedicamento').val(codigo);
-        $('#editarQuantidadeMedicamento').val(quantidade);
+            $('#editarIdMedicamento').val(id);
+            $('#editarNomeMedicamento').val(nome);
+            $('#editarCodigoMedicamento').val(codigo);
+            $('#editarQuantidadeMedicamento').val(quantidade);
 
-        $('#editarMedicamentoModal').modal('show');
+            $('#editarMedicamentoModal').modal('show');
+        });
+    }); 
+
+    $(document).ready(function(){
+        $('#salvarEdicaoMedicamento').on('click', async function() {
+            var id = $('#editarIdMedicamento').val();
+            var nome = $('#editarNomeMedicamento').val();
+            var codigo = $('#editarCodigoMedicamento').val();
+            var quantidade = $('#editarQuantidadeMedicamento').val();
+
+            var dadosMedicamento = {
+                nome: nome,
+                codigo: codigo,
+                quantidade: parseInt(quantidade),
+            };
+
+            // URL da API
+            var url = 'http://localhost:3001/estoque/medicamento/' + id;
+
+            try {
+                const response = await fetch(url, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(dadosMedicamento)
+                });
+
+                if (response.ok) {
+                    const resultado = await response.json();
+                    alert('Medicamento atualizado com sucesso!');
+                    $('#editarMedicamentoModal').modal('hide');
+                    location.reload();
+                } else {
+                    const erroMsg = await response.text();
+                    throw new Error(erroMsg);
+                }
+            } catch (error) {
+                console.error('Erro ao atualizar o medicamento:', error);
+                alert('Erro ao atualizar o medicamento. Verifique o console para mais detalhes.');
+            }
+        });
     });
-}); 
 
-$(document).ready(function(){
-    $('#salvarEdicaoMedicamento').on('click', async function() {
-        var id = $('#editarIdMedicamento').val();
-        var nome = $('#editarNomeMedicamento').val();
-        var codigo = $('#editarCodigoMedicamento').val();
-        var quantidade = $('#editarQuantidadeMedicamento').val();
+    $('#enviarMedicamentoExcepcional').on('click', async function() {
+        var nome = $('#nomeMedicamento').val();
 
         var dadosMedicamento = {
             nome: nome,
-            codigo: codigo,
-            quantidade: parseInt(quantidade),
+            quantidade: 0 // quantidade inicial será zero
         };
 
-        // URL da API
-        var url = 'http://localhost:3001/estoque/medicamento/' + id;
-
         try {
-            const response = await fetch(url, {
-                method: 'PUT',
+            const response = await fetch('http://localhost:3001/estoque/medicamentos', {
+                method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -328,146 +345,134 @@ $(document).ready(function(){
             });
 
             if (response.ok) {
-                const resultado = await response.json();
-                alert('Medicamento atualizado com sucesso!');
-                $('#editarMedicamentoModal').modal('hide');
-                location.reload();
+                alert('Medicamento excepcional solicitado com sucesso!');
+                $('#solicitarMedicamentoModal').modal('hide');
+                location.reload(); // Recarrega a página para mostrar o novo medicamento
             } else {
                 const erroMsg = await response.text();
                 throw new Error(erroMsg);
             }
         } catch (error) {
-            console.error('Erro ao atualizar o medicamento:', error);
-            alert('Erro ao atualizar o medicamento. Verifique o console para mais detalhes.');
+            console.error('Erro ao solicitar o medicamento excepcional:', error);
+            alert('Erro ao solicitar o medicamento excepcional. Verifique o console para mais detalhes.');
         }
     });
-});
 
-$('#enviarMedicamentoExcepcional').on('click', async function() {
-    var nome = $('#nomeMedicamento').val();
+    $(document).ready(function() {
+        // Função para carregar pacientes
+        function carregarPacientes() {
+            fetch('http://localhost:3001/pacientes')
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    }
+                    throw new Error('Erro ao buscar pacientes.');
+                })
+                .then(data => {
+                    const pacienteSelect = $('#pacienteId');
+                    pacienteSelect.empty();
+                    data.forEach(paciente => {
+                        pacienteSelect.append(`<option value="${paciente._id}">${paciente.nome}</option>`);
+                    });
+                })
+                .catch(error => {
+                    console.error('Erro ao carregar os pacientes:', error);
+                    alert('Erro ao carregar os pacientes. Verifique o console para mais detalhes.');
+                });
+        }
 
-    var dadosMedicamento = {
-        nome: nome,
-        quantidade: 0 // quantidade inicial será zero
-    };
-
-    try {
-        const response = await fetch('http://localhost:3001/estoque/medicamentos', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(dadosMedicamento)
+        // Preparar data e hora ao abrir a modal
+        $('#saidaMedicamentoModal').on('show.bs.modal', function(e) {
+            carregarPacientes();
+            const now = new Date();
+            $('#dataSaida').val(now.toLocaleDateString('pt-BR'));
+            $('#horaSaida').val(now.toLocaleTimeString('pt-BR'));
         });
 
-        if (response.ok) {
-            alert('Medicamento excepcional solicitado com sucesso!');
-            $('#solicitarMedicamentoModal').modal('hide');
-            location.reload(); // Recarrega a página para mostrar o novo medicamento
-        } else {
-            const erroMsg = await response.text();
-            throw new Error(erroMsg);
-        }
-    } catch (error) {
-        console.error('Erro ao solicitar o medicamento excepcional:', error);
-        alert('Erro ao solicitar o medicamento excepcional. Verifique o console para mais detalhes.');
-    }
-});
-
-$(document).ready(function() {
-    // Função para carregar pacientes
-    function carregarPacientes() {
-        fetch('http://localhost:3001/pacientes')
-            .then(response => {
-                if (response.ok) {
-                    return response.json();
-                }
-                throw new Error('Erro ao buscar pacientes.');
-            })
-            .then(data => {
-                const pacienteSelect = $('#pacienteId');
-                pacienteSelect.empty();
-                data.forEach(paciente => {
-                    pacienteSelect.append(`<option value="${paciente._id}">${paciente.nome}</option>`);
-                });
-            })
-            .catch(error => {
-                console.error('Erro ao carregar os pacientes:', error);
-                alert('Erro ao carregar os pacientes. Verifique o console para mais detalhes.');
-            });
-    }
-
-    // Preparar data e hora ao abrir a modal
-    $('#saidaMedicamentoModal').on('show.bs.modal', function(e) {
-        carregarPacientes();
-        const now = new Date();
-        $('#dataSaida').val(now.toLocaleDateString('pt-BR'));
-        $('#horaSaida').val(now.toLocaleTimeString('pt-BR'));
-    });
-
-    $('#finalizarSaidaMedicamento').on('click', async function() {
-        var idMedicamento = $('#medicamentoId').val();
-        var quantidadeSaida = parseInt($('#quantidadeSaida').val());
-        // até aqui funfou
-        var dadosSaida = {
-            medicamento: $('#medicamentoId').val(),
-            quantidade: parseInt($('#quantidadeSaida').val()),
-            paciente: $('#pacienteId').val(),
-            nomeMedico: $('#nomeMedico').val(),
-            crmMedico: $('#crmMedico').val(),
-            dataReceita: $('#dataReceita').val(),
-            numeroReceita: $('#numeroReceita').val(),
-            dataSaida: $('#dataSaida').val(),
-            horaSaida: $('#horaSaida').val()
-        };
-        try {
-            const responseSaida = await fetch('http://localhost:3001/saidamed', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(dadosSaida)
-            });
-            const estoqueResponse = await fetch(`http://localhost:3001/estoque/medicamento/${idMedicamento}`);
-            const medicamentoResposta = await estoqueResponse.json();
-            const medicamento = medicamentoResposta[0]
-            
-            
-            console.log('medicamento fora do array', medicamento)
-
-            if (medicamento.quantidade < quantidadeSaida) {
-                alert('Quantidade em estoque insuficiente para a saída.');
-                return;
-            }
-
-            var dadosAtualizados = {
-                nome: medicamento.nome,
-                codigo: medicamento.codigo,
-                quantidade: medicamento.quantidade - quantidadeSaida,
+        $('#finalizarSaidaMedicamento').on('click', async function() {
+            var idMedicamento = $('#medicamentoId').val();
+            var quantidadeSaida = parseInt($('#quantidadeSaida').val());
+            // até aqui funfou
+            var dadosSaida = {
+                medicamento: $('#medicamentoId').val(),
+                quantidade: parseInt($('#quantidadeSaida').val()),
+                paciente: $('#pacienteId').val(),
+                nomeMedico: $('#nomeMedico').val(),
+                crmMedico: $('#crmMedico').val(),
+                dataReceita: $('#dataReceita').val(),
+                numeroReceita: $('#numeroReceita').val(),
+                dataSaida: $('#dataSaida').val(),
+                horaSaida: $('#horaSaida').val()
             };
+            try {
+                const responseSaida = await fetch('http://localhost:3001/saidamed', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(dadosSaida)
+                });
+                const estoqueResponse = await fetch(`http://localhost:3001/estoque/medicamento/${idMedicamento}`);
+                const medicamentoResposta = await estoqueResponse.json();
+                const medicamento = medicamentoResposta[0]
+                
+                
+                console.log('medicamento fora do array', medicamento)
 
-            const response = await fetch(`http://localhost:3001/estoque/medicamento/${idMedicamento}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(dadosAtualizados)
+                if (medicamento.quantidade < quantidadeSaida) {
+                    alert('Quantidade em estoque insuficiente para a saída.');
+                    return;
+                }
+
+                var dadosAtualizados = {
+                    nome: medicamento.nome,
+                    codigo: medicamento.codigo,
+                    quantidade: medicamento.quantidade - quantidadeSaida,
+                };
+
+                const response = await fetch(`http://localhost:3001/estoque/medicamento/${idMedicamento}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(dadosAtualizados)
+                });
+
+                if (response.ok) {
+                    alert('Saída de medicamento registrada e estoque atualizado com sucesso!');
+                    $('#saidaMedicamentoModal').modal('hide');
+                    location.reload();
+                } else {
+                    const erroMsg = await response.text();
+                    throw new Error(erroMsg);
+                }
+            } catch (error) {
+                console.error('Erro ao registrar a saída de medicamento:', error);
+                alert('Erro ao registrar a saída de medicamento. Verifique o console para mais detalhes.');
+            }
+        });
+
+        $(document).ready(function() {
+            $('#filtro').change(function() {
+                var filtro = $(this).val();
+                var filtroTexto = $('#filtroTexto').val(); 
+                window.location.href = 'index.php?filtro=' + filtro + '&filtroTexto=' + filtroTexto;
             });
 
-            if (response.ok) {
-                alert('Saída de medicamento registrada e estoque atualizado com sucesso!');
-                $('#saidaMedicamentoModal').modal('hide');
-                location.reload();
-            } else {
-                const erroMsg = await response.text();
-                throw new Error(erroMsg);
-            }
-        } catch (error) {
-            console.error('Erro ao registrar a saída de medicamento:', error);
-            alert('Erro ao registrar a saída de medicamento. Verifique o console para mais detalhes.');
-        }
+            $('#filtroTexto').on('input', function() {
+                var filtroTexto = $(this).val().toLowerCase();
+                $('#tabelaEstoque tr').each(function() {
+                    var nome = $(this).find('td:nth-child(1)').text().toLowerCase();
+                    var codigo = $(this).find('td:nth-child(2)').text().toLowerCase();
+                    if (nome.includes(filtroTexto) || codigo.includes(filtroTexto)) {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                });
+            });
+        });
     });
-});
 
 
 </script>

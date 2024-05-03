@@ -245,20 +245,20 @@ $(document).ready(function() {
 });
 
 
- $(document).ready(function() {
-        $('#filtroNome').on('input', function() {
-            var filtroNome = $(this).val().toLowerCase();
-            $('tbody tr').each(function() {
-                var nomepaciente = $(this).find('td:nth-child(1)').text().toLowerCase();
-                var sus = $(this).find('td:nth-child(2)').text().toLowerCase();
-                if (nomepaciente.includes(filtroNome) || sus.includes(filtroNome)) {
-                    $(this).show();
-                } else {
-                    $(this).hide();
-                }
+        $(document).ready(function() {
+            $('#filtroNome').on('input', function() {
+                var filtroNome = $(this).val().toLowerCase();
+                $('tbody tr').each(function() {
+                    var nomepaciente = $(this).find('td:nth-child(1)').text().toLowerCase();
+                    var sus = $(this).find('td:nth-child(2)').text().toLowerCase();
+                    if (nomepaciente.includes(filtroNome) || sus.includes(filtroNome)) {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                });
             });
         });
-    });
  
     });
     </script>
