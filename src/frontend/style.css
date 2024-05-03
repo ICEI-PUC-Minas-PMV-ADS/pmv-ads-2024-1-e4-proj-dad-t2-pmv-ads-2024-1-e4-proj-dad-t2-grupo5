@@ -9,8 +9,14 @@
 
 body {
     background-color: var(--cor-secundaria);
-    color: var(--cor-fonte);
-    height: 100vh;
+    height: 100%;
+    margin: 0;
+}
+
+footer {
+    flex-shrink: 0;
+    background-color: #333;
+    color: #fff;
 }
 
 .navbar-custom {
