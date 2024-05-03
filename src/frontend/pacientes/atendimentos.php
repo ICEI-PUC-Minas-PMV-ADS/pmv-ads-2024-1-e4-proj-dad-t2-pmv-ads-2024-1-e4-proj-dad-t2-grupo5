@@ -220,6 +220,8 @@
             }
         });
 
+        
+
         function visualizarAtendimento(atendimentoId) {
             $.ajax({
                 url: `http://localhost:3001/atendimentos/${atendimentoId}`,
