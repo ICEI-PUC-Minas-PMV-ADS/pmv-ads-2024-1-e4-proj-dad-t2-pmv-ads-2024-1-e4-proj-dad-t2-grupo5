@@ -30,8 +30,8 @@ if (!$pacientes || curl_errno($ch)) {
   <head>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pacientes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
+      <title>Pacientes</title>
     <link
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -41,6 +41,7 @@ if (!$pacientes || curl_errno($ch)) {
     <link rel="stylesheet" href="http://<?php echo $domain; ?>/style.css">
   </head>
   <body>
+    
     <?php
         require './modals/tabelaModal.php'
     ?>
@@ -57,7 +58,8 @@ if (!$pacientes || curl_errno($ch)) {
         require './modals/adicionarPacienteModal.php'
     ?>
 
-    <script>
+    
+         <script>
      $(document).ready(function() {
       $('.editarPacienteBtn').on('click', function() {
           var nome = $(this).data('nome');
@@ -109,57 +111,7 @@ if (!$pacientes || curl_errno($ch)) {
           $('#pacienteProfissao').val(profissao);
       });
 
-      $('#adicionarPacienteForm').submit(function(event) {
-            var formData = $(this).serializeArray();
-
-            var jsonData = {};
-            $.each(formData, function() {
-                jsonData[this.name] = this.value;
-            });
-
-            console.log('Dados enviados para a API:', jsonData); 
-
-            $.ajax({
-                type: 'POST',
-                url: 'http://localhost:3001/pacientes/login',
-
-                contentType: 'application/json',
-                data: JSON.stringify(jsonData),
-                success: function(response) {
-                    console.log('Paciente criado com sucesso:', response);
-                    $('#adicionarPacienteModal').modal('hide'); 
-                    location.reload(); 
-                },
-                error: function(xhr, status, error) {
-                    console.error('Erro:', error);
-                }
-            });
-        });
-
-
-
-      function excluirPaciente() {
-          var pacienteId = $('#pacienteId').val();
-
-          $.ajax({
-              url: `http://localhost:3001/pacientes/excluir/${pacienteId}`,
-              type: 'DELETE',
-              success: function(result) {
-                  location.reload();
-              },
-              error: function(error) {
-                  console.error('Erro ao excluir o paciente:', error);
-              }
-          });
-      }
-
-      $('#excluirpaciente').on('click', function() {
-              excluirPaciente();
-      });
-
-
-
-function atualizarPaciente(id, dados) {
+     function atualizarPaciente(id, dados) {
     console.log('JSON enviado pelo frontend:', dados); 
     $.ajax({
         url: 'http://localhost:3001/pacientes/' + id,

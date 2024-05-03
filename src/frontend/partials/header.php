@@ -1,6 +1,6 @@
 <?php
     $http = $_SERVER['HTTP_HOST'];
-    $domain = $http . "/pmv-ads-2024-1-e4-proj-dad-t2-pmv-ads-2024-1-e4-proj-dad-t2-grupo5/src/frontend";
+    $domain = $http . "/vivabem/pmv-ads-2024-1-e4-proj-dad-t2-pmv-ads-2024-1-e4-proj-dad-t2-grupo5/src/frontend";
 ?>
 
 

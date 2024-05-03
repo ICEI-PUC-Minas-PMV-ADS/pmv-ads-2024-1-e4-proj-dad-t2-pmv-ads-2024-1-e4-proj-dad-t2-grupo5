@@ -10,7 +10,8 @@
         <button type="button" class="btn btn-success  mb-3" data-toggle="modal" data-target="#adicionarPacienteModal">
             Adicionar Paciente
         </button>
-        <table class="table">
+
+                <table class="table">
             <thead>
                 <tr>
                     <th>Nome</th>

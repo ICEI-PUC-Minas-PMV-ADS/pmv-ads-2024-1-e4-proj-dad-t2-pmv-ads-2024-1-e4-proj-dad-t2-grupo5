@@ -47,7 +47,7 @@
     include '../partials/header.php';
 ?>
 
-<!DOCTYPE html>
+   <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -74,6 +74,8 @@
 </style>
 
 <body>
+
+            
     <div class="container mb-3">
         <h2>Selecione um Paciente</h2>
         <select id="selectPaciente" class="form-control">
@@ -103,16 +105,30 @@
                             <td><?php echo !empty($atendimento['medico']['nome']) ? htmlspecialchars($atendimento['medico']['nome']) : 'Não informado'; ?></td>
                             <td><?php echo !empty($atendimento['data']) ? htmlspecialchars(date('d/m/Y', strtotime($atendimento['data']))) : 'Não informado'; ?></td>
                             <td><button class="btn btn-primary" onclick="visualizarAtendimento('<?php echo $atendimento['_id']; ?>')">Visualizar</button></td>
-                        </tr>
+                            <td><button class="btn btn-info" data-toggle="modal" data-target="#solicitarExameModal" onclick="solicitarExame('<?php echo $atendimento['_id']; ?>')">Solicitar Exame</button></td>
+                            <td><button class="btn btn-secondary" data-toggle="modal" data-target="#listarSolicitacaoModal" onclick="listarSolicitacao('<?php echo $atendimento['_id']; ?>')">Listar Solicitações</button></td>
+                                                                                                        
+                                  </tr>
                     <?php endforeach; ?>
                 <?php else: ?>
                     <tr><td colspan="4">Nenhum atendimento encontrado para este paciente.</td></tr>
                 <?php endif; ?>
+
+                
+                
             </tbody>
         </table>
     </div>
 
+     
+
     <?php include './modals/visualizarAtendimento.php' ?>
+
+    <?php include './modals/solicitarExameModal.php'?>
+
+    <?php include './modals/listarSolicitacaoModal.php'?>
+
+   
 
     <script>
         $('#selectPaciente').change(function() {
@@ -184,5 +200,10 @@
             });
         }
     </script>
+             <?php include './modals/solicitarExameModal.php'?>
+             
+
+
+            
 </body>
 </html>
