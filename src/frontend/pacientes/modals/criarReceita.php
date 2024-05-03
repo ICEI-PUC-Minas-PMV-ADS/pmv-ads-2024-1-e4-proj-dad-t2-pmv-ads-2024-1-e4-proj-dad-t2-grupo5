@@ -26,7 +26,7 @@
                         <textarea id="observacoes" class="form-control" name="observacoes"></textarea>
                     </div>
                     <div id="medicamentos">
-                        <!-- Campos de medicamentos serão adicionados aqui -->
+                        
                     </div>
                     <button type="button" class="btn btn-secondary" onclick="adicionarMedicamento()">Adicionar Medicamento</button><br><br>
                     <button type="submit" class="btn btn-primary">Salvar Receita</button>
@@ -49,7 +49,10 @@
            <div class="medicamento-group row">
                 <div class="col-md-4">
                     <label for="medicamento_${index}_nome">Nome do Medicamento:</label>
-                    <input type="text" id="medicamento_${index}_nome" class="form-control" name="medicamentos[${index}][nome]" required>
+                    <select id="medicamento_${index}_nome" class="form-control" name="medicamentos[${index}][nome]" required>
+                        <option value="">Selecione um medicamento</option>
+                        <!-- Options serão preenchidos dinamicamente -->
+                    </select>
                 </div>
                 <div class="col-md-3">
                     <label for="medicamento_${index}_quantidade">Quantidade:</label>
@@ -66,6 +69,25 @@
         `;
 
         container.insertAdjacentHTML('beforeend', html);
+
+        $.ajax({
+            url: 'http://localhost:3001/estoque/disponiveis',
+            type: 'GET',
+            success: function(data) {
+                const select = document.getElementById(`medicamento_${index}_nome`);
+                select.innerHTML = '<option value="">Selecione um medicamento</option>';
+
+                data.forEach(function(medicamento) {
+                    const option = document.createElement('option');
+                    option.value = medicamento.nome;
+                    option.textContent = medicamento.nome;
+                    select.appendChild(option);
+                });
+            },
+            error: function(xhr, status, error) {
+                console.log('Erro ao carregar medicamentos: ' + error);
+            }
+        });
     }
 
     function removerMedicamento(button) {
