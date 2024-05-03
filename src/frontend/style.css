@@ -7,16 +7,21 @@
     --fonte-paragrafo: 12px;
 }
 
+html,
 body {
     background-color: var(--cor-secundaria);
     height: 100%;
     margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
 }
 
 footer {
     flex-shrink: 0;
     background-color: #333;
     color: #fff;
+    bottom: 0;
 }
 
 .navbar-custom {
@@ -39,6 +44,7 @@ section {
 }
 
 main {
+    flex: 1;
     margin: 20px 5%;
 }
 
