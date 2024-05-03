@@ -34,6 +34,7 @@
                 <?php if ($usuario['setor'] === 'Medico'): ?>
                     <!-- Médicos -->
                     <li class="nav-item"><a class="nav-link" href="<?php echo $domain; ?>/pacientes/">Pacientes</a></li>
+                    <li class="nav-item"><a class="nav-link" href="<?php echo $domain; ?>/pacientes/atendimentos.php">Atendimentos</a></li>
                     <li class="nav-item"><a class="nav-link" href="<?php echo $domain; ?>/receitas/">Receitas</a></li>
                     <li class="nav-item"><a class="nav-link" href="<?php echo $domain; ?>/atendimento/">Fila</a></li>
                 <?php elseif ($usuario['setor'] === 'Enfermeiro'): ?>

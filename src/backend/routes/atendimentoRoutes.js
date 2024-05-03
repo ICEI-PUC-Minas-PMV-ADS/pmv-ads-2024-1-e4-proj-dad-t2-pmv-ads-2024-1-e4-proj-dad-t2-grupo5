@@ -2,12 +2,14 @@ const express = require('express');
 const router = express.Router();
 const Atendimento = require('../models/atendimento');
 
-// Listar todos os atendimentos
+// Listar todos os atendimentos ordenados pela data do mais recente para o mais antigo
 router.get('/', async (req, res) => {
   try {
     const atendimentos = await Atendimento.find({})
       .populate('medico', 'nome') // Popula o nome do médico
-      .populate('paciente', 'nome'); // Popula o nome do paciente
+      .populate('paciente', 'nome') // Popula o nome do paciente
+      .sort({ data: -1 }); // Ordena pela data em ordem decrescente (-1)
+
     res.json(atendimentos);
   } catch (error) {
     res.status(500).json({ error: error.message });
