@@ -26,6 +26,7 @@ if (!$pacientes || curl_errno($ch)) {
 }
 
 verificarAutenticacao($domain);
+// verificarIsUserFarmacia($domain); Teste
     
 ?>
 <!DOCTYPE html>
