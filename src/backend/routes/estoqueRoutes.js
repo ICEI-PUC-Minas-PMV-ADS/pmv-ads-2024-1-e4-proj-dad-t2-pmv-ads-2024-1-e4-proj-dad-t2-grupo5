@@ -34,10 +34,10 @@ router.post('/medicamentos', async (req, res) => {
 
 
 
-// LIST
+// LIST in alphabetical order
 router.get('/', async (req, res) => {
   try {
-    const results = await Estoque.find({});
+    const results = await Estoque.find({}).sort({ nome: 1 });
     res.json(results);
   } catch (error) {
     res.status(500).json({ error: error.message });
