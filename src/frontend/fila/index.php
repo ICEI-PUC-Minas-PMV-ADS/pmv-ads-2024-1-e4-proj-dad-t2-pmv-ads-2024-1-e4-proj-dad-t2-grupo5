@@ -196,22 +196,25 @@ if (!$estoque || curl_errno($ch)) {
             });
         }
 
-        function carregarProfissionais() {
-            $.ajax({
-                url: 'http://localhost:3001/usuarios',
-                method: 'GET',
-                success: function(profissionais) {
-                    var selecao = $('#selecaoProfissional');
-                    selecao.empty().append('<option value="">Selecione um profissional</option>');
-                    profissionais.forEach(function(profissional) {
-                        selecao.append($('<option>').val(profissional._id).text(profissional.nome));
-                    });
-                },
-                error: function() {
-                    console.error('Erro ao carregar profissionais');
+    function carregarProfissionais() {
+        $.ajax({
+        url: 'http://localhost:3001/usuarios',
+        method: 'GET',
+        success: function(profissionais) {
+            var selecao = $('#selecaoProfissional');
+            selecao.empty().append('<option value="">Selecione um profissional</option>');
+            
+            profissionais.forEach(function(profissional) {
+                if (profissional.setor.toLowerCase() === 'medico') {
+                    selecao.append($('<option>').val(profissional._id).text(profissional.nome));
                 }
             });
+        },
+        error: function() {
+            console.error('Erro ao carregar profissionais');
         }
+    });
+}
 
         function checkForm() {
             var isPacienteSelected = $('#searchPaciente').val() !== '';
