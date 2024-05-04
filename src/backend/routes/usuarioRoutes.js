@@ -1,13 +1,16 @@
 const express = require('express');
 const router = express.Router();
 const Usuario = require('../models/usuario');
+const bcrypt = require('bcrypt');
 
-// Add multiple users
 router.post('/criar/multiplos', async (req, res) => {
     try {
         const novosUsuarios = req.body;
+        for (const usuario of novosUsuarios) {
+            usuario.senha = await bcrypt.hash(usuario.senha, 10);
+        }
         const resultados = await Usuario.insertMany(novosUsuarios);
-        res.status(201).send({ message: 'usuários adicionados com sucesso!', data: resultados });
+        res.status(201).send({ message: 'Usuários adicionados com sucesso!', data: resultados });
     } catch (error) {
         res.status(400).send({ error: 'Falha ao adicionar usuários', details: error });
     }
@@ -15,25 +18,26 @@ router.post('/criar/multiplos', async (req, res) => {
 
 router.post('/criar', async (req, res) => {
     try {
-      const { cpf, email, crm } = req.body;
-      const usuarioExistente = await Usuario.findOne({ $or: [{ cpf }, { email }, { crm }] });
-      
-      if (usuarioExistente) {
-        if (usuarioExistente.cpf === cpf) {
-          return res.status(400).send({ error: 'Usuário já cadastrado com este CPF' });
+        const { cpf, email, crm, senha } = req.body;
+        const usuarioExistente = await Usuario.findOne({ $or: [{ cpf }, { email }, { crm }] });
+
+        if (usuarioExistente) {
+            if (usuarioExistente.cpf === cpf) {
+                return res.status(400).send({ error: 'Usuário já cadastrado com este CPF' });
+            }
+            if (usuarioExistente.email === email) {
+                return res.status(400).send({ error: 'Usuário já cadastrado com este email' });
+            }
+            if (usuarioExistente.crm === crm) {
+                return res.status(400).send({ error: 'Usuário já cadastrado com este CRM' });
+            }
         }
-        if (usuarioExistente.email === email) {
-          return res.status(400).send({ error: 'Usuário já cadastrado com este email' });
-        }
-        if (usuarioExistente.crm === crm) {
-          return res.status(400).send({ error: 'Usuário já cadastrado com este CRM' });
-        }
-      }
-      
-      const novoUsuario = new Usuario(req.body);
-      await novoUsuario.save();
-      res.status(201).send({ message: 'Usuário adicionado com sucesso!' });
-      
+
+        const hashedPassword = await bcrypt.hash(senha, 10);
+        const novoUsuario = new Usuario({ ...req.body, senha: hashedPassword });
+        await novoUsuario.save();
+        res.status(201).send({ message: 'Usuário adicionado com sucesso!' });
+
     } catch (error) {
         res.status(400).send({ error: 'Falha ao adicionar usuário', details: error });
     }
