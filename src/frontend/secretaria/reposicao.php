@@ -25,14 +25,14 @@ if (!$estoque || curl_errno($ch)) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gerenciar Solicitações de Reposição</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet"href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="<?php echo $domain; ?>/style.css">
 </head>
 <body>
 
 <main>
-    <h1 class="mt-4 mb-3">Gestão de Unidade 1</h1>
+    <h1 class="mt-4 mb-3">Reposição da Unidade 1</h1>
         <button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#adicionarMedicamentoModal">
             Adicionar Estoque
         </button>
@@ -118,86 +118,6 @@ if (!$estoque || curl_errno($ch)) {
   </div>
 </div>
   
-<!-- criar e popular a tabela -->
-<script>
-
-    $(document).ready(function() {
-        $('#salvarMedicamento').on('click', function() {
-            var dados = {
-                nome: $('#nomeMedicamento').val(),
-                codigo: $('#codigoMedicamento').val(),
-                quantidade: $('#quantidadeMedicamento').val(),
-            };
-
-            console.log(dados);
-            $.ajax({
-                url: 'http://localhost:3001/estoque/medicamentos',
-                type: 'POST',
-                contentType: 'application/json',
-                data: JSON.stringify(dados),
-                success: function(response) {
-                    window.location.reload();
-                },
-                error: function(xhr) {
-                    try {
-                        var resposta = JSON.parse(xhr.responseText);
-                        var mensagemErro = resposta.message;
-                        $('#mensagemErro').text(mensagemErro);
-                    } catch(e) {
-                        $('#mensagemErro').text("Ocorreu um erro desconhecido ao adicionar o Medicamento.");
-                    }
-
-                    $('#erroModal').modal('show');
-                }
-            });
-        });
-    });
-
-
-    async function preencherListaMedicamentos() {
-        try {
-            const response = await fetch('http://localhost:3001/reposicao/');
-            if (!response.ok) {
-                throw new Error('Erro ao buscar medicamentos solicitados: ' + response.statusText);
-            }
-            const medicamentos = await response.json();
-
-            console.log(medicamentos)
-
-            const listaMedicamentos = document.getElementById('listaMedicamentos');
-            listaMedicamentos.innerHTML = '';
-
-            medicamentos[0].medicamentos.forEach(medicamento => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${medicamento.nome}</td>
-                    <td>${medicamento.codigo}</td>
-                    <td>${medicamento.quantidadeAtual}</td>
-                    <td>
-                        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalEditarMedicamento" data-medicamento-id="${medicamento._id}">
-                            Editar
-                        </button>
-                    </td>
-                `;
-                listaMedicamentos.appendChild(row);
-            });
-        } catch (error) {
-            console.error(error);
-            alert('Erro ao buscar medicamentos solicitados. Verifique o console para mais detalhes.');
-        }
-    }
-
-
-
-    preencherListaMedicamentos();
-
-    document.getElementById('formEditarMedicamento').addEventListener('submit', async (event) => {
-        event.preventDefault();
-        document.getElementById('modalEditarMedicamento').classList.remove('show');
-        document.getElementById('modalEditarMedicamento').setAttribute('aria-hidden', 'true');
-        document.querySelector('.modal-backdrop').remove();
-    });
-</script>
 
 <!-- editar medicamento -->
 <script>
@@ -253,20 +173,7 @@ $(document).ready(function() {
     });
 });
 
-// $('#excluirMedicamento').click(function() {
-//         var id = $('#editarIdMedicamento').val();
-//         console.log(id)
 
-//         $.ajax({
-//             url: 'http://localhost:3001/estoque/excluir/' + id,
-//             method: 'DELETE', 
-//             success: function(response) {
-//                 location.reload();
-//             },
-//             error: function(xhr, status, error) {
-//             }
-//         });
-//     }); 
 
 </script>
 
@@ -276,6 +183,9 @@ $(document).ready(function() {
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
+<?php
+include '../partials/footer.php';
+?>
 
 </body>
 </html>

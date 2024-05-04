@@ -50,7 +50,7 @@ if (!$estoque || curl_errno($ch)) {
             <input type="text" class="form-control" id="filtroTexto">
         </div>
 
-        <h2>Estoque</h2>
+        <h2>Estoque da unidade 1</h2>
 
         <table class="table">
     <thead>
