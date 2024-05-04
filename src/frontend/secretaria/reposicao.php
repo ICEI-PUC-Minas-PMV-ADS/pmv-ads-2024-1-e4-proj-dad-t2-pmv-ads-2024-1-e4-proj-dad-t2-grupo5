@@ -1,6 +1,6 @@
 <?php
 
-
+include '../partials/header.php';
 
 $ch = curl_init();
 
@@ -16,7 +16,6 @@ $estoque = json_decode($resposta, true);
 if (!$estoque || curl_errno($ch)) {
     // die('Erro ao acessar a API: ' . curl_error($ch));
 }
-include '../partials/header.php';
 
 ?>
 
@@ -27,10 +26,12 @@ include '../partials/header.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gerenciar Solicitações de Reposição</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="<?php echo $domain; ?>/style.css">
 </head>
 <body>
 
-<div class="container">
+<main>
     <h1 class="mt-4 mb-3">Gestão de Unidade 1</h1>
         <button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#adicionarMedicamentoModal">
             Adicionar Estoque
@@ -47,7 +48,7 @@ include '../partials/header.php';
                     <tbody id="listaMedicamentos">
                     </tbody>
                 </table>
-</div>
+</main>
 
 
 <div class="modal fade" id="modalEditarMedicamento" tabindex="-1" aria-labelledby="modalEditarMedicamentoLabel" aria-hidden="true">

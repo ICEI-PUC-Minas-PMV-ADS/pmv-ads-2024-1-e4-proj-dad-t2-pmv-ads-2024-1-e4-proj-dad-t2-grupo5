@@ -35,6 +35,7 @@ require './vendor/autoload.php';
                                 <option value="Medico">Médico</option>
                                 <option value="Pediatria">Pediatria</option>
                                 <option value="Recepcao">Recepção</option>
+                                <option value="Secretaria">Secretaria</option>
                             </select>
                         </div>
                         <div class="box">
@@ -96,6 +97,9 @@ require './vendor/autoload.php';
                             break;
                         case "Recepcao":
                             window.location.href = "<?php echo $domain; ?>/fila/";
+                            break;
+                        case "Secretaria":
+                            window.location.href = "<?php echo $domain; ?>/secretaria/";
                             break;
                         default:
                             window.location.href = "pagina_padrao.html";

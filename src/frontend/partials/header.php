@@ -44,6 +44,10 @@
                 <?php elseif ($usuario['setor'] === 'Recepcao'): ?>
                     <!-- Recepção -->
                     <li class="nav-item"><a class="nav-link" href="<?php echo $domain; ?>/fila/">Fila</a></li>
+                <?php elseif ($usuario['setor'] === 'Secretaria'): ?>
+                    <!-- Secretaria -->
+                    <li class="nav-item"><a class="nav-link" href="<?php echo $domain; ?>/secretaria/">Estoque</a></li>
+                    <li class="nav-item"><a class="nav-link" href="<?php echo $domain; ?>/secretaria/reposicao.php">Reposição</a></li>
             <?php endif; ?>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
