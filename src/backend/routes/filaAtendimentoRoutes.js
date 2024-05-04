@@ -44,14 +44,23 @@ router.post('/adicionar', async (req, res) => {
   }
 });
 
+const priorityOrder = {
+    'Emergencial': 1,
+    'Prioritário': 2,
+    'Eletivo': 3
+};
+
 // Rota para listar todos os itens na fila de atendimento
 router.get('/', async (req, res) => {
-  try {
-    const itensFila = await FilaAtendimento.find();
-    res.json(itensFila);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
+    try {
+        const itensFila = await FilaAtendimento.find().populate('paciente').populate('profissional');
+        const sortedItens = itensFila.sort((a, b) => {
+            return priorityOrder[a.tipoAtendimento] - priorityOrder[b.tipoAtendimento];
+        });
+        res.json(sortedItens);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
 });
 
 
