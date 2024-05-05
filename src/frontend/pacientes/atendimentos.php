@@ -133,13 +133,11 @@
 
     <script>
         $(document).ready(function() {
-            // Filtragem baseada em entrada do usuário
             $('#filtroNome').on('input', function() {
                 var filtroNome = $(this).val().toLowerCase();
                 filtrarAtendimentos(filtroNome);
             });
 
-            // Função para filtrar atendimentos
             function filtrarAtendimentos(filtro) {
                 $('tbody tr').each(function() {
                     var nomePaciente = $(this).find('td:nth-child(1)').text().toLowerCase();
@@ -152,11 +150,9 @@
                 });
             }
 
-            // Captura o pacienteId do URL, se presente
             var urlParams = new URLSearchParams(window.location.search);
             var pacienteId = urlParams.get('pacienteId');
             if (pacienteId) {
-                // Simular uma entrada no campo de filtro com o ID do paciente para filtragem automática
                 $('#filtroNome').val(pacienteId).trigger('input');
             }
         });
