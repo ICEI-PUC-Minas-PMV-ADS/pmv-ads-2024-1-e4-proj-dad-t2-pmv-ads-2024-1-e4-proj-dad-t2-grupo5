@@ -193,7 +193,7 @@ $(document).ready(function() {
 
                 alert('Medicamento atualizado com sucesso!');
                 $('#modalEditarMedicamento').modal('hide');
-                preencherListaMedicamentos();
+                location.reload();
             } else {
                 const erroMsg = await response.text();
                 throw new Error(erroMsg);
