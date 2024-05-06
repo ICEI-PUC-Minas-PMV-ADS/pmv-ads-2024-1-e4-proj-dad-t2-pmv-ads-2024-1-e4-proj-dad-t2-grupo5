@@ -33,7 +33,7 @@ include '../partials/header.php';
 <body>
 
 <div class="container">
-    <h1 class="mt-4 mb-3">Gestão de Unidade 1</h1>
+    <h1 class="mt-4 mb-3">Reposição de Medicamentos unidade 1</h1>
         <button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#adicionarMedicamentoModal">
             Adicionar Estoque
         </button>
