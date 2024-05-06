@@ -23,7 +23,8 @@ router.put('/repor-medicamentos/:id', async (req, res) => {
         _id: medicamento._id, // Incluir o ID do medicamento
         nome: medicamento.nome,
         codigo: medicamento.codigo,
-        quantidadeAtual: medicamento.quantidade
+        quantidadeAtual: medicamento.quantidade,
+        validade: medicamento.validade
       }));
 
       // Atualizar a solicitação de reposição com os medicamentos atuais

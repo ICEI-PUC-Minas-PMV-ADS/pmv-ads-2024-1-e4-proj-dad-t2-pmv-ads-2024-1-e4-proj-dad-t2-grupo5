@@ -44,6 +44,7 @@
                 <?php elseif ($usuario['setor'] === 'Recepcao'): ?>
                     <!-- Recepção -->
                     <li class="nav-item"><a class="nav-link" href="<?php echo $domain; ?>/fila/">Fila</a></li>
+                    <li class="nav-item"><a class="nav-link" href="<?php echo $domain; ?>/pacientes/">Pacientes</a></li>
                 <?php elseif ($usuario['setor'] === 'Secretaria'): ?>
                     <!-- Secretaria -->
                     <li class="nav-item"><a class="nav-link" href="<?php echo $domain; ?>/secretaria/">Estoque</a></li>

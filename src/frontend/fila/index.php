@@ -99,12 +99,12 @@ if (!$estoque || curl_errno($ch)) {
                 </div>
                 <div class="modal-body">
                     <form id="adicionarPacienteForm">
-                        <!-- Campos do formulário, ex: Nome, Data de Nascimento, etc. -->
+                        
                         <div class="form-group">
                             <label for="nome">Nome</label>
                             <input type="text" class="form-control" id="nome" name="nome" required>
                         </div>
-                        <!-- Adicione mais campos conforme necessário -->
+                       
                         <button type="submit" class="btn btn-primary">Salvar</button>
                     </form>
                 </div>
@@ -262,7 +262,7 @@ if (!$estoque || curl_errno($ch)) {
                 type: 'DELETE',
                 success: function(result) {
                     console.log('Item removido com sucesso:', result);
-                    carregarFila(); // Recarrega a lista para refletir a mudança
+                    carregarFila(); 
                 },
                 error: function(xhr) {
                     console.error('Erro ao excluir o item da fila:', xhr.responseText);

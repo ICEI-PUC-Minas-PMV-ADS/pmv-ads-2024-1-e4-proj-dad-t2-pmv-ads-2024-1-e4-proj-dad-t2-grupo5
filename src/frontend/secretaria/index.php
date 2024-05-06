@@ -58,26 +58,50 @@ if (!$estoque || curl_errno($ch)) {
             <th>Nome</th>
             <th>Código</th>
             <th>Quantidade</th>
+            <th>Validade</th>
             <th>Ações</th>
         </tr>         
     </thead>
     <tbody id="tabelaEstoque">
-    <?php if (!empty($estoque)): ?>
-        <?php foreach ($estoque as $medicamento): ?>
+        <?php if (!empty($estoque)): ?>
+            <?php foreach ($estoque as $medicamento): ?>
+                <tr>
+                    <td style="color: <?php echo $medicamento['quantidade'] == 0 ? 'red' : ($medicamento['quantidade'] <= 5 ? 'blue' : 'black'); ?>">
+                        <?php echo htmlspecialchars($medicamento['nome']); ?>
+                    </td>
+                    <td><?php echo htmlspecialchars($medicamento['codigo']); ?></td>
+                    <td style="color: <?php echo $medicamento['quantidade'] <= 5 ? 'red' : 'green'; ?>">
+                        <?php echo htmlspecialchars($medicamento['quantidade']); ?>
+                    </td>
+                    <td style="color: 
+                    <?php
+                        $validade = new DateTime($medicamento['validade']);
+                        $hoje = new DateTime();
+                        $intervalo = $validade->diff($hoje)->days;
+
+                        if ($validade < $hoje) {
+                            echo 'red';
+                        } elseif ($intervalo <= 60) {
+                            echo 'blue';
+                        } else {
+                            echo 'black';
+                        }
+                    ?>">
+                    <?php echo htmlspecialchars($validade->format('d/m/Y')); ?>
+                </td>
+                    <td>
+                        <button class="btn btn-info btn-sm editarBtn" 
+                                data-id="<?php echo $medicamento['_id']; ?>" 
+                                data-nome="<?php echo htmlspecialchars($medicamento['nome']); ?>" 
+                                data-codigo="<?php echo htmlspecialchars($medicamento['codigo']); ?>" 
+                                data-quantidade="<?php echo htmlspecialchars($medicamento['quantidade']); ?>"
+                                data-validade="<?php echo htmlspecialchars($medicamento['validade']); ?>">Editar</button>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        <?php else: ?>
             <tr>
-                <td><?php echo htmlspecialchars($medicamento['nome']); ?></td>
-                <td><?php echo htmlspecialchars($medicamento['codigo']); ?></td>
-                <td style="color: <?php echo $medicamento['quantidade'] < 5 ? 'red' : 'green'; ?>">
-                    <?php echo htmlspecialchars($medicamento['quantidade']); ?>
-                </td>
-                <td>
-                    <button class="btn btn-info btn-sm editarBtn" data-id="<?php echo $medicamento['_id']; ?>" data-nome="<?php echo htmlspecialchars($medicamento['nome']); ?>" data-codigo="<?php echo htmlspecialchars($medicamento['codigo']); ?>" data-quantidade="<?php echo htmlspecialchars($medicamento['quantidade']); ?>">Editar</button>
-                </td>
-            </tr>
-        <?php endforeach; ?>
-    <?php else: ?>
-        <tr>
-            <td colspan="4">Nenhum medicamento encontrado.</td>
+                <td colspan="5">Nenhum medicamento encontrado.</td>
         </tr>
     <?php endif; ?>
 </tbody>
@@ -106,10 +130,13 @@ if (!$estoque || curl_errno($ch)) {
                         <label for="editarCodigoMedicamento">Codigo:</label>
                         <input type="number" class="form-control" id="editarCodigoMedicamento" name="codigo">
                     </div>
-             
                     <div class="form-group">
                         <label for="editarQuantidadeMedicamento">Quantidade:</label>
                         <input type="number" class="form-control" id="editarQuantidadeMedicamento" name="quantidade">
+                    </div>
+                    <div class="form-group">
+                        <label for="editarValidadeMedicamento">Validade:</label>
+                        <input type="date" class="form-control" id="editarValidadeMedicamento" name="validade">
                     </div>
                 </form>
             </div>
@@ -173,27 +200,29 @@ if (!$estoque || curl_errno($ch)) {
         var nome = $(this).data('nome');
         var codigo = $(this).data('codigo');
         var quantidade = $(this).data('quantidade');
+        var validade = $(this).data('validade');
 
         $('#editarIdMedicamento').val(id);
         $('#editarNomeMedicamento').val(nome);
         $('#editarCodigoMedicamento').val(codigo);
         $('#editarQuantidadeMedicamento').val(quantidade);
+        $('#editarValidadeMedicamento').val(validade);
 
         $('#editarMedicamentoModal').modal('show');
     });
-}); 
 
-$(document).ready(function(){
     $('#salvarEdicaoMedicamento').on('click', async function() {
         var id = $('#editarIdMedicamento').val();
         var nome = $('#editarNomeMedicamento').val();
         var codigo = $('#editarCodigoMedicamento').val();
         var quantidade = $('#editarQuantidadeMedicamento').val();
+        var validade = $('#editarValidadeMedicamento').val();
 
         var dadosMedicamento = {
             nome: nome,
             codigo: codigo,
             quantidade: parseInt(quantidade),
+            validade: validade
         };
 
         // URL da API
@@ -209,7 +238,6 @@ $(document).ready(function(){
             });
 
             if (response.ok) {
-                const resultado = await response.json();
                 alert('Medicamento atualizado com sucesso!');
                 $('#editarMedicamentoModal').modal('hide');
                 location.reload();
@@ -223,6 +251,7 @@ $(document).ready(function(){
         }
     });
 });
+
 
 
 

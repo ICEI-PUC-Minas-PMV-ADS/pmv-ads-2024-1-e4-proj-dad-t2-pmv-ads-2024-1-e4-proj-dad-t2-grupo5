@@ -68,18 +68,36 @@ if (!$estoque || curl_errno($ch)) {
             <th>Nome</th>
             <th>Código</th>
             <th>Quantidade</th>
+            <th>Validade</th>
         </tr>         
     </thead>
     <tbody id="tabelaEstoque">
-    <?php if (!empty($estoque)): ?>
-        <?php foreach ($estoque as $medicamento): ?>
-            <tr>
-                <td><?php echo htmlspecialchars($medicamento['nome']); ?></td>
-                <td><?php echo htmlspecialchars($medicamento['codigo']); ?></td>
-                <td style="color: <?php echo $medicamento['quantidade'] < 5 ? 'red' : 'green'; ?>">
-                    <?php echo htmlspecialchars($medicamento['quantidade']); ?>
+        <?php if (!empty($estoque)): ?>
+            <?php foreach ($estoque as $medicamento): ?>
+                <tr>
+                    <td style="color: <?php echo $medicamento['quantidade'] == 0 ? 'red' : ($medicamento['quantidade'] <= 5 ? 'blue' : 'black'); ?>">
+                        <?php echo htmlspecialchars($medicamento['nome']); ?>
+                    </td>
+                    <td><?php echo htmlspecialchars($medicamento['codigo']); ?></td>
+                    <td style="color: <?php echo $medicamento['quantidade'] <= 5 ? 'red' : 'green'; ?>">
+                        <?php echo htmlspecialchars($medicamento['quantidade']); ?>
+                    </td>
+                    <td style="color: 
+                    <?php
+                        $validade = new DateTime($medicamento['validade']);
+                        $hoje = new DateTime();
+                        $intervalo = $validade->diff($hoje)->days;
+
+                        if ($validade < $hoje) {
+                            echo 'red';
+                        } elseif ($intervalo <= 60) {
+                            echo 'blue';
+                        } else {
+                            echo 'black';
+                        }
+                    ?>">
+                    <?php echo htmlspecialchars($validade->format('d/m/Y')); ?>
                 </td>
-            </tr>
         <?php endforeach; ?>
     <?php else: ?>
         <tr>
@@ -128,27 +146,39 @@ if (!$estoque || curl_errno($ch)) {
     </div>
 </div>
 
-<!-- Modal para Solicitar Medicamento Excepcional -->
-<div class="modal fade" id="solicitarMedicamentoModal" tabindex="-1" role="dialog" aria-labelledby="solicitarMedicamentoModalLabel" aria-hidden="true">
+<!-- Modal para Solicitar Reposição -->
+<div class="modal fade" id="solicitarReposicaoModal" tabindex="-1" role="dialog" aria-labelledby="solicitarReposicaoModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="solicitarMedicamentoModalLabel">Solicitar Medicamento Excepcional</h5>
+                <h5 class="modal-title" id="solicitarReposicaoModalLabel">Solicitar Reposição</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form id="solicitarMedicamentoForm">
+                <form id="solicitarReposicaoForm">
                     <div class="form-group">
-                        <label for="nomeMedicamento">Nome do Medicamento:</label>
-                        <input type="text" class="form-control" id="nomeMedicamento" required>
+                        <label for="medicamentoIdReposicao">Medicamento:</label>
+                        <select class="form-control" id="medicamentoIdReposicao" required>
+                            <?php foreach ($estoque as $item): ?>
+                                <option value="<?= htmlspecialchars($item['_id']) ?>"><?= htmlspecialchars($item['nome']) ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="quantidadeReposicao">Quantidade:</label>
+                        <input type="number" class="form-control" id="quantidadeReposicao" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="validadeReposicao">Validade:</label>
+                        <input type="date" class="form-control" id="validadeReposicao" required>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary" id="enviarMedicamentoExcepcional">Enviar Solicitação</button>
+                <button type="button" class="btn btn-primary" id="btnSolicitarReposicao">Enviar Solicitação</button>
             </div>
         </div>
     </div>
@@ -259,7 +289,7 @@ if (!$estoque || curl_errno($ch)) {
     });
 
 // solicitação de reposição de medicamento 
-    document.getElementById('btnSolicitarReposicao').addEventListener('click', async () => {
+document.getElementById('btnSolicitarReposicao').addEventListener('click', async () => {
         try {
 
             alert('Reposição Solicitada com Sucesso');
@@ -283,7 +313,8 @@ if (!$estoque || curl_errno($ch)) {
             console.error('Erro ao solicitar reposição:', error);
             alert('Erro ao solicitar reposição. Verifique o console para mais detalhes.');
         }
-    });
+});
+
 
 
 $('#enviarMedicamentoExcepcional').on('click', async function() {
@@ -291,7 +322,7 @@ $('#enviarMedicamentoExcepcional').on('click', async function() {
 
     var dadosMedicamento = {
         nome: nome,
-        quantidade: 0 // quantidade inicial será zero
+        quantidade: 0 
     };
 
     try {
@@ -306,7 +337,7 @@ $('#enviarMedicamentoExcepcional').on('click', async function() {
         if (response.ok) {
             alert('Medicamento excepcional solicitado com sucesso!');
             $('#solicitarMedicamentoModal').modal('hide');
-            location.reload(); // Recarrega a página para mostrar o novo medicamento
+            location.reload(); 
         } else {
             const erroMsg = await response.text();
             throw new Error(erroMsg);
@@ -318,7 +349,7 @@ $('#enviarMedicamentoExcepcional').on('click', async function() {
 });
 
 $(document).ready(function() {
-    // Função para carregar pacientes
+    
     function carregarPacientes() {
         fetch('http://localhost:3001/pacientes')
             .then(response => {
@@ -340,7 +371,7 @@ $(document).ready(function() {
             });
     }
 
-    // Preparar data e hora ao abrir a modal
+    
     $('#saidaMedicamentoModal').on('show.bs.modal', function(e) {
         carregarPacientes();
         const now = new Date();

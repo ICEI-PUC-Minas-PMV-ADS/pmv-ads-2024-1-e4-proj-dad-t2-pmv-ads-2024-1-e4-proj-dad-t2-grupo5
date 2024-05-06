@@ -15,27 +15,28 @@ router.post('/medicamentos/multiplos', async (req, res) => {
 });
 
 router.post('/medicamentos', async (req, res) => {
-    const { nome, codigo } = req.body;
+  const { nome, codigo, preco, quantidade, validade } = req.body;
 
-    try {
-        const medicamentoExistente = await Estoque.findOne({ $or: [{ nome }, { codigo }] });
+  try {
+      const medicamentoExistente = await Estoque.findOne({ $or: [{ nome }, { codigo }] });
 
-        if (medicamentoExistente) {
-            return res.status(400).send({ message: 'Medicamento já existe no banco de dados.' });
-        }
+      if (medicamentoExistente) {
+          return res.status(400).send({ message: 'Medicamento já existe no banco de dados.' });
+      }
 
-        const novoMedicamento = new Estoque(req.body);
-        await novoMedicamento.save();
-        res.status(201).send({ message: 'Medicamento adicionado com sucesso!' });
+      const novoMedicamento = new Estoque({ nome, codigo, preco, quantidade, validade });
+      await novoMedicamento.save();
+      res.status(201).send({ message: 'Medicamento adicionado com sucesso!' });
 
-    } catch (error) {
-        res.status(400).send({ error: 'Falha ao adicionar medicamento', details: error });
-    }
+  } catch (error) {
+      res.status(400).send({ error: 'Falha ao adicionar medicamento', details: error });
+  }
 });
 
 
 
-// LIST in alphabetical order
+
+// LIST em ordem alfabetica
 router.get('/', async (req, res) => {
   try {
     const results = await Estoque.find({}).sort({ nome: 1 });
@@ -62,20 +63,21 @@ router.delete('/excluir/:id', async (req, res) => {
 
 // Update
 router.put('/medicamento/:id', async (req, res) => {
-  const { nome, codigo, preco, quantidade } = req.body;
+  const { nome, codigo, preco, quantidade, validade } = req.body;
   try {
-    const result = await Estoque.findByIdAndUpdate(req.params.id, {
-      nome,
-      codigo,
-      preco,
-      quantidade,
-    }, { new: true });
-    if (!result) {
-      return res.status(404).json({ mensagem: "Medicamento não encontrado." });
-    }
-    res.status(200).json({ mensagem: "Medicamento atualizado com sucesso.", data: result });
+      const result = await Estoque.findByIdAndUpdate(req.params.id, {
+          nome,
+          codigo,
+          preco,
+          quantidade,
+          validade
+      }, { new: true });
+      if (!result) {
+          return res.status(404).json({ mensagem: "Medicamento não encontrado." });
+      }
+      res.status(200).json({ mensagem: "Medicamento atualizado com sucesso.", data: result });
   } catch (error) {
-    res.status(500).json({ erro: error.message });
+      res.status(500).json({ erro: error.message });
   }
 });
 

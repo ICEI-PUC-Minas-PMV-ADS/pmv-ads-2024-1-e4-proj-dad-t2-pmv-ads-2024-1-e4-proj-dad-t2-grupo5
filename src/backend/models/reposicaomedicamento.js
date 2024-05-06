@@ -1,9 +1,17 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-// Definição do esquema para a reposição de medicamentos.
+
 const reposicaoMedicamentoSchema = new Schema({
-    medicamentos: Schema.Types.Mixed,
+    dataCriacao: { type: Date, default: Date.now },
+    medicamentos: [
+        {
+            nome: { type: String, required: true },
+            codigo: { type: String, required: true },
+            quantidadeAtual: { type: Number, required: true },
+            validade: { type: Date, required: true }
+        }
+    ]
 });
 
 module.exports = mongoose.model('ReposicaoMedicamentos', reposicaoMedicamentoSchema);

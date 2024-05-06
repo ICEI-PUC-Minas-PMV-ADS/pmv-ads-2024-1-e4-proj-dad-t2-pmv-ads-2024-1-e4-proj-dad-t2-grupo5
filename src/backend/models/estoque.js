@@ -7,6 +7,7 @@ const estoqueSchema = new Schema({
   codigo: { type: String, required: false, default: 'excepcional' },
   preco: { type: Number, default: 1},
   quantidade: { type: Number, required: true },
+  validade: { type: Date, required: true }
 });
 
 module.exports = mongoose.model('Estoque', estoqueSchema);
