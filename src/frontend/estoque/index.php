@@ -75,7 +75,7 @@ if (!$estoque || curl_errno($ch)) {
         <?php if (!empty($estoque)): ?>
             <?php foreach ($estoque as $medicamento): ?>
                 <tr>
-                    <td style="color: <?php echo $medicamento['quantidade'] == 0 ? 'red' : ($medicamento['quantidade'] <= 5 ? 'blue' : 'black'); ?>">
+                    <td style="color: <?php echo $medicamento['quantidade'] == 0 ? 'red' : 'black'; ?>">
                         <?php echo htmlspecialchars($medicamento['nome']); ?>
                     </td>
                     <td><?php echo htmlspecialchars($medicamento['codigo']); ?></td>
@@ -84,7 +84,9 @@ if (!$estoque || curl_errno($ch)) {
                     </td>
                     <td style="color: 
                     <?php
-                        $validade = new DateTime($medicamento['validade']);
+                        $validade_raw = $medicamento['validade'] ?? null;
+                        if ($validade_raw) {
+                        $validade = new DateTime($validade_raw);
                         $hoje = new DateTime();
                         $intervalo = $validade->diff($hoje)->days;
 
@@ -95,8 +97,18 @@ if (!$estoque || curl_errno($ch)) {
                         } else {
                             echo 'black';
                         }
-                    ?>">
-                    <?php echo htmlspecialchars($validade->format('d/m/Y')); ?>
+                        } else {
+                        echo 'black';
+                        }
+                        ?>
+                        ">
+                        <?php
+                             if (!empty($validade_raw)) {
+                             echo htmlspecialchars($validade->format('d/m/Y'));
+                            } else {
+                              echo 'Não informado';
+                         }
+                    ?>
                 </td>
         <?php endforeach; ?>
     <?php else: ?>
@@ -179,6 +191,32 @@ if (!$estoque || curl_errno($ch)) {
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                 <button type="button" class="btn btn-primary" id="btnSolicitarReposicao">Enviar Solicitação</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para Solicitar Medicamento Excepcional -->
+<div class="modal fade" id="solicitarMedicamentoModal" tabindex="-1" role="dialog" aria-labelledby="solicitarMedicamentoModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="solicitarMedicamentoModalLabel">Solicitar Medicamento Excepcional</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="solicitarMedicamentoForm">
+                    <div class="form-group">
+                        <label for="nomeMedicamento">Nome do Medicamento:</label>
+                        <input type="text" class="form-control" id="nomeMedicamento" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="enviarMedicamentoExcepcional">Enviar Solicitação</button>
             </div>
         </div>
     </div>
@@ -322,7 +360,7 @@ $('#enviarMedicamentoExcepcional').on('click', async function() {
 
     var dadosMedicamento = {
         nome: nome,
-        quantidade: 0 
+        quantidade: 0
     };
 
     try {

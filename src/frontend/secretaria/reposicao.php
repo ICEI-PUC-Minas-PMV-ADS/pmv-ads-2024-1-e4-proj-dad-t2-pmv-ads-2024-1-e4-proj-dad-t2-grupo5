@@ -112,15 +112,20 @@ async function preencherListaMedicamentos() {
         medicamentosReposicao.forEach(reposicao => {
             reposicao.medicamentos.forEach(medicamento => {
                 
-                const validade = new Date(medicamento.validade);
-                const validadeFormatada = validade.toLocaleDateString('pt-BR'); 
+                let dataremedio;
+                if (!medicamento.validade || isNaN(new Date(medicamento.validade).getTime())) {
+                    dataremedio = "Não informado";
+                } else {
+                    const validade = new Date(medicamento.validade);
+                    dataremedio = validade.toLocaleDateString('pt-BR');
+                }
 
                 const row = document.createElement('tr');
                 row.innerHTML = `
                     <td>${medicamento.nome}</td>
                     <td>${medicamento.codigo}</td>
                     <td>${medicamento.quantidadeAtual}</td>
-                    <td>${validadeFormatada}</td>
+                    <td>${dataremedio}</td>
                     <td>
                         <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalEditarMedicamento" data-medicamento-id="${medicamento._id}">
                             Editar

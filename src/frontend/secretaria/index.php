@@ -66,16 +66,19 @@ if (!$estoque || curl_errno($ch)) {
         <?php if (!empty($estoque)): ?>
             <?php foreach ($estoque as $medicamento): ?>
                 <tr>
-                    <td style="color: <?php echo $medicamento['quantidade'] == 0 ? 'red' : ($medicamento['quantidade'] <= 5 ? 'blue' : 'black'); ?>">
+                <td style="color: <?php echo $medicamento['quantidade'] == 0 ? 'red' : 'black'; ?>">
                         <?php echo htmlspecialchars($medicamento['nome']); ?>
                     </td>
                     <td><?php echo htmlspecialchars($medicamento['codigo']); ?></td>
                     <td style="color: <?php echo $medicamento['quantidade'] <= 5 ? 'red' : 'green'; ?>">
                         <?php echo htmlspecialchars($medicamento['quantidade']); ?>
                     </td>
+                    </td>
                     <td style="color: 
                     <?php
-                        $validade = new DateTime($medicamento['validade']);
+                        $validade_raw = $medicamento['validade'] ?? null;
+                        if ($validade_raw) {
+                        $validade = new DateTime($validade_raw);
                         $hoje = new DateTime();
                         $intervalo = $validade->diff($hoje)->days;
 
@@ -86,8 +89,18 @@ if (!$estoque || curl_errno($ch)) {
                         } else {
                             echo 'black';
                         }
-                    ?>">
-                    <?php echo htmlspecialchars($validade->format('d/m/Y')); ?>
+                        } else {
+                        echo 'black';
+                        }
+                        ?>
+                        ">
+                        <?php
+                             if (!empty($validade_raw)) {
+                             echo htmlspecialchars($validade->format('d/m/Y'));
+                            } else {
+                              echo 'Não informado';
+                         }
+                    ?>
                 </td>
                     <td>
                         <button class="btn btn-info btn-sm editarBtn" 
@@ -95,7 +108,7 @@ if (!$estoque || curl_errno($ch)) {
                                 data-nome="<?php echo htmlspecialchars($medicamento['nome']); ?>" 
                                 data-codigo="<?php echo htmlspecialchars($medicamento['codigo']); ?>" 
                                 data-quantidade="<?php echo htmlspecialchars($medicamento['quantidade']); ?>"
-                                data-validade="<?php echo htmlspecialchars($medicamento['validade']); ?>">Editar</button>
+                                data-validade="<?php echo isset($medicamento['validade']) ? htmlspecialchars($medicamento['validade']) : 'Não Informado'; ?>">Editar</button>
                     </td>
                 </tr>
             <?php endforeach; ?>
