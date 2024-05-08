@@ -77,9 +77,9 @@ if (!$estoque || curl_errno($ch)) {
             Saída de Medicamento
         </button>
         <div class="legenda mt-4">
-            <ul>
+            <ul style="list-style-type: none;">
                 <li><span style="color: DarkOrange; font-weight: bold;"><span style="height: 10px; width: 10px; background-color: DarkOrange; border-radius: 50%; display: inline-block;"></span> Estoques baixos</span></li>
-                <li><span style="color: red; font-weight: bold;"><span style="height: 10px; width: 10px; background-color: red; border-radius: 50%; display: inline-block;"></span> Estoque zerado</span></li>
+                <li><span style="color: red; font-weight: bold;"><span style="height: 10px; width: 10px; background-color: red; border-radius: 50%; display: inline-block;"></span> Estoque em falta / sem validade</span></li>
                 <li><span style="color: blue; font-weight: bold;"><span style="height: 10px; width: 10px; background-color: blue; border-radius: 50%; display: inline-block;"></span> Menos de 60 dias para o medicamento vencer</span></li>
                 <li><span style="color: Gold; font-weight: bold;"><span style="height: 10px; width: 10px; background-color: Gold; border-radius: 50%; display: inline-block;"></span> Medicamento Vencido</span></li>
                 <li><span style="color: Green; font-weight: bold;"><span style="height: 10px; width: 10px; background-color: Green; border-radius: 50%; display: inline-block;"></span> Quantidade ou Validade OK</span></li>    
@@ -118,36 +118,56 @@ if (!$estoque || curl_errno($ch)) {
                     </td>
                     <td style="color: 
                     <?php
-                        $validade_raw = $medicamento['validade'] ?? null;
-                        if ($validade_raw) {
-                        $validade = new DateTime($validade_raw);
-                        $hoje = new DateTime();
-                        $intervalo = $validade->diff($hoje)->days;
+                        $validade_raw = $medicamento['validade'] ?? null; 
 
-                        if ($validade < $hoje) {
-                            echo 'Gold';
-                        } elseif ($intervalo <= 60) {
-                            echo 'blue';
-                        } else {
-                            echo 'black';
-                        }
-                        } else {
-                        echo 'black';
-                        }
-                        ?>;
-                            font-weight: bold;
-                        ">
-                        <?php
-                             if (!empty($validade_raw)) {
-                             echo htmlspecialchars($validade->format('d/m/Y'));
+                        if (!empty($validade_raw)) {
+                            $validade = new DateTime($validade_raw);
+                            $hoje = new DateTime();
+                            $intervalo = $validade->diff($hoje)->days;
+
+                            if ($validade < $hoje) {
+                                echo 'Gold';  
+                            } elseif ($intervalo <= 60) {
+                                echo 'blue';  
                             } else {
-                              echo 'Não informado';
-                         }
+                                echo 'black'; 
+                            }
+                        } else {
+                            echo 'red'; 
+                        }
+                    ?>;
+                    font-weight: bold;">
+                    <?php
+                        if (!empty($validade_raw)) {
+                            echo htmlspecialchars($validade->format('d/m/Y'));
+                        } else {
+                            echo 'Não informado'; 
+                        }
                     ?>
                 </td>
                 <td>
                     <span class="circle <?php echo ($medicamento['quantidade'] == 0) ? 'red' : (($medicamento['quantidade'] >= 1 && $medicamento['quantidade'] <= 5) ? 'darkorange' : 'green'); ?>"></span>
-                    <span class="circle <?php echo $validade < $hoje ? 'gold' : ($intervalo <= 60 ? 'blue' : 'green'); ?>"></span>
+                    <span class="circle <?php 
+                        $validade_raw = $medicamento['validade'] ?? null;
+
+                        if ($validade_raw === null) {
+                            echo 'Red';
+                        } else {
+                            $validade = new DateTime($validade_raw);
+                            $hoje = new DateTime();
+                            $intervalo = $validade->diff($hoje)->days;
+
+                            if ($validade < $hoje) {
+                                echo 'Gold';
+                            } elseif ($intervalo <= 60) {
+                                echo 'Blue';
+                            } else {
+                                echo 'Green';
+                            }
+                        }
+                    ?>">
+                    </span>
+
                 </td>
         <?php endforeach; ?>
     <?php else: ?>
