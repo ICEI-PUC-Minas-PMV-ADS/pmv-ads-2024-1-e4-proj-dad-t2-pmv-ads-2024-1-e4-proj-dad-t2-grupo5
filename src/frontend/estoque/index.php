@@ -41,6 +41,20 @@ if (!$estoque || curl_errno($ch)) {
 </head>
 
 <body>
+<style>
+.circle {
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 5px;
+}
+.green { background-color: green; }
+.gold { background-color: gold; }
+.darkorange { background-color: DarkOrange; }
+.red { background-color: red; }
+.blue { background-color: blue; }
+</style>
 
 <main>
     
@@ -64,11 +78,12 @@ if (!$estoque || curl_errno($ch)) {
         </button>
         <div class="legenda mt-4">
             <ul>
-                <li><span style="color: DarkOrange; font-weight: bold;">Quantidade em Laranja: Estoques baixos</span></li>
-                <li><span style="color: red; font-weight: bold;">Quantidade em vermelho: Estoque zerado</span></li>
-                <li><span style="color: blue; font-weight: bold;">Validade em azul: 60 dias ou menos para vencer</span></li>
-                <li><span style="color: red; font-weight: bold;">Validade em vermelho: Vencido</span></li>
-            </ul>
+                <li><span style="color: DarkOrange; font-weight: bold;"><span style="height: 10px; width: 10px; background-color: DarkOrange; border-radius: 50%; display: inline-block;"></span> Estoques baixos</span></li>
+                <li><span style="color: red; font-weight: bold;"><span style="height: 10px; width: 10px; background-color: red; border-radius: 50%; display: inline-block;"></span> Estoque zerado</span></li>
+                <li><span style="color: blue; font-weight: bold;"><span style="height: 10px; width: 10px; background-color: blue; border-radius: 50%; display: inline-block;"></span> Menos de 60 dias para o medicamento vencer</span></li>
+                <li><span style="color: Gold; font-weight: bold;"><span style="height: 10px; width: 10px; background-color: Gold; border-radius: 50%; display: inline-block;"></span> Medicamento Vencido</span></li>
+                <li><span style="color: Green; font-weight: bold;"><span style="height: 10px; width: 10px; background-color: Green; border-radius: 50%; display: inline-block;"></span> Quantidade ou Validade OK</span></li>    
+            </ul> 
         </div>
 
         <table class="table">
@@ -78,6 +93,7 @@ if (!$estoque || curl_errno($ch)) {
             <th>Código</th>
             <th>Quantidade</th>
             <th>Validade</th>
+            <th>Situação</th>
         </tr>         
     </thead>
     <tbody id="tabelaEstoque">
@@ -89,7 +105,7 @@ if (!$estoque || curl_errno($ch)) {
                     <td style="color: 
                     <?php
                         if ($medicamento['quantidade'] == 0) {
-                            echo '#FF0000'; 
+                            echo 'red'; 
                         } elseif ($medicamento['quantidade'] >= 1 && $medicamento['quantidade'] <= 5) {
                             echo 'DarkOrange'; 
                         } else {
@@ -109,7 +125,7 @@ if (!$estoque || curl_errno($ch)) {
                         $intervalo = $validade->diff($hoje)->days;
 
                         if ($validade < $hoje) {
-                            echo 'red';
+                            echo 'Gold';
                         } elseif ($intervalo <= 60) {
                             echo 'blue';
                         } else {
@@ -128,6 +144,10 @@ if (!$estoque || curl_errno($ch)) {
                               echo 'Não informado';
                          }
                     ?>
+                </td>
+                <td>
+                    <span class="circle <?php echo ($medicamento['quantidade'] == 0) ? 'red' : (($medicamento['quantidade'] >= 1 && $medicamento['quantidade'] <= 5) ? 'darkorange' : 'green'); ?>"></span>
+                    <span class="circle <?php echo $validade < $hoje ? 'gold' : ($intervalo <= 60 ? 'blue' : 'green'); ?>"></span>
                 </td>
         <?php endforeach; ?>
     <?php else: ?>
