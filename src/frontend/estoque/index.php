@@ -43,6 +43,7 @@ if (!$estoque || curl_errno($ch)) {
 <body>
 
 <main>
+    
     <div class="container mt-4">
         <!-- Filtro de texto -->
         <div class="form-group">
@@ -61,6 +62,14 @@ if (!$estoque || curl_errno($ch)) {
         <button type="button" class="btn btn-warning mb-3" data-toggle="modal" data-target="#saidaMedicamentoModal">
             Saída de Medicamento
         </button>
+        <div class="legenda mt-4">
+            <ul>
+                <li><span style="color: DarkOrange; font-weight: bold;">Quantidade em Laranja: Estoques baixos</span></li>
+                <li><span style="color: red; font-weight: bold;">Quantidade em vermelho: Estoque zerado</span></li>
+                <li><span style="color: blue; font-weight: bold;">Validade em azul: 60 dias ou menos para vencer</span></li>
+                <li><span style="color: red; font-weight: bold;">Validade em vermelho: Vencido</span></li>
+            </ul>
+        </div>
 
         <table class="table">
     <thead>
@@ -75,12 +84,21 @@ if (!$estoque || curl_errno($ch)) {
         <?php if (!empty($estoque)): ?>
             <?php foreach ($estoque as $medicamento): ?>
                 <tr>
-                    <td style="color: <?php echo $medicamento['quantidade'] == 0 ? 'red' : 'black'; ?>">
-                        <?php echo htmlspecialchars($medicamento['nome']); ?>
-                    </td>
-                    <td><?php echo htmlspecialchars($medicamento['codigo']); ?></td>
-                    <td style="color: <?php echo $medicamento['quantidade'] <= 5 ? 'red' : 'green'; ?>">
-                        <?php echo htmlspecialchars($medicamento['quantidade']); ?>
+                    <td style="font-weight: bold;"><?php echo htmlspecialchars($medicamento['nome']); ?></td>
+                    <td style="font-weight: bold;"><?php echo htmlspecialchars($medicamento['codigo']); ?></td>
+                    <td style="color: 
+                    <?php
+                        if ($medicamento['quantidade'] == 0) {
+                            echo '#FF0000'; 
+                        } elseif ($medicamento['quantidade'] >= 1 && $medicamento['quantidade'] <= 5) {
+                            echo 'DarkOrange'; 
+                        } else {
+                            echo 'black';
+                        }
+                    ?>;
+                        font-weight: bold;
+                    ">
+                    <?php echo htmlspecialchars($medicamento['quantidade']); ?>
                     </td>
                     <td style="color: 
                     <?php
@@ -100,7 +118,8 @@ if (!$estoque || curl_errno($ch)) {
                         } else {
                         echo 'black';
                         }
-                        ?>
+                        ?>;
+                            font-weight: bold;
                         ">
                         <?php
                              if (!empty($validade_raw)) {
