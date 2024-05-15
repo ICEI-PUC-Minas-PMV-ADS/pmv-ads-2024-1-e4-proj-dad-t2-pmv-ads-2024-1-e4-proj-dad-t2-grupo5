@@ -60,4 +60,4 @@ const solicitacaoexameSchema = new Schema({
   
 });
 
-module.exports = mongoose.model('Solicitação de Exames', solicitacaoexameSchema);
+module.exports = mongoose.model('solicitacaoDeExames', solicitacaoexameSchema);

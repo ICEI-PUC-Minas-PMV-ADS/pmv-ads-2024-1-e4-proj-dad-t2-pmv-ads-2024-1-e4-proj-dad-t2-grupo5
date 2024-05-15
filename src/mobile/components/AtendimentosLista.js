@@ -13,7 +13,7 @@ const AtendimentosLista = () => {
       try {
         // O Id virá da session em feats posteriores
         const pacienteId = '65f310bac89182504704c5b1';
-        const response = await fetch(`http://192.168.3.4:3001/atendimentos/paciente/${pacienteId}`);
+        const response = await fetch(`http://192.168.0.23:3001/atendimentos/paciente/${pacienteId}`);
         const data = await response.json();
         setAtendimentos(data);
         setLoading(false);
