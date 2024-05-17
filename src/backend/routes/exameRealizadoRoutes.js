@@ -18,10 +18,10 @@ router.post('/', async (req, res) => {
 
 // GET: Listar exames realizados por ID do paciente
 router.get('/realizados/paciente/:id', async (req, res) => {
-    const pacienteId = req.params.id;
+    const paciente = req.params.id;
     try {
         // A consulta agora busca diretamente por 'solicitacaoRef.pacienteId'
-        const examesRealizados = await ExameRealizado.find({ "solicitacaoRef.pacienteId": pacienteId }).exec();
+        const examesRealizados = await ExameRealizado.find({ "solicitacaoRef.paciente": paciente }).exec();
         res.json(examesRealizados);
     } catch (error) {
         console.error("Erro ao buscar exames realizados:", error);

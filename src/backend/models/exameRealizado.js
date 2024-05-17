@@ -21,15 +21,17 @@ const exameRealizadoSchema = new Schema({
           ref: 'atendimento',
           required: true,
       },
-        medicoId: {
+        medico: {
           type: mongoose.Types.ObjectId,
-          ref: 'usuario',
+          ref: 'Usuario',
           required: true,
+          autopopulate: true
       },
-      pacienteId: {
+      paciente: {
           type: mongoose.Types.ObjectId,
-          ref: 'paciente',
+          ref: 'Paciente',
           required: true,
+          autopopulate: true
       },
   },
 
