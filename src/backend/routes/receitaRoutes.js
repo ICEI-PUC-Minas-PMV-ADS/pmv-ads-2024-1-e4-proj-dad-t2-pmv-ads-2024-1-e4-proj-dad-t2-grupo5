@@ -49,4 +49,17 @@ router.post('/', async (req, res) => {
     }
 });
 
+// Listar todas as receitas médicas de um paciente específico por ID
+router.get('/paciente/:pacienteId', async (req, res) => {
+    const pacienteId = req.params.pacienteId;
+    try {
+        const receitas = await ReceitaMedica.find({ 'atendimentoRef.paciente': pacienteId });
+        res.json(receitas);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
 module.exports = router;
+
+

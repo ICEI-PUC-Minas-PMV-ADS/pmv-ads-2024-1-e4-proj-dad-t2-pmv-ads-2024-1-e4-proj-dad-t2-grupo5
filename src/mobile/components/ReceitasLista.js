@@ -2,37 +2,35 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList, Button, ActivityIndicator, TouchableOpacity, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-const ExamesLista = () => {
+const ReceitasLista = () => {
   const navigation = useNavigation();
-  const [exames, setExames] = useState([]);
+  const [receitas, setReceitas] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchExames = async () => {
+    const fetchReceitas = async () => {
       try {
-        // O Id virá da session em feats posteriores
         const pacienteId = '65f310bac89182504704c5b1';
-        const response = await fetch(`http://192.168.2.17:3001/examesRealizados/realizados/paciente/${pacienteId}`);
+        const response = await fetch(`http://192.168.2.17:3001/receita/paciente/${pacienteId}`);
         const data = await response.json();
-        const sortedData = data.sort((a, b) => new Date(b.dataRealizacao) - new Date(a.dataRealizacao));
-        setExames(data);
+        setReceitas(response.data);
         setLoading(false);
       } catch (error) {
-        console.error('Erro ao buscar exames:', error);
+        console.error('Erro ao buscar receitas:', error);
         setLoading(false);
       }
     };
 
-    fetchExames();
+    fetchReceitas();
   }, []);
 
   const renderItem = ({ item }) => {
     return (
       <View style={styles.itemContainer}>
         <Text style={styles.itemText}>
-          Data do Exame:{'\n'}{new Date(item.dataRealizacao).toLocaleDateString('pt-BR')}
+          Receita:{'\n'}{new Date(item.dataFim).toLocaleDateString()}
         </Text>
-        <TouchableOpacity style={styles.itemBtn} onPress={() => navigation.navigate('ExameDetalhes', { Exame: item })}>
+        <TouchableOpacity style={styles.itemBtn} onPress={() => navigation.navigate('ReceitasDetalhes', { receitas: item })}>
           <Text style={styles.btnText}>Detalhes</Text>
         </TouchableOpacity>
       </View>
@@ -46,7 +44,7 @@ const ExamesLista = () => {
   return (
     <View style={styles.listContainer}>
       <FlatList
-        data={exames}
+        data={receitas}
         renderItem={renderItem}
         keyExtractor={(item) => item._id}
       />
@@ -79,8 +77,7 @@ const styles = StyleSheet.create({
   },
   itemText: {
     flex: 1,
-    marginRight: 10
+    marginRight: 10 
   }
 });
-
-export default ExamesLista;
+export default ReceitasLista;
