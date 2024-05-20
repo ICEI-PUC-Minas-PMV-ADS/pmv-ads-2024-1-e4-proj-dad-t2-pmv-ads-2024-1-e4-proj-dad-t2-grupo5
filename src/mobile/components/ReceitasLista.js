@@ -13,7 +13,7 @@ const ReceitasLista = () => {
         const pacienteId = '65f310bac89182504704c5b1';
         const response = await fetch(`http://192.168.2.17:3001/receita/paciente/${pacienteId}`);
         const data = await response.json();
-        setReceitas(response.data);
+        setReceitas(data);
         setLoading(false);
       } catch (error) {
         console.error('Erro ao buscar receitas:', error);
@@ -30,7 +30,7 @@ const ReceitasLista = () => {
         <Text style={styles.itemText}>
           Receita:{'\n'}{new Date(item.dataFim).toLocaleDateString()}
         </Text>
-        <TouchableOpacity style={styles.itemBtn} onPress={() => navigation.navigate('ReceitasDetalhes', { receitas: item })}>
+        <TouchableOpacity style={styles.itemBtn} onPress={() => navigation.navigate('ReceitasDetalhes', { receita: item })}>
           <Text style={styles.btnText}>Detalhes</Text>
         </TouchableOpacity>
       </View>

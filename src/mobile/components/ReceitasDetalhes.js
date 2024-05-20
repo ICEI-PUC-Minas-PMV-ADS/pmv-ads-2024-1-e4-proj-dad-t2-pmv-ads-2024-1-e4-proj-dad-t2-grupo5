@@ -1,8 +1,9 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-const ReceitaDetalhes = ({ receita }) => {
-  return (
+const ReceitaDetalhes = ({ route }) => {
+    const { receita } = route.params
+      return (
     <View style={styles.container}>
       <Text style={styles.title}>Detalhes da Receita</Text>
       <Text style={styles.info}>Data de Início: {new Date(receita.dataInicio).toLocaleDateString()}</Text>
