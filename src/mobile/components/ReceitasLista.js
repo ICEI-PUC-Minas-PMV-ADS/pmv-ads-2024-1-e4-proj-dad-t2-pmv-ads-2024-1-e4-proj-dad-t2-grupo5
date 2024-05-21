@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList, Button, ActivityIndicator, TouchableOpacity, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { IP } from '@env';
 
 const ReceitasLista = () => {
   const navigation = useNavigation();
@@ -11,7 +12,7 @@ const ReceitasLista = () => {
     const fetchReceitas = async () => {
       try {
         const pacienteId = '65f310bac89182504704c5b1';
-        const response = await fetch(`http://192.168.2.17:3001/receita/paciente/${pacienteId}`);
+        const response = await fetch(`http://${IP}:3001/receita/paciente/${pacienteId}`);
         const data = await response.json();
         setReceitas(data);
         setLoading(false);
