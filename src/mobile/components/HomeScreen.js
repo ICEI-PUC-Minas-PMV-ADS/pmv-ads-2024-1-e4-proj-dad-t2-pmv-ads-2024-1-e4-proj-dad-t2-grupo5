@@ -1,22 +1,27 @@
-// components/HomeScreen.js
 import React from 'react';
-import { View, Button, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
 const HomeScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <Button
-        title="Lista de Atendimentos"
+      <TouchableOpacity
+        style={styles.button}
         onPress={() => navigation.navigate('AtendimentosLista')}
-      />
-      <Button
-        title="Lista de Exames"
+      >
+        <Text style={styles.buttonText}>Lista de Atendimentos</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.button}
         onPress={() => navigation.navigate('ExameListaScreen')}
-      />
-      <Button
-        title="Lista de Receitas"
+      >
+        <Text style={styles.buttonText}>Lista de Exames</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.button}
         onPress={() => navigation.navigate('ReceitasLista')}
-      />
+      >
+        <Text style={styles.buttonText}>Lista de Receitas</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -27,6 +32,19 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 16,
+  },
+  button: {
+    backgroundColor: '#1E90FF',
+    padding: 20,
+    marginVertical: 10,
+    width: '100%',
+    alignItems: 'center',
+    borderRadius: 10,
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold',
   },
 });
 
