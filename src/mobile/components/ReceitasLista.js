@@ -21,7 +21,7 @@ const ReceitasLista = () => {
     const fetchReceitas = async () => {
       try {
         const pacienteId = await SecureStore.getItemAsync('userId');
-        const response = await fetch(`http://${IP}:3001/receita/paciente/${pacienteId}`);
+        const response = await fetch(`https://vivabemapi.vercel.app/receita/paciente/${pacienteId}`);
         const data = await response.json();
         setReceitas(data);
         setLoading(false);

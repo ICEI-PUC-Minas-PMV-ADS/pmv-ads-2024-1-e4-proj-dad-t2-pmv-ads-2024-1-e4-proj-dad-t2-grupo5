@@ -29,7 +29,7 @@ const LoginScreen = () => {
 
     const handleLogin = async () => {
         try {
-            const response = await axios.post(`http://${IP}:3001/loginMobile`, {
+            const response = await axios.post(`https://vivabemapi.vercel.app/loginMobile`, {
                 cpf,
                 senha
             });

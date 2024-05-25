@@ -21,7 +21,7 @@ const AtendimentosLista = () => {
     const fetchAtendimentos = async () => {
       try {
         const pacienteId = await SecureStore.getItemAsync('userId');
-        const response = await fetch(`http://${IP}:3001/atendimentos/paciente/${pacienteId}`);
+        const response = await fetch(`https://vivabemapi.vercel.app/atendimentos/paciente/${pacienteId}`);
         const data = await response.json();
         setAtendimentos(data);
         setLoading(false);

@@ -22,7 +22,7 @@ const ExamesLista = () => {
       try {
         // O Id virá da session em feats posteriores
         const pacienteId = await SecureStore.getItemAsync('userId');
-        const response = await fetch(`http://${IP}:3001/examesRealizados/realizados/paciente/${pacienteId}`);
+        const response = await fetch(`https://vivabemapi.vercel.app/examesRealizados/realizados/paciente/${pacienteId}`);
         const data = await response.json();
         const sortedData = data.sort((a, b) => new Date(b.dataRealizacao) - new Date(a.dataRealizacao));
         setExames(data);
