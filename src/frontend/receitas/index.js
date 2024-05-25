@@ -4,7 +4,7 @@
         console.log(id)
 
         $.ajax({
-            url: 'http://localhost:3001/estoque/excluir/' + id,
+            url: 'https://vivabemapi.vercel.app/estoque/excluir/' + id,
             method: 'DELETE', 
             success: function(response) {
                 location.reload();
@@ -37,7 +37,7 @@
         var quantidade = $('#editarQuantidadeMedicamento').val();
 
         $.ajax({
-            url: `http://localhost:3001/estoque/medicamento/${id}`, // Ajuste a URL conforme necessário
+            url: `https://vivabemapi.vercel.app/estoque/medicamento/${id}`, // Ajuste a URL conforme necessário
             method: 'PUT', // Método HTTP apropriado para atualizações
             contentType: "application/json",
             data: JSON.stringify({
@@ -72,7 +72,7 @@ $('#salvarMedicamento').on('click', function() {
     };
 
     $.ajax({
-        url: 'http://localhost:3001/estoque/medicamentos',
+        url: 'https://vivabemapi.vercel.app/estoque/medicamentos',
         type: 'POST',
         contentType: 'application/json',
         data: JSON.stringify(dados),

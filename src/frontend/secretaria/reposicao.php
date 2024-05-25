@@ -4,7 +4,7 @@
 
 $ch = curl_init();
 
-curl_setopt($ch, CURLOPT_URL, "http://localhost:3001/reposicao");
+curl_setopt($ch, CURLOPT_URL, "https://vivabemapi.vercel.app/reposicao");
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
 $resposta = curl_exec($ch);
@@ -95,7 +95,7 @@ include '../partials/header.php';
 <script>
 async function preencherListaMedicamentos() {
     try {
-        const response = await fetch('http://localhost:3001/reposicao/');
+        const response = await fetch('https://vivabemapi.vercel.app/reposicao/');
         if (!response.ok) {
             throw new Error('Erro ao buscar medicamentos solicitados: ' + response.statusText);
         }
@@ -175,7 +175,7 @@ $(document).ready(function() {
         };
 
         // URL da API
-        var url = 'http://localhost:3001/estoque/medicamento/' + id;
+        var url = 'https://vivabemapi.vercel.app/estoque/medicamento/' + id;
 
         try {
             const response = await fetch(url, {
@@ -188,7 +188,7 @@ $(document).ready(function() {
 
             if (response.ok) {
                 
-                await fetch(`http://localhost:3001/reposicao/repor-medicamentos/6622c3ef98ae18494d3f25e5`, {
+                await fetch(`https://vivabemapi.vercel.app/reposicao/repor-medicamentos/6622c3ef98ae18494d3f25e5`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json'

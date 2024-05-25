@@ -11,7 +11,7 @@ include '../partials/header.php';
 
 $ch = curl_init();
 
-curl_setopt($ch, CURLOPT_URL, "http://localhost:3001/estoque");
+curl_setopt($ch, CURLOPT_URL, "https://vivabemapi.vercel.app/estoque");
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_HTTPHEADER, array(
     "x-api-key: $apiKey"
@@ -391,7 +391,7 @@ document.getElementById('btnSolicitarReposicao').addEventListener('click', async
 
             alert('Reposição Solicitada com Sucesso');
 
-            const response = await fetch('http://localhost:3001/reposicao/repor-medicamentos/6622c3ef98ae18494d3f25e5', {
+            const response = await fetch('https://vivabemapi.vercel.app/reposicao/repor-medicamentos/6622c3ef98ae18494d3f25e5', {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
@@ -423,7 +423,7 @@ $('#enviarMedicamentoExcepcional').on('click', async function() {
     };
 
     try {
-        const response = await fetch('http://localhost:3001/estoque/medicamentos', {
+        const response = await fetch('https://vivabemapi.vercel.app/estoque/medicamentos', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -448,7 +448,7 @@ $('#enviarMedicamentoExcepcional').on('click', async function() {
 $(document).ready(function() {
     
     function carregarPacientes() {
-        fetch('http://localhost:3001/pacientes')
+        fetch('https://vivabemapi.vercel.app/pacientes')
             .then(response => {
                 if (response.ok) {
                     return response.json();
@@ -492,14 +492,14 @@ $(document).ready(function() {
             horaSaida: $('#horaSaida').val()
         };
         try {
-            const responseSaida = await fetch('http://localhost:3001/saidamed', {
+            const responseSaida = await fetch('https://vivabemapi.vercel.app/saidamed', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(dadosSaida)
             });
-            const estoqueResponse = await fetch(`http://localhost:3001/estoque/medicamento/${idMedicamento}`);
+            const estoqueResponse = await fetch(`https://vivabemapi.vercel.app/estoque/medicamento/${idMedicamento}`);
             const medicamentoResposta = await estoqueResponse.json();
             const medicamento = medicamentoResposta[0]
             
@@ -517,7 +517,7 @@ $(document).ready(function() {
                 quantidade: medicamento.quantidade - quantidadeSaida,
             };
 
-            const response = await fetch(`http://localhost:3001/estoque/medicamento/${idMedicamento}`, {
+            const response = await fetch(`https://vivabemapi.vercel.app/estoque/medicamento/${idMedicamento}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'

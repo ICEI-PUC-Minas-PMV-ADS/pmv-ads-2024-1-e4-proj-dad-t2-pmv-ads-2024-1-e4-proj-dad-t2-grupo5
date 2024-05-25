@@ -99,7 +99,7 @@
     document.addEventListener('DOMContentLoaded', () => {
         const carregarDados = async () => {
             try {
-                const response = await fetch('http://localhost:3001/receita');
+                const response = await fetch('https://vivabemapi.vercel.app/receita');
                 const data = await response.json();
 
                 if (data && data.length > 0) {
