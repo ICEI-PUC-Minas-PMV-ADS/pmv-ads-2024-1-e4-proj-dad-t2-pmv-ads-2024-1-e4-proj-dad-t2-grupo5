@@ -3,13 +3,21 @@ import { View, Text, FlatList, Button, ActivityIndicator, TouchableOpacity, Styl
 import { useNavigation } from '@react-navigation/native';
 import { IP } from '@env';
 import * as SecureStore from 'expo-secure-store';
+import { useAuth } from '../auth/AuthContext';
+
 
 const ReceitasLista = () => {
   const navigation = useNavigation();
+  const { user } = useAuth();
   const [receitas, setReceitas] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (!user) {
+      navigation.navigate('LoginScreen');
+      return;
+    }
+
     const fetchReceitas = async () => {
       try {
         const pacienteId = await SecureStore.getItemAsync('userId');

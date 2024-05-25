@@ -3,13 +3,21 @@ import { View, Text, FlatList, Button, ActivityIndicator, TouchableOpacity, Styl
 import { useNavigation } from '@react-navigation/native';
 import { IP } from '@env';
 import * as SecureStore from 'expo-secure-store';
+import { useAuth } from '../auth/AuthContext';
+
 
 const ExamesLista = () => {
   const navigation = useNavigation();
+  const { user } = useAuth();
   const [exames, setExames] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (!user) {
+      navigation.navigate('LoginScreen');
+      return;
+    }
+
     const fetchExames = async () => {
       try {
         // O Id virá da session em feats posteriores
