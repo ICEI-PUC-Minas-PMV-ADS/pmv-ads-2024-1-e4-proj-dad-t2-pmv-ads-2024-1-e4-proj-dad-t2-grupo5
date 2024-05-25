@@ -8,13 +8,15 @@ import ReceitasDetalhes from './components/ReceitasDetalhes';
 import AtendimentosLista from './components/AtendimentosLista';
 import AtendimentoDetalhes from './components/AtendimentoDetalhes';
 import HomeScreen from './components/HomeScreen';
+import LoginScreen from './components/LoginScreen'
 
 const Stack = createNativeStackNavigator();
 
 const Navigation = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="HomeScreen">
+      <Stack.Navigator initialRouteName="LoginScreen"  screenOptions = {{headerShown: false}}>
+        <Stack.Screen name="LoginScreen" component={LoginScreen} options={{ title: 'Login' }} /> 
         <Stack.Screen name="HomeScreen" component={HomeScreen} options={{ title: 'Home' }} />
         <Stack.Screen name="ReceitasLista" component={ReceitasLista} options={{ title: 'Lista de Receitas' }} />
         <Stack.Screen name="ReceitasDetalhes" component={ReceitasDetalhes} options={{ title: 'Detalhe da Receita' }} />
