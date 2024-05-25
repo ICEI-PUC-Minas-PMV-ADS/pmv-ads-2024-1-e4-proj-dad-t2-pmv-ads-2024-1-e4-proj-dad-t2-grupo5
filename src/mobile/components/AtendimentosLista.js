@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList, Button, ActivityIndicator, TouchableOpacity, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { IP } from '@env';
+import * as SecureStore from 'expo-secure-store';
 
 
 const AtendimentosLista = () => {
@@ -13,7 +14,7 @@ const AtendimentosLista = () => {
     const fetchAtendimentos = async () => {
       try {
         // O Id virá da session em feats posteriores
-        const pacienteId = '65f310bac89182504704c5b1';
+        const pacienteId = await SecureStore.getItemAsync('userId');
         const response = await fetch(`http://${IP}:3001/atendimentos/paciente/${pacienteId}`);
         const data = await response.json();
         setAtendimentos(data);
