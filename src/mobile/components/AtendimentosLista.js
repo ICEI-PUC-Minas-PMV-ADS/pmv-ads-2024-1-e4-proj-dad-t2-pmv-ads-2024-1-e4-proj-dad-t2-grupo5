@@ -3,17 +3,23 @@ import { View, Text, FlatList, Button, ActivityIndicator, TouchableOpacity, Styl
 import { useNavigation } from '@react-navigation/native';
 import { IP } from '@env';
 import * as SecureStore from 'expo-secure-store';
+import { useAuth } from '../auth/AuthContext';
 
 
 const AtendimentosLista = () => {
   const navigation = useNavigation();
+  const { user } = useAuth();
   const [atendimentos, setAtendimentos] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (!user) {
+      navigation.navigate('LoginScreen');
+      return;
+    }
+
     const fetchAtendimentos = async () => {
       try {
-        // O Id virá da session em feats posteriores
         const pacienteId = await SecureStore.getItemAsync('userId');
         const response = await fetch(`http://${IP}:3001/atendimentos/paciente/${pacienteId}`);
         const data = await response.json();

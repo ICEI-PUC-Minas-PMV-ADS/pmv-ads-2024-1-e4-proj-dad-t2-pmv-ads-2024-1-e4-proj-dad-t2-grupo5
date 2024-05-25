@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, Image, Alert, StyleSheet, useWindowDimensions, ScrollView, TextInput, TouchableOpacity } from 'react-native';
 import Logo from '../assets/icon.png';
 import axios from 'axios';
@@ -13,6 +13,20 @@ const LoginScreen = () => {
     const navigation = useNavigation();
     const { height } = useWindowDimensions();
 
+    useEffect(() => {
+        const checkLogin = async () => {
+            const userId = await SecureStore.getItemAsync('userId');
+            if (userId) {
+                navigation.reset({
+                    index: 0,
+                    routes: [{ name: 'HomeScreen' }],
+                });
+            }
+        };
+
+        checkLogin();
+    }, []);
+
     const handleLogin = async () => {
         try {
             const response = await axios.post(`http://${IP}:3001/loginMobile`, {
@@ -21,7 +35,10 @@ const LoginScreen = () => {
             });
             const userId = response.data.userId;
             await SecureStore.setItemAsync('userId', userId);
-            navigation.navigate('HomeScreen');
+            navigation.reset({
+                index: 0,
+                routes: [{ name: 'HomeScreen' }],
+            });
         } catch (error) {
             console.error(error);
             Alert.alert('Erro', 'Usuário ou senha inválidos.');
