@@ -97,6 +97,7 @@
                             <td><?php echo !empty($atendimento['data']) ? htmlspecialchars(date('d/m/Y', strtotime($atendimento['data']))) : 'Não informado'; ?></td>
                             <td>
                                 <button class="btn btn-primary" onclick="visualizarAtendimento('<?php echo $atendimento['_id']; ?>')">Visualizar</button>
+                                <button class="btn btn-primary" onclick="ExameMedico('<?php echo $atendimento['_id']; ?>')">Exames</button>
                                 <button class="btn btn-primary" onclick="receitaMedica('<?php echo $atendimento['_id']; ?>')">Receita</button>
                             </td>
                         </tr>
