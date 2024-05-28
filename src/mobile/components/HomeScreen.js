@@ -22,6 +22,12 @@ const HomeScreen = ({ navigation }) => {
       >
         <Text style={styles.buttonText}>Lista de Receitas</Text>
       </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate('EditarPerfil')}
+      >
+        <Text style={styles.buttonText}>Editar Perfil</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -31,20 +37,18 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 16,
   },
   button: {
-    backgroundColor: '#1E90FF',
-    padding: 20,
+    backgroundColor: '#007BFF',
+    padding: 15,
     marginVertical: 10,
-    width: '100%',
+    borderRadius: 5,
+    width: '80%',
     alignItems: 'center',
-    borderRadius: 10,
   },
   buttonText: {
     color: '#fff',
-    fontSize: 18,
-    fontWeight: 'bold',
+    fontSize: 16,
   },
 });
 
