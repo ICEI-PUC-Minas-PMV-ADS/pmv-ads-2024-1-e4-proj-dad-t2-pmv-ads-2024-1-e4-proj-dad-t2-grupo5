@@ -31,7 +31,7 @@ const AtendimentosLista = () => {
     return (
       <View style={styles.itemContainer}>
         <Text style={styles.itemText}>
-          Data do Atendimento:{'\n'}{new Date(item.data).toLocaleDateString()}
+          Data do Atendimento:{'\n'}{new Date(item.data).toLocaleDateString('pt-BR')}
         </Text>
         <TouchableOpacity style={styles.itemBtn} onPress={() => navigation.navigate('AtendimentoDetalhes', { atendimento: item })}>
           <Text style={styles.btnText}>Detalhes</Text>

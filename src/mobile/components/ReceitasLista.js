@@ -29,7 +29,7 @@ const ReceitasLista = () => {
     return (
       <View style={styles.itemContainer}>
         <Text style={styles.itemText}>
-          Receita:{'\n'}{new Date(item.dataFim).toLocaleDateString()}
+          Receita:{'\n'}{new Date(item.dataFim).toLocaleDateString('pt-BR')}
         </Text>
         <TouchableOpacity style={styles.itemBtn} onPress={() => navigation.navigate('ReceitasDetalhes', { receita: item })}>
           <Text style={styles.btnText}>Detalhes</Text>
