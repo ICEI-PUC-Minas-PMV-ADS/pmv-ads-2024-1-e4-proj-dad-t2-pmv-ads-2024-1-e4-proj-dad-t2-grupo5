@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Paciente = require('../models/pacientes');
+const bcrypt = require('bcrypt');
 
 // Adicionar múltiplos pacientes (para fins de teste)
 router.post('/criar/multiplos', async (req, res) => {
@@ -16,7 +17,9 @@ router.post('/criar/multiplos', async (req, res) => {
 // CREATE
 router.post('/criar', async (req, res) => {
     try {
-        const novoPaciente = new Paciente(req.body);
+        const { senha, ...resto } = req.body;
+        const senhaHashed = await bcrypt.hash(senha, 10);
+        const novoPaciente = new Paciente({ ...resto, senha: senhaHashed });
         await novoPaciente.save();
         res.status(201).send({ message: 'Paciente adicionado com sucesso!' });
     } catch (error) {

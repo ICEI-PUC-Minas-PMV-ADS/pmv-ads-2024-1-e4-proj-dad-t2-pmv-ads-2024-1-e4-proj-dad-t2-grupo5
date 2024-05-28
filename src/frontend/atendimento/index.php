@@ -108,7 +108,7 @@ $('#enviarAtendimento').click(function() {
     };
 
     $.ajax({
-        url: 'http://localhost:3001/atendimentos',
+        url: 'https://vivabemapi.vercel.app/atendimentos',
         method: 'POST',
         contentType: 'application/json',
         data: JSON.stringify(dadosAtendimento),
@@ -123,7 +123,7 @@ $('#enviarAtendimento').click(function() {
 
 function atualizarStatusFila(filaId, atendido, pacientesus) {
     $.ajax({
-        url: `http://localhost:3001/fila/atualizar/${filaId}`,
+        url: `https://vivabemapi.vercel.app/fila/atualizar/${filaId}`,
         method: 'PUT',
         contentType: 'application/json',
         success: function(response) {
@@ -166,7 +166,7 @@ $(document).ready(function() {
 
 function carregarFila() {
     $.ajax({
-        url: 'http://localhost:3001/fila/profissional/' + usuarioId,
+        url: 'https://vivabemapi.vercel.app/fila/profissional/' + usuarioId,
         method: 'GET',
         success: function(response) {
             $('#tabelaFila').empty();

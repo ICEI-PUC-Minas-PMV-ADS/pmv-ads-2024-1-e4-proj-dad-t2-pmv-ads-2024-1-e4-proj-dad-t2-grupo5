@@ -8,6 +8,7 @@ const pacienteSchema = new Schema({
   sexo: { type: String, enum: ['Masculino', 'Feminino'], required: true },
   sus: { type: Number, default: null },
   pec: { type: String, default: null },
+  cpf: { type: String, required: true, unique: true },
   cep: { type: Number, default: null },
   logradouro: { type: String, default: null },
   bairro: { type: String, default: null },

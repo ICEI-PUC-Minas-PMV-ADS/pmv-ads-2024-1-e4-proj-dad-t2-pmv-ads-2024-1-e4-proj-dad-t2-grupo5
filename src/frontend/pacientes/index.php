@@ -9,13 +9,20 @@ $apiKey = $_ENV['API_KEY'];
 include '../partials/header.php';
 $ch = curl_init();
 
-curl_setopt($ch, CURLOPT_URL, "http://localhost:3001/pacientes");
+curl_setopt($ch, CURLOPT_URL, "https://vivabemapi.vercel.app/pacientes");
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 curl_setopt($ch, CURLOPT_HTTPHEADER, array(
     "x-api-key: $apiKey"
 ));
 
 $resposta = curl_exec($ch);
+
+if (curl_errno($ch)) {
+    echo 'Erro cURL: ' . curl_error($ch);
+    curl_close($ch);
+    exit;
+}
 
 curl_close($ch);
 
@@ -128,7 +135,7 @@ verificarAutenticacao($domain);
 
             $.ajax({
                 type: 'POST',
-                url: 'http://localhost:3001/pacientes/login',
+                url: 'https://vivabemapi.vercel.app/pacientes/login',
 
                 contentType: 'application/json',
                 data: JSON.stringify(jsonData),
@@ -149,7 +156,7 @@ verificarAutenticacao($domain);
           var pacienteId = $('#pacienteId').val();
 
           $.ajax({
-              url: `http://localhost:3001/pacientes/excluir/${pacienteId}`,
+              url: `https://vivabemapi.vercel.app/pacientes/excluir/${pacienteId}`,
               type: 'DELETE',
               success: function(result) {
                   location.reload();
@@ -169,7 +176,7 @@ verificarAutenticacao($domain);
 function atualizarPaciente(id, dados) {
     console.log('JSON enviado pelo frontend:', dados); 
     $.ajax({
-        url: 'http://localhost:3001/pacientes/' + id,
+        url: 'https://vivabemapi.vercel.app/pacientes/' + id,
         type: 'PUT',
         contentType: 'application/json',
         data: JSON.stringify(dados),

@@ -9,7 +9,7 @@ include '../partials/header.php';
 
 $ch = curl_init();
 
-curl_setopt($ch, CURLOPT_URL, "http://localhost:3001/fila");
+curl_setopt($ch, CURLOPT_URL, "https://vivabemapi.vercel.app/fila");
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_HTTPHEADER, array(
     "x-api-key: $apiKey"
@@ -150,7 +150,7 @@ if (!$estoque || curl_errno($ch)) {
 
         function carregarFila() {
             $.ajax({
-                url: 'http://localhost:3001/fila',
+                url: 'https://vivabemapi.vercel.app/fila',
                 method: 'GET',
                 success: function(response) {
                     $('#tabelaFila').empty();
@@ -179,7 +179,7 @@ if (!$estoque || curl_errno($ch)) {
 
         function carregarPacientes(searchTerm) {
             $.ajax({
-                url: `http://localhost:3001/pacientes?nome=${encodeURIComponent(searchTerm)}`,
+                url: `https://vivabemapi.vercel.app/pacientes?nome=${encodeURIComponent(searchTerm)}`,
                 method: 'GET',
                 success: function(pacientes) {
                     $('#pacienteOptions').empty();
@@ -198,7 +198,7 @@ if (!$estoque || curl_errno($ch)) {
 
     function carregarProfissionais() {
         $.ajax({
-        url: 'http://localhost:3001/usuarios',
+        url: 'https://vivabemapi.vercel.app/usuarios',
         method: 'GET',
         success: function(profissionais) {
             var selecao = $('#selecaoProfissional');
@@ -233,7 +233,7 @@ if (!$estoque || curl_errno($ch)) {
 
             if (pacienteId && tipoAtendimento && profissionalId) {
                 $.ajax({
-                    url: 'http://localhost:3001/fila/adicionar',
+                    url: 'https://vivabemapi.vercel.app/fila/adicionar',
                     method: 'POST',
                     contentType: 'application/json',
                     data: JSON.stringify({
@@ -258,7 +258,7 @@ if (!$estoque || curl_errno($ch)) {
 
         function excluirItemFila(itemId) {
             $.ajax({
-                url: 'http://localhost:3001/fila/' + itemId,
+                url: 'https://vivabemapi.vercel.app/fila/' + itemId,
                 type: 'DELETE',
                 success: function(result) {
                     console.log('Item removido com sucesso:', result);

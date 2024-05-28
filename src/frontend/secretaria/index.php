@@ -11,7 +11,7 @@ include '../partials/header.php';
 
 $ch = curl_init();
 
-curl_setopt($ch, CURLOPT_URL, "http://localhost:3001/estoque");
+curl_setopt($ch, CURLOPT_URL, "https://vivabemapi.vercel.app/estoque");
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_HTTPHEADER, array(
     "x-api-key: $apiKey"
@@ -296,7 +296,7 @@ if (!$estoque || curl_errno($ch)) {
         };
 
         // URL da API
-        var url = 'http://localhost:3001/estoque/medicamento/' + id;
+        var url = 'https://vivabemapi.vercel.app/estoque/medicamento/' + id;
 
         try {
             const response = await fetch(url, {

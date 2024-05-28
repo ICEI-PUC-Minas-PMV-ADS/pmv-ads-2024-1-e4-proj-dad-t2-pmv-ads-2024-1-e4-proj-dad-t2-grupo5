@@ -28,6 +28,7 @@ const exameRealizadoRoutes = require('./routes/exameRealizadoRoutes');
 const filaAtendimentoRoutes = require('./routes/filaAtendimentoRoutes');
 const loginRoutes = require('./routes/login');
 const reposicaoRoutes = require('./routes/reposicaomedicamentoRoutes.js');
+const loginMobileRoutes = require('./routes/loginMobileRoutes.js');
 
 app.use(morgan('dev'));
 app.use(express.json()); 
@@ -43,6 +44,7 @@ app.use('/examesRealizados', exameRealizadoRoutes);
 app.use('/fila', filaAtendimentoRoutes);
 app.use('/login', loginRoutes);
 app.use('/reposicao', reposicaoRoutes);
+app.use('/loginMobile', loginMobileRoutes);
 
 const PORT = 3001;
 

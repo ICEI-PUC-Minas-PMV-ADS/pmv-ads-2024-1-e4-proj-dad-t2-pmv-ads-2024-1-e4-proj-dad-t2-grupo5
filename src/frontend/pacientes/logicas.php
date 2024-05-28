@@ -2,7 +2,7 @@
 
 function receitaMedica(atendimentoId) {
     $.ajax({
-        url: `http://localhost:3001/receita/atendimento/${atendimentoId}`,
+        url: `https://vivabemapi.vercel.app/receita/atendimento/${atendimentoId}`,
         type: 'GET',
         headers: {
             'x-api-key': '<?php echo addslashes($apiKey); ?>'
@@ -71,7 +71,7 @@ function imprimirReceita(receita) {
 
 function visualizarAtendimento(atendimentoId) {
     $.ajax({
-        url: `http://localhost:3001/atendimentos/${atendimentoId}`,
+        url: `https://vivabemapi.vercel.app/atendimentos/${atendimentoId}`,
         type: 'GET',
         headers: {
             'x-api-key': '<?php echo $apiKey; ?>'

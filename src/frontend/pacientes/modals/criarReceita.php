@@ -71,7 +71,7 @@
         container.insertAdjacentHTML('beforeend', html);
 
         $.ajax({
-            url: 'http://localhost:3001/estoque/disponiveis',
+            url: 'https://vivabemapi.vercel.app/estoque/disponiveis',
             type: 'GET',
             success: function(data) {
                 const select = document.getElementById(`medicamento_${index}_nome`);
@@ -97,7 +97,7 @@
 
     function emitirReceita(atendimentoId) {
         $.ajax({
-            url: `http://localhost:3001/atendimentos/${atendimentoId}`,
+            url: `https://vivabemapi.vercel.app/atendimentos/${atendimentoId}`,
             type: 'GET',
             headers: {
                 'x-api-key': '<?php echo $apiKey; ?>'
@@ -160,7 +160,7 @@
     });
 
     $.ajax({
-        url: 'http://localhost:3001/receita',
+        url: 'https://vivabemapi.vercel.app/receita',
         type: 'POST',
         contentType: 'application/json',
         data: JSON.stringify(formDataJson),

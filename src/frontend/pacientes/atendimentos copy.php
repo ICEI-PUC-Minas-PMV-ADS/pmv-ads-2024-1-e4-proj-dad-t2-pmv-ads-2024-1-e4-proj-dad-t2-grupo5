@@ -8,10 +8,13 @@
 
 // lógica da requisicao  ##############################################################
     $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, "http://localhost:3001/pacientes");
+    curl_setopt($ch, CURLOPT_URL, "https://vivabemapi.vercel.app/pacientes");
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_HTTPHEADER, ["x-api-key: $apiKey"]);
 
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+
+    
     $respostaPacientes = curl_exec($ch);
     curl_close($ch);
 
@@ -31,9 +34,8 @@
     if ($pacienteId !== null) {
         $chAtendimentos = curl_init();
 
-        curl_setopt($chAtendimentos, CURLOPT_URL, "http://localhost:3001/atendimentos/paciente/$pacienteId");
+        curl_setopt($chAtendimentos, CURLOPT_URL, "https://vivabemapi.vercel.app/atendimentos/paciente/$pacienteId");
         curl_setopt($chAtendimentos, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($chAtendimentos, CURLOPT_HTTPHEADER, ["x-api-key: $apiKey"]);
 
         $respostaAtendimentos = curl_exec($chAtendimentos);
 
