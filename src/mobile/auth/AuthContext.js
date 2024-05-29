@@ -5,7 +5,7 @@ const AuthContext = createContext(null);
 import * as SecureStore from 'expo-secure-store';
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(null); 
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -13,7 +13,7 @@ export const AuthProvider = ({ children }) => {
       try {
         const storedUserId = await SecureStore.getItemAsync('userId');
         if (storedUserId) {
-          setUser({ id: storedUserId }); // Supondo que o usuário seja identificado pelo ID
+          setUser({ id: storedUserId });
         }
       } catch (error) {
         console.error('Failed to fetch user id:', error);
@@ -26,7 +26,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = (userData) => {
     setUser(userData);
-    SecureStore.setItemAsync('userId', userData.id); // Supondo que userData contém um ID
+    SecureStore.setItemAsync('userId', userData.id);
   };
 
   const logout = () => {

@@ -4,10 +4,7 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 const HomeScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.navigate('AtendimentosLista')}
-      >
+      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('AtendimentosLista')} >
         <Text style={styles.buttonText}>Lista de Atendimentos</Text>
       </TouchableOpacity>
       <TouchableOpacity
