@@ -66,6 +66,7 @@ const ExamesLista = () => {
 
 const styles = StyleSheet.create({
   listContainer: {
+    marginTop: 50,
     flex: 1
   },
   itemContainer: {

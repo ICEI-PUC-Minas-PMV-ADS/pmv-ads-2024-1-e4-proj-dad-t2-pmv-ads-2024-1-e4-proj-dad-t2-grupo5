@@ -64,7 +64,8 @@ const ReceitasLista = () => {
 
 const styles = StyleSheet.create({
   listContainer: {
-    flex: 1
+    flex: 1,
+    marginTop: 50,
   },
   itemContainer: {
     backgroundColor: '#dbdbdb',
@@ -75,6 +76,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     padding: 10,
     borderRadius: 12,
+    
   },
   itemBtn: {
     backgroundColor: '#10b547',

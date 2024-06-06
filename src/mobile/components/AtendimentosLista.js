@@ -14,6 +14,7 @@ const AtendimentosLista = () => {
 
   useEffect(() => {
     if (!user) {
+      SecureStore.setItemAsync('redirectAfterLogin', 'AtendimentosLista');
       navigation.navigate('LoginScreen');
       return;
     }
@@ -32,7 +33,7 @@ const AtendimentosLista = () => {
     };
 
     fetchAtendimentos();
-  }, []);
+  }, [user]);
 
   const renderItem = ({ item }) => {
     return (
@@ -64,6 +65,7 @@ const AtendimentosLista = () => {
 
 const styles = StyleSheet.create({
   listContainer: {
+    marginTop: 50,
     flex: 1
   },
   itemContainer: {

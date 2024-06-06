@@ -10,6 +10,7 @@ import AtendimentosLista from '../components/AtendimentosLista';
 import AtendimentoDetalhes from '../components/AtendimentoDetalhes';
 import HomeScreen from '../components/HomeScreen';
 import LoginScreen from '../components/LoginScreen';
+import EditarPerfilScreen from '../components/EditarPerfilScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -26,6 +27,7 @@ const Navigation = () => {
             <Stack.Screen name="ExameDetalhes" component={ExameDetalhes} options={{ title: 'Detalhe do Exame' }} />
             <Stack.Screen name="AtendimentosLista" component={AtendimentosLista} options={{ title: 'Lista de Atendimentos' }} />
             <Stack.Screen name="AtendimentoDetalhes" component={AtendimentoDetalhes} options={{ title: 'Detalhe do Atendimento' }} />
+            <Stack.Screen name="EditarPerfil" component={EditarPerfilScreen} options={{ title: 'Editar Perfil' }} />
           </Stack.Navigator>
         </NavigationContainer>
     </SafeAreaView>

@@ -54,6 +54,9 @@ Assim que a primeira versão do sistema estiver disponível, deverá complementa
 # Video da entrega da etapa 3
 [Clique aqui para assistir no youtube](https://youtu.be/QQ1dci2-rfA)
 
+# Video da entrega da etapa 4
+[Clique aqui para assistir no youtube](https://youtu.be/rF0LmsLAOsw)
+
 # Apresentação
 
 <li><a href="presentation/README.md"> Apresentação da solução</a></li>

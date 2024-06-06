@@ -53,7 +53,7 @@ $usuarioId = isset($_SESSION['usuario']['id']) ? $_SESSION['usuario']['id'] : nu
             </div>
             <div class="modal-body">
                 <form id="formAtendimento">
-                    <input type="hidden" id="pacienteSus" value="">
+                    <input type="hidden" id="pacienteNome" value="">
                     <div class="form-group">
                         <label for="descricaoSubjetivo">Subjetivo</label>
                         <textarea class="form-control" id="descricaoSubjetivo" name="descricaoSubjetivo" required></textarea>
@@ -128,13 +128,13 @@ $usuarioId = isset($_SESSION['usuario']['id']) ? $_SESSION['usuario']['id'] : nu
         $(document).on('click', '.cancelarBtn', function() {
             var filaId = $(this).data('fila-id'); 
             var pacienteId = $(this).data('paciente-id');
-            var pacientesus = $(this).data('paciente-sus');
+            var pacienteNome = $(this).data('paciente-nome');
 
-            console.log('sus', pacientesus)
+            console.log('sus', pacienteNome)
 
             $('#filaId').val(filaId); 
             $('#pacienteId').val(pacienteId);
-            $('#pacienteSus').val(pacientesus);
+            $('#pacienteNome').val(pacienteNome);
 
             $('#modalAtendimento').modal('show');
         });
@@ -144,7 +144,7 @@ $('#enviarAtendimento').click(function() {
     var exameSolicitado = $('#exameSolicitado').is(':checked');
     var medicoId = $('#medicoId').val();
     var pacienteId = $('#pacienteId').val();
-    var pacientesus = $('#pacienteSus').val();
+    var pacienteNome = $('#pacienteNome').val();
 
     var dadosAtendimento = {
         descricao: descricao,
@@ -159,7 +159,7 @@ $('#enviarAtendimento').click(function() {
         contentType: 'application/json',
         data: JSON.stringify(dadosAtendimento),
         success: function(response) {
-            atualizarStatusFila(pacienteId, true, pacientesus);
+            atualizarStatusFila(pacienteId, true, pacienteNome);
         },
         error: function() {
             alert('Erro ao adicionar atendimento');
@@ -167,15 +167,14 @@ $('#enviarAtendimento').click(function() {
     });
 });
 
-function atualizarStatusFila(filaId, atendido, pacientesus) {
+function atualizarStatusFila(filaId, atendido, pacienteNome) {
     $.ajax({
         url: `https://vivabemapi.vercel.app/fila/atualizar/${filaId}`,
         method: 'PUT',
         contentType: 'application/json',
         success: function(response) {
             $('#modalAtendimento').modal('hide');
-            alert('Atendimento adicionado e fila atualizada com sucesso!');
-            window.location.href = '<?php echo $domain; ?>/pacientes/atendimentos.php?pacienteId=' + pacientesus; // Usar pacientesus aqui
+            window.location.href = '<?php echo $domain; ?>/pacientes/atendimentos.php?pacienteId=' + pacienteNome;
             carregarFila();
         },
         error: function() {
@@ -228,7 +227,7 @@ function carregarFila() {
                 newRow.append('<td>' + dataHora.toLocaleDateString('pt-BR') + ' ' + dataHora.toLocaleTimeString('pt-BR') + '</td>');
                 newRow.append('<td>' + nomeProfissional + '</td>');
                 newRow.append('<td>' +
-                    '<button type="button" class="btn btn-success cancelarBtn" data-paciente-sus="' + item.paciente.sus + '" data-fila-id="' + item._id + '" data-paciente-id="' + item.paciente._id + '">Chamar</button>' +
+                    '<button type="button" class="btn btn-success cancelarBtn" data-paciente-nome="' + item.paciente.nome + '" data-fila-id="' + item._id + '" data-paciente-id="' + item.paciente._id + '">Chamar</button>' +
                 '</td>');
                 $('#tabelaFila').append(newRow);
             });
