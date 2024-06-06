@@ -18,6 +18,7 @@ $usuarioId = isset($_SESSION['usuario']['id']) ? $_SESSION['usuario']['id'] : nu
     <title>Fila de Pacientes</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?php echo $domain; ?>/style.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
 </head>
 <body>
     
@@ -54,8 +55,50 @@ $usuarioId = isset($_SESSION['usuario']['id']) ? $_SESSION['usuario']['id'] : nu
                 <form id="formAtendimento">
                     <input type="hidden" id="pacienteSus" value="">
                     <div class="form-group">
-                        <label for="descricao">Descrição</label>
-                        <textarea class="form-control" id="descricao" required></textarea>
+                        <label for="descricaoSubjetivo">Subjetivo</label>
+                        <textarea class="form-control" id="descricaoSubjetivo" name="descricaoSubjetivo" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="descricaoObjetivo">Objetivo</label>
+                        <textarea class="form-control" id="descricaoObjetivo" name="descricaoObjetivo" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="descricaoAvaliacao">Avaliação</label>
+                        <textarea class="form-control" id="descricaoAvaliacao" name="descricaoAvaliacao" required placeholder="Detalhes gerais da avaliação."></textarea>
+                        <div class="mt-3">
+                            <label for="pressao">Pressão</label>
+                            <input type="text" class="form-control" id="pressao" name="pressao" required>
+                            <label for="glicemia">Glicemia</label>
+                            <input type="text" class="form-control" id="glicemia" name="glicemia" required>
+                            <label for="peso">Peso</label>
+                            <input type="text" class="form-control" id="peso" name="peso" required>
+                            <label for="altura">Altura</label>
+                            <input type="text" class="form-control" id="altura" name="altura" required>
+                            <div class="form-group">
+                                 <label for="codigoInput">Código CID:</label>
+                                <input type="text" class="form-control" id="codigoInput" />
+                            </div>
+                            <div class="form-group">
+                                <label for="nomeSelect">Nome CID:</label>
+                                <select class="form-control" id="nomeSelect">
+                                <option value="">Selecione uma doença CID</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="codigoInput">Código CIAP:</label>
+                                <input type="text" class="form-control" id="codigoInput" />
+                            </div>
+                            <div class="form-group">
+                                <label for="nomeSelect">Nome CIAP:</label>
+                                <select class="form-control" id="nomeSelect">
+                                <option value="">Selecione uma doença CIAP</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="descricaoPlanoTerapeutico">Plano Terapêutico</label>
+                        <textarea class="form-control" id="descricaoPlanoTerapeutico" name="descricaoPlanoTerapeutico" required></textarea>
                     </div>
                     <div class="form-group form-check">
                         <input type="checkbox" class="form-check-input" id="exameSolicitado">
@@ -76,6 +119,9 @@ $usuarioId = isset($_SESSION['usuario']['id']) ? $_SESSION['usuario']['id'] : nu
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js"></script>
+
+
 <script>
     var usuarioId = <?php echo json_encode($usuarioId); ?>;
 
@@ -193,6 +239,71 @@ function carregarFila() {
     });
 }
 
+fetch("../data/cids.js")
+        .then((response) => response.json())
+        .then((data) => {
+          // Popula o select com os nomes das doenças CID
+          const selectElement = document.getElementById("nomeSelect");
+          data.forEach((cid) => {
+            const option = document.createElement("option");
+            option.text = cid.nome;
+            option.value = cid.codigo;
+            selectElement.appendChild(option);
+          });
+
+          // Event listener para atualizar o código CID quando uma doença CID é selecionada
+          selectElement.addEventListener("change", function () {
+            const codigoInput = document.getElementById("codigoInput");
+            const selectedOption =
+              selectElement.options[selectElement.selectedIndex];
+            codigoInput.value = selectedOption.value;
+          });
+
+          // Event listener para atualizar a doença CID quando um código CID é digitado
+          const codigoInput = document.getElementById("codigoInput");
+          codigoInput.addEventListener("input", function () {
+            const codigo = codigoInput.value;
+            const selectedOption = Array.from(selectElement.options).find(
+              (option) => option.value === codigo
+            );
+            if (selectedOption) {
+              selectElement.value = selectedOption.value;
+            }
+          });
+        });
+
+    fetch("../data/ciap.js")
+        .then((response) => response.json())
+        .then((data) => {
+          // Popula o select com os nomes das doenças CID
+          const selectElement = document.getElementById("nomeSelect");
+          data.forEach((cid) => {
+            const option = document.createElement("option");
+            option.text = cid.nome;
+            option.value = cid.codigo;
+            selectElement.appendChild(option);
+          });
+
+          // Event listener para atualizar o código CID quando uma doença CID é selecionada
+          selectElement.addEventListener("change", function () {
+            const codigoInput = document.getElementById("codigoInput");
+            const selectedOption =
+              selectElement.options[selectElement.selectedIndex];
+            codigoInput.value = selectedOption.value;
+          });
+
+          // Event listener para atualizar a doença CID quando um código CID é digitado
+          const codigoInput = document.getElementById("codigoInput");
+          codigoInput.addEventListener("input", function () {
+            const codigo = codigoInput.value;
+            const selectedOption = Array.from(selectElement.options).find(
+              (option) => option.value === codigo
+            );
+            if (selectedOption) {
+              selectElement.value = selectedOption.value;
+            }
+          });
+        });
 
 </script>
 
