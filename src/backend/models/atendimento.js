@@ -3,9 +3,33 @@ const Schema = mongoose.Schema;
 
 
 const AtendimentoSchema = new Schema({
-  descricao: {
+  descricaoSubjetivo: {
     type: String,
     required: true
+  },
+  descricaoObjetivo: {
+    type: String,
+    required: true
+  },
+  descricaoAvaliacao: {
+    type: String,
+    required: true
+  },
+  descricaoPlanoTerapeutico: {
+    type: String,
+    required: true
+  },
+  pressao: String,
+  glicemia: String,
+  peso: Number,
+  altura: Number,
+  cid: {
+    codigo: String,
+    nome: String
+  },
+  ciap: {
+    codigo: String,
+    nome: String
   },
   exameSolicitado: {
     type: Boolean,
@@ -17,15 +41,15 @@ const AtendimentoSchema = new Schema({
     required: true,
     autopopulate: true
   },
-  data: {
-    type: Date,
-    default: Date.now
-  },
   paciente: {
     type: mongoose.Types.ObjectId,
     ref: 'Paciente',
     required: true,
     autopopulate: true
+  },
+  data: {
+    type: Date,
+    default: Date.now
   }
 });
 
