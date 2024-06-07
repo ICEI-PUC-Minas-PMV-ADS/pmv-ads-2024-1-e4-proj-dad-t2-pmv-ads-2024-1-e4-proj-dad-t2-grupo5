@@ -85,13 +85,13 @@ $usuarioId = isset($_SESSION['usuario']['id']) ? $_SESSION['usuario']['id'] : nu
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="codigoInput">Código CIAP:</label>
-                                <input type="text" class="form-control" id="codigoInput" />
+                                <label for="codigoCIAPInput">Código CIAP:</label>
+                                <input type="text" class="form-control" id="codigoCIAPInput" />
                             </div>
                             <div class="form-group">
-                                <label for="nomeSelect">Nome CIAP:</label>
-                                <select class="form-control" id="nomeSelect">
-                                <option value="">Selecione uma doença CIAP</option>
+                                <label for="ciapSelect">Nome CIAP:</label>
+                                <select class="form-control" id="ciapSelect">
+                                    <option value="">Selecione uma condição CIAP</option>
                                 </select>
                             </div>
                         </div>
@@ -271,38 +271,44 @@ fetch("../data/cids.js")
           });
         });
 
-    fetch("../data/ciap.js")
-        .then((response) => response.json())
-        .then((data) => {
-          // Popula o select com os nomes das doenças CID
-          const selectElement = document.getElementById("nomeSelect");
-          data.forEach((cid) => {
+        fetch("../data/ciap.js")
+    .then((response) => response.json())
+    .then((data) => {
+        // Popula o select com os nomes das condições CIAP
+        const ciapSelect = document.getElementById("ciapSelect");
+        data.forEach((ciap) => {
             const option = document.createElement("option");
-            option.text = cid.nome;
-            option.value = cid.codigo;
-            selectElement.appendChild(option);
-          });
+            option.text = ciap.nome;
+            option.value = ciap.codigo;
+            ciapSelect.appendChild(option);
+        });
 
-          // Event listener para atualizar o código CID quando uma doença CID é selecionada
-          selectElement.addEventListener("change", function () {
-            const codigoInput = document.getElementById("codigoInput");
-            const selectedOption =
-              selectElement.options[selectElement.selectedIndex];
-            codigoInput.value = selectedOption.value;
-          });
+        // Event listener para atualizar o código CIAP quando uma condição CIAP é selecionada
+        ciapSelect.addEventListener("change", function () {
+            const codigoCIAPInput = document.getElementById("codigoCIAPInput");
+            const selectedOption = ciapSelect.options[ciapSelect.selectedIndex];
+            codigoCIAPInput.value = selectedOption.value;
+        });
 
-          // Event listener para atualizar a doença CID quando um código CID é digitado
-          const codigoInput = document.getElementById("codigoInput");
-          codigoInput.addEventListener("input", function () {
-            const codigo = codigoInput.value;
-            const selectedOption = Array.from(selectElement.options).find(
-              (option) => option.value === codigo
+        // Event listener para atualizar a condição CIAP quando um código CIAP é digitado
+        const codigoCIAPInput = document.getElementById("codigoCIAPInput");
+        codigoCIAPInput.addEventListener("input", function () {
+            const codigo = codigoCIAPInput.value;
+            const selectedOption = Array.from(ciapSelect.options).find(
+                (option) => option.value === codigo
             );
             if (selectedOption) {
-              selectElement.value = selectedOption.value;
+                ciapSelect.value = selectedOption.value;
+            } else {
+                ciapSelect.value = ""; // Para garantir que o select volte ao padrão se o código não corresponder
             }
-          });
         });
+    })
+    .catch(error => console.error('Erro ao carregar dados CIAP:', error));
+
+
+
+
 
 </script>
 
