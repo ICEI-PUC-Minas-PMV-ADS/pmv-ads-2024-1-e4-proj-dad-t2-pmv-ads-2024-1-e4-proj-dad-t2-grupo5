@@ -43,7 +43,7 @@ $usuarioId = isset($_SESSION['usuario']['id']) ? $_SESSION['usuario']['id'] : nu
 
 <!-- Modal de Atendimento -->
 <div class="modal fade" id="modalAtendimento" tabindex="-1" role="dialog" aria-labelledby="modalAtendimentoLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="modalAtendimentoLabel">Adicionar Atendimento</h5>
@@ -56,15 +56,15 @@ $usuarioId = isset($_SESSION['usuario']['id']) ? $_SESSION['usuario']['id'] : nu
                     <input type="hidden" id="pacienteNome" value="">
                     <div class="form-group">
                         <label for="descricaoSubjetivo">Subjetivo</label>
-                        <textarea class="form-control" id="descricaoSubjetivo" name="descricaoSubjetivo" required rows="10"></textarea>
+                        <textarea class="form-control" id="descricaoSubjetivo" name="descricaoSubjetivo" required></textarea>
                     </div>
                     <div class="form-group">
                         <label for="descricaoObjetivo">Objetivo</label>
-                        <textarea class="form-control" id="descricaoObjetivo" name="descricaoObjetivo" required rows="10"></textarea>
+                        <textarea class="form-control" id="descricaoObjetivo" name="descricaoObjetivo" required></textarea>
                     </div>
                     <div class="form-group">
                         <label for="descricaoAvaliacao">Avaliação</label>
-                        <textarea class="form-control" id="descricaoAvaliacao" name="descricaoAvaliacao" required rows="10" placeholder="Detalhes gerais da avaliação."></textarea>
+                        <textarea class="form-control" id="descricaoAvaliacao" name="descricaoAvaliacao" required placeholder="Detalhes gerais da avaliação."></textarea>
                         <div class="mt-3">
                             <label for="pressao">Pressão</label>
                             <input type="text" class="form-control" id="pressao" name="pressao" required>
@@ -98,7 +98,7 @@ $usuarioId = isset($_SESSION['usuario']['id']) ? $_SESSION['usuario']['id'] : nu
                     </div>
                     <div class="form-group">
                         <label for="descricaoPlanoTerapeutico">Plano Terapêutico</label>
-                        <textarea class="form-control" id="descricaoPlanoTerapeutico" name="descricaoPlanoTerapeutico" required rows="10"></textarea>
+                        <textarea class="form-control" id="descricaoPlanoTerapeutico" name="descricaoPlanoTerapeutico" required></textarea>
                     </div>
                     <div class="form-group form-check">
                         <input type="checkbox" class="form-check-input" id="exameSolicitado">
@@ -115,7 +115,6 @@ $usuarioId = isset($_SESSION['usuario']['id']) ? $_SESSION['usuario']['id'] : nu
         </div>
     </div>
 </div>
-
 
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -301,7 +300,7 @@ fetch("../data/cids.js")
             if (selectedOption) {
                 ciapSelect.value = selectedOption.value;
             } else {
-                ciapSelect.value = ""; 
+                ciapSelect.value = ""; // Para garantir que o select volte ao padrão se o código não corresponder
             }
         });
     })

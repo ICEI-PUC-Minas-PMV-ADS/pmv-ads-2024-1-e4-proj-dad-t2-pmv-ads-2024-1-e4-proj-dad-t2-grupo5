@@ -6,9 +6,9 @@ const Atendimento = require('../models/atendimento');
 router.get('/', async (req, res) => {
   try {
     const atendimentos = await Atendimento.find({})
-      .populate('medico', 'nome') // Popula o nome do médico
-      .populate('paciente', 'nome') // Popula o nome do paciente
-      .sort({ data: -1 }); // Ordena pela data em ordem decrescente (-1)
+      .populate('medico', 'nome') 
+      .populate('paciente', 'nome') 
+      .sort({ data: -1 }); 
 
     res.json(atendimentos);
   } catch (error) {
@@ -58,8 +58,8 @@ router.post('/', async (req, res) => {
       glicemia,
       peso,
       altura,
-      cid, // Assumindo que cid é um objeto com {codigo, nome}
-      ciap, // Assumindo que ciap é um objeto com {codigo, nome}
+      cid, 
+      ciap, 
       exameSolicitado,
       medico,
       paciente
