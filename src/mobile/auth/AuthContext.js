@@ -16,7 +16,7 @@ export const AuthProvider = ({ children }) => {
           setUser({ id: storedUserId });
         }
       } catch (error) {
-        console.error('Failed to fetch user id:', error);
+        console.error('Falha ao buscar userId:', error);
       }
       setLoading(false);
     };

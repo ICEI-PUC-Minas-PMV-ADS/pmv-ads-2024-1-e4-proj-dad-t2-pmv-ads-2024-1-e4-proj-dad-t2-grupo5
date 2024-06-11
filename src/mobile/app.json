@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "meuProjeto",
-    "slug": "meuProjeto",
+    "name": "Viva Bem",
+    "slug": "VivaBem",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -18,13 +18,19 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.reislucasf.VivaBem"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
       "expo-secure-store"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "f58bbcaf-11fc-4903-9509-8cd0d9acfd99"
+      }
+    }
   }
 }

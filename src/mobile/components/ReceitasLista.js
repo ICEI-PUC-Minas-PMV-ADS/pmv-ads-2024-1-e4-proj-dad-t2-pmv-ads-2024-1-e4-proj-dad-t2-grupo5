@@ -32,7 +32,7 @@ const ReceitasLista = () => {
     };
 
     fetchReceitas();
-  }, []);
+  }, [user]);
 
   const renderItem = ({ item }) => {
     return (

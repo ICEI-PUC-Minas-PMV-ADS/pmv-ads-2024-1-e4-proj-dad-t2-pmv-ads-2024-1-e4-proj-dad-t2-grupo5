@@ -7,7 +7,6 @@ export default function App() {
   return (
     <AuthProvider>
       <SafeAreaView style={styles.safeArea}>
-        {/* Ajustar StatusBar aqui */}
         <StatusBar barStyle="dark-content" backgroundColor="#FFFFFF" />
         <Navigation />
       </SafeAreaView>

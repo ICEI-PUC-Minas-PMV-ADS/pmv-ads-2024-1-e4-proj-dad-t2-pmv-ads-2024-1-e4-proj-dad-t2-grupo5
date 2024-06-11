@@ -34,7 +34,7 @@ const ExamesLista = () => {
     };
 
     fetchExames();
-  }, []);
+  }, [user]);
 
   const renderItem = ({ item }) => {
     return (

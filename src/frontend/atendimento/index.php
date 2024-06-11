@@ -164,7 +164,7 @@ $usuarioId = isset($_SESSION['usuario']['id']) ? $_SESSION['usuario']['id'] : nu
     };
 
     $.ajax({
-        url: 'http://localhost:3001/atendimentos',
+        url: 'https://vivabemapi.vercel.app/atendimentos',
         method: 'POST',
         contentType: 'application/json',
         data: JSON.stringify(dadosAtendimento),
