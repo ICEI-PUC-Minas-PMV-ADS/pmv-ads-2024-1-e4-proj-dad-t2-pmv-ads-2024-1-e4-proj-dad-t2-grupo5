@@ -128,8 +128,6 @@
         $('#solicitarExameModal').data('pacienteId', pacienteId);
         $('#solicitarExameModal').data('medicoId', medicoId);
 
-        console.log('Modal setup com os IDs:', { atendimentoId, pacienteId, medicoId });
-
         $.ajax({
             url: `http://localhost:3001/solicitacaoExames/${atendimentoId}`,
             type: 'GET',
@@ -140,6 +138,7 @@
                 if (response.exists) {
                     var modalBody = $('#registrarExameModal .modal-body');
                     $('#registrarExameModal').modal('show');
+                     verificarExame(atendimentoId);
                 } else {
                     $('#solicitarExameModal').modal('show');
                 }

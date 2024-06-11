@@ -13,7 +13,7 @@
                         <button type="button" class="btn btn-primary btn-block" onclick="imprimirSolicitacao()">Imprimir Solicitação</button>
                     </div>
                     <div class="col-md-6">
-                        <button type="button" class="btn btn-success btn-block" onclick="registrarExameRealizado()">Registrar Exame</button>
+                        <button type="button" class="btn btn-success btn-block" id="btnAcaoExame" onclick="registrarExameRealizado()">Registrar Exame</button>
                     </div>
                 </div>
             </div>
@@ -63,12 +63,85 @@
     </div>
 </div>
 
-
-
 <script>
+    function verificarExame(atendimentoId) {
+        $.ajax({
+            url: `http://localhost:3001/examesRealizados/${atendimentoId}`,
+            type: 'GET',
+            headers: {
+                'x-api-key': '<?php echo addslashes($apiKey); ?>'
+            },
+            success: function(response) {
+                if (response.exists) {
+                    $('#btnAcaoExame').text('Imprimir Exame').attr('onclick', 'imprimirExameRealizado()');
+                } else {
+                    $('#btnAcaoExame').text('Registrar Exame').attr('onclick', 'registrarExameRealizado()');
+                }
+                $('#registrarExameModal').modal('show');
+            },
+            error: function(xhr, status, error) {
+                console.error('Erro ao verificar a existência da realização de exame: ' + error);
+                alert('Erro ao verificar a existência de exame.');
+            }
+        });
+    }
+
     function imprimirSolicitacao() {
         var atendimentoId = $('#registrarExameModal').data('atendimentoId');
-        console.log('Imprimindo solicitação...');
+        console.log( atendimentoId);
+        
+        $.ajax({
+            url: `http://localhost:3001/solicitacaoExames/atendimento/${atendimentoId}`,
+            type: 'GET',
+            success: function(data) {
+                var conteudoParaImprimir = montarConteudoImpressao(data);
+                var janelaDeImpressao = window.open('', '_blank', 'width=800,height=600');
+                janelaDeImpressao.document.open();
+                janelaDeImpressao.document.write(conteudoParaImprimir);
+                janelaDeImpressao.document.close();
+                janelaDeImpressao.focus();
+                janelaDeImpressao.print();
+                janelaDeImpressao.close();
+            },
+            error: function(xhr, status, error) {
+                console.error('Erro ao obter dados para impressão:', error);
+            }
+        });
+    }
+
+    function montarConteudoImpressao(dados) {
+        var html = `
+            <html>
+            <head>
+                <title>Solicitação de Exame</title>
+                <style>
+                    body { font-family: Arial, sans-serif; font-size: 14px; }
+                    table { width: 100%; border-collapse: collapse; }
+                    th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+                    th { background-color: #f2f2f2; }
+                </style>
+            </head>
+            <body>
+                <h1>Solicitação de Exame</h1>
+                <p>Atendimento ID: ${dados.atendimentoRef.AtendimentoId}</p>
+                <p>Médico ID: ${dados.atendimentoRef.medicoId}</p>
+                <p>Paciente ID: ${dados.atendimentoRef.pacienteId}</p>
+                <table>
+                    <tr><th>Exame</th><th>Solicitado</th></tr>
+        `;
+
+        Object.keys(dados).forEach(key => {
+            if (typeof dados[key] === 'boolean') {
+                html += `<tr><td>${key}</td><td>${dados[key] ? 'Sim' : 'Não'}</td></tr>`;
+            }
+        });
+
+        html += `
+                </table>
+            </body>
+            </html>
+        `;
+        return html;
     }
 
     function registrarExameRealizado() {
@@ -82,6 +155,11 @@
         form.data('medicoId', medicoId);
 
         $('#modalRegistrarExame').modal('show');
+    }
+
+    function abrirGestaoExame(atendimentoId) {
+        $('#registrarExameModal').data('atendimentoId', atendimentoId);
+        verificarExame(atendimentoId);
     }
 </script>
 
@@ -133,9 +211,6 @@ document.getElementById('formRegistrarExame').addEventListener('submit', functio
         });
     });
 
-    console.log('URL sendo chamada:', 'http://localhost:3001/examesRealizados/');
-    console.log('Dados sendo enviados:', JSON.stringify(data));
-
     fetch('http://localhost:3001/examesRealizados/', {
         method: 'POST',
         headers: {
@@ -145,8 +220,8 @@ document.getElementById('formRegistrarExame').addEventListener('submit', functio
     })
     .then(response => response.json())
     .then(data => {
-        alert('Exame registrado com sucesso!');
         $('#modalRegistrarExame').modal('hide');
+        location.reload();
     })
     .catch(error => {
         console.error('Erro ao registrar exame:', error);

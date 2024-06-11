@@ -248,7 +248,7 @@
         $('#formSolicitarExame').data('pacienteId', pacienteId);
         $('#formSolicitarExame').data('medicoId', medicoId);
 
-        console.log('Setup modal:', { atendimentoId, pacienteId, medicoId });
+        // console.log('Setup modal:', { atendimentoId, pacienteId, medicoId });
     }
 
     $(document).ready(function () {
@@ -267,7 +267,7 @@
                 dadosExame[this.name] = true;
             });
 
-            console.log('Dados sendo enviados:', JSON.stringify(dadosExame));
+            // console.log('Dados sendo enviados:', JSON.stringify(dadosExame));
 
             $.ajax({
                 url: "http://localhost:3001/solicitacaoExames",
@@ -275,7 +275,6 @@
                 contentType: "application/json",
                 data: JSON.stringify(dadosExame),
                 success: function () {
-                    alert("Exame solicitado com sucesso!");
                     $("#solicitarExameModal").modal("hide");
                     location.reload();
                 },

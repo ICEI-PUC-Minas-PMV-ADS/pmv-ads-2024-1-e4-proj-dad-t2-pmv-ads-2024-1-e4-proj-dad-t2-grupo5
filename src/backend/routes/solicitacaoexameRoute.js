@@ -17,6 +17,22 @@ router.get('/:atendimentoId', async (req, res) => {
     }
 });
 
+// Listar uma solicitação para um determinado ID de atendimento
+router.get('/atendimento/:atendimentoId', async (req, res) => {
+    const atendimentoId = req.params.atendimentoId;
+    try {
+        const solicitacao = await solicitacaoexame.findOne({ 'atendimentoRef.AtendimentoId': atendimentoId });
+        if (solicitacao) {
+            // Retornar a solicitação completa
+            res.json(solicitacao);
+        } else {
+            res.status(404).json({ message: 'Solicitação de exame não encontrada.' });
+        }
+    } catch (error) {
+        res.status(500).json({ error: 'Erro ao buscar a solicitação de exame', details: error });
+    }
+});
+
 // Listar todos os exames que foram solicitados
 router.get('/', async (req, res) => {
   try {
