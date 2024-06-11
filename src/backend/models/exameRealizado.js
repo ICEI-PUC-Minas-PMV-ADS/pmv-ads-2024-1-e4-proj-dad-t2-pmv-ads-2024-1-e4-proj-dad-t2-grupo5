@@ -13,7 +13,7 @@ const exameRealizadoSchema = new Schema({
         SolicitacaoId: {
           type: mongoose.Types.ObjectId,
           ref: 'solicitacaoDeExames',
-          required: true,
+          required: false,
           autopopulate: true,
       },
         AtendimentoId: {

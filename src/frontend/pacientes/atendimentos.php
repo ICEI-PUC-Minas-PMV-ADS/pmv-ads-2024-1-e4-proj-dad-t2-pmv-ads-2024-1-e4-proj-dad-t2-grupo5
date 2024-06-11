@@ -8,7 +8,7 @@
 
 // lógica da requisicao  ##############################################################
     $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, "https://vivabemapi.vercel.app/pacientes");
+    curl_setopt($ch, CURLOPT_URL, "http://localhost:3001/pacientes");
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
     curl_setopt($ch, CURLOPT_HTTPHEADER, ["x-api-key: $apiKey"]);
@@ -21,7 +21,7 @@
 
     $chAtendimentos = curl_init();
 
-    curl_setopt($chAtendimentos, CURLOPT_URL, "https://vivabemapi.vercel.app/atendimentos/");
+    curl_setopt($chAtendimentos, CURLOPT_URL, "http://localhost:3001/atendimentos/");
     curl_setopt($chAtendimentos, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
     curl_setopt($chAtendimentos, CURLOPT_HTTPHEADER, ["x-api-key: $apiKey"]);
@@ -45,7 +45,7 @@
   <title>Atendimentos</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <link rel="stylesheet" href="<?php echo $domain; ?>/style.css">
 
   <script src="https://code.jquery.com/jquery-4.2.1.slim.min.js"></script>
@@ -97,7 +97,7 @@
                             <td><?php echo !empty($atendimento['data']) ? htmlspecialchars(date('d/m/Y', strtotime($atendimento['data']))) : 'Não informado'; ?></td>
                             <td>
                                 <button class="btn btn-primary" onclick="visualizarAtendimento('<?php echo $atendimento['_id']; ?>')">Visualizar</button>
-                                <button class="btn btn-primary" onclick="ExameMedico('<?php echo $atendimento['_id']; ?>')">Exames</button>
+                                <button class="btn btn-primary" onclick="exameMedico('<?php echo $atendimento['_id']; ?>', '<?php echo $atendimento['paciente']['id']; ?>', '<?php echo $atendimento['medico']['_id']; ?>')">Exames</button>
                                 <button class="btn btn-primary" onclick="receitaMedica('<?php echo $atendimento['_id']; ?>')">Receita</button>
                             </td>
                         </tr>
@@ -111,6 +111,49 @@
 
     
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+<script>
+    function exameMedico(atendimentoId, pacienteId, medicoId) {
+        setupModal(atendimentoId, pacienteId, medicoId); 
+
+        $('#registrarExameModal').data('atendimentoId', atendimentoId);
+        $('#registrarExameModal').data('pacienteId', pacienteId);
+        $('#registrarExameModal').data('medicoId', medicoId);
+
+        $('#solicitarExameModal').data('atendimentoId', atendimentoId);
+        $('#solicitarExameModal').data('pacienteId', pacienteId);
+        $('#solicitarExameModal').data('medicoId', medicoId);
+
+        console.log('Modal setup com os IDs:', { atendimentoId, pacienteId, medicoId });
+
+        $.ajax({
+            url: `http://localhost:3001/solicitacaoExames/${atendimentoId}`,
+            type: 'GET',
+            headers: {
+                'x-api-key': '<?php echo addslashes($apiKey); ?>'
+            },
+            success: function(response) {
+                if (response.exists) {
+                    var modalBody = $('#registrarExameModal .modal-body');
+                    $('#registrarExameModal').modal('show');
+                } else {
+                    $('#solicitarExameModal').modal('show');
+                }
+            },
+            error: function(xhr, status, error) {
+                console.log('Erro ao verificar a existência da solicitação de exame: ' + error);
+            }
+        });
+    }
+</script>
+
+
+    <?php include './modals/registrarExame.php' ?>
+    <?php include './modals/solicitarExameModal.php' ?>
     <?php include './modals/optReceita.php' ?>
     <?php include './modals/criarReceita.php' ?>
     <?php include './modals/visualizarAtendimento.php' ?>

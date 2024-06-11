@@ -2,6 +2,21 @@ const express = require('express');
 const router = express.Router();
 const solicitacaoexame = require('../models/solicitacaoexame');
 
+// Verificar se existe uma solicitação para um determinado ID de atendimento
+router.get('/:atendimentoId', async (req, res) => {
+    const atendimentoId = req.params.atendimentoId;
+    try {
+        const existente = await solicitacaoexame.findOne({ 'atendimentoRef.AtendimentoId': atendimentoId });
+        if (existente) {
+            res.json({ exists: true });
+        } else {
+            res.json({ exists: false });
+        }
+    } catch (error) {
+        res.status(500).json({ error: 'Erro ao verificar a solicitação de exame', details: error });
+    }
+});
+
 // Listar todos os exames que foram solicitados
 router.get('/', async (req, res) => {
   try {

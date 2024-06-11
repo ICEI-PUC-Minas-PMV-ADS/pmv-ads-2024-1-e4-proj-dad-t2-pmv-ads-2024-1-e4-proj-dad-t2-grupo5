@@ -32,7 +32,7 @@ if (!$pacientes || curl_errno($ch)) {
     // die('Erro ao acessar a API: ' . curl_error($ch));
 }
 
-verificarAutenticacao($domain);
+// verificarAutenticacao($domain);
 // verificarIsUserFarmacia($domain); Teste
     
 ?>
@@ -48,7 +48,7 @@ verificarAutenticacao($domain);
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <link rel="stylesheet" href="<?php echo $domain; ?>/style.css">
+    <link rel="stylesheet" href="https://vivabem.reislucasf.com.br/style.css">
     
     <script src="https://code.jquery.com/jquery-4.2.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
