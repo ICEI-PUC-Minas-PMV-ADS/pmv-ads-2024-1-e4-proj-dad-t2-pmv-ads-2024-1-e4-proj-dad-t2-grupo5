@@ -91,22 +91,43 @@
 
     function imprimirSolicitacao() {
         var atendimentoId = $('#registrarExameModal').data('atendimentoId');
-        console.log(atendimentoId);
+        console.log('Atendimento ID:', atendimentoId);
 
+        // Primeira chamada para obter detalhes do atendimento
         $.ajax({
-            url: `http://localhost:3001/solicitacaoExames/atendimento/${atendimentoId}`,
+            url: `http://localhost:3001/atendimentos/${atendimentoId}`,
             type: 'GET',
-            success: function(data) {
-                var conteudoParaImprimir = montarConteudoImpressao(data);
-                criarEImprimirIframe(conteudoParaImprimir);
+            success: function(atendimentoDataArray) {
+                if (atendimentoDataArray.length > 0) {
+                    var atendimentoData = atendimentoDataArray[0]; // Acessando o primeiro elemento
+                    console.log('Dados do Atendimento:', atendimentoData);
+                    // Segunda chamada para obter detalhes dos exames solicitados
+                    $.ajax({
+                        url: `http://localhost:3001/solicitacaoExames/atendimento/${atendimentoId}`,
+                        type: 'GET',
+                        success: function(exameData) {
+                            console.log('Dados da Solicitação de Exames:', exameData);
+                            var conteudoParaImprimir = montarConteudoImpressao(atendimentoData, exameData);
+                            criarEImprimirIframe(conteudoParaImprimir);
+                        },
+                        error: function(xhr, status, error) {
+                            console.error('Erro ao obter dados dos exames para impressão:', error);
+                        }
+                    });
+                } else {
+                    console.error('Atendimento não encontrado.');
+                }
             },
             error: function(xhr, status, error) {
-                console.error('Erro ao obter dados para impressão:', error);
+                console.error('Erro ao obter dados do atendimento para impressão:', error);
             }
         });
     }
 
-    function montarConteudoImpressao(dados) {
+    function montarConteudoImpressao(atendimentoData, exameData) {
+        var medico = atendimentoData.medico;
+        var paciente = atendimentoData.paciente;
+
         var html = `
             <html>
             <head>
@@ -120,16 +141,18 @@
             </head>
             <body>
                 <h1>Solicitação de Exame</h1>
-                <p>Atendimento ID: ${dados.atendimentoRef.AtendimentoId}</p>
-                <p>Médico ID: ${dados.atendimentoRef.medicoId}</p>
-                <p>Paciente ID: ${dados.atendimentoRef.pacienteId}</p>
+                <p><strong>Nome do Médico:</strong> ${medico.nome}</p>
+                <p><strong>CRM do Médico:</strong> ${medico.crm}</p>
+                <p><strong>Nome do Paciente:</strong> ${paciente.nome}</p>
+                <p><strong>Data de Nascimento:</strong> ${new Date(paciente.dataNascimento).toLocaleDateString('pt-BR')}</p>
+                <p><strong>Número do SUS:</strong> ${paciente.sus}</p>
                 <table>
                     <tr><th>Exame</th><th>Solicitado</th></tr>
         `;
 
-        Object.keys(dados).forEach(key => {
-            if (typeof dados[key] === 'boolean') {
-                html += `<tr><td>${key}</td><td>${dados[key] ? 'Sim' : 'Não'}</td></tr>`;
+        Object.keys(exameData).forEach(key => {
+            if (typeof exameData[key] === 'boolean' && exameData[key]) {
+                html += `<tr><td>${formatKey(key)}</td><td>Sim</td></tr>`;
             }
         });
 
@@ -139,6 +162,10 @@
             </html>
         `;
         return html;
+    }
+
+    function formatKey(key) {
+        return key.replace(/([A-Z])/g, ' $1').trim().replace(/^./, str => str.toUpperCase()); 
     }
 
     function criarEImprimirIframe(conteudo) {
@@ -160,7 +187,7 @@
 
         iframe.srcdoc = "about:blank"; 
     }
-    
+
     function registrarExameRealizado() {
         var atendimentoId = $('#registrarExameModal').data('atendimentoId');
         var pacienteId = $('#registrarExameModal').data('pacienteId');
