@@ -140,30 +140,42 @@ $usuarioId = isset($_SESSION['usuario']['id']) ? $_SESSION['usuario']['id'] : nu
             $('#modalAtendimento').modal('show');
         });
 
-$('#enviarAtendimento').click(function() {
-    var descricao = $('#descricao').val();
-    var exameSolicitado = $('#exameSolicitado').is(':checked');
-    var medicoId = $('#medicoId').val();
-    var pacienteId = $('#pacienteId').val();
-    var pacienteNome = $('#pacienteNome').val();
-
+        $('#enviarAtendimento').click(function() {
     var dadosAtendimento = {
-        descricao: descricao,
-        exameSolicitado: exameSolicitado,
-        medico: medicoId,
-        paciente: pacienteId
+        descricaoSubjetivo: $('#descricaoSubjetivo').val(),
+        descricaoObjetivo: $('#descricaoObjetivo').val(),
+        descricaoAvaliacao: $('#descricaoAvaliacao').val(),
+        descricaoPlanoTerapeutico: $('#descricaoPlanoTerapeutico').val(),
+        pressao: $('#pressao').val(),
+        glicemia: $('#glicemia').val(),
+        peso: $('#peso').val(),
+        altura: $('#altura').val(),
+        cid: {
+            codigo: $('#codigoInput').val(),
+            nome: $('#nomeSelect option:selected').text()
+        },
+        ciap: {
+            codigo: $('#codigoCIAPInput').val(),
+            nome: $('#ciapSelect option:selected').text()
+        },
+        exameSolicitado: $('#exameSolicitado').is(':checked'),
+        medico: $('#medicoId').val(),
+        paciente: $('#pacienteId').val()
     };
 
     $.ajax({
-        url: 'https://vivabemapi.vercel.app/atendimentos',
+        url: 'http://localhost:3001/atendimentos',
         method: 'POST',
         contentType: 'application/json',
         data: JSON.stringify(dadosAtendimento),
         success: function(response) {
-            atualizarStatusFila(pacienteId, true, pacienteNome);
+            alert('Atendimento adicionado com sucesso!');
+            $('#modalAtendimento').modal('hide');
+            // Atualize sua tabela ou UI aqui se necessário
         },
-        error: function() {
-            alert('Erro ao adicionar atendimento');
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log('Erro ao adicionar atendimento:', textStatus, errorThrown, jqXHR.responseText);
+            alert('Erro ao adicionar atendimento: ' + textStatus + ' - ' + errorThrown);
         }
     });
 });
@@ -212,7 +224,7 @@ $(document).ready(function() {
 
 function carregarFila() {
     $.ajax({
-        url: 'https://vivabemapi.vercel.app/fila/profissional/' + usuarioId,
+        url: 'http://vivabemapi.vercel.app/fila/profissional/' + usuarioId,
         method: 'GET',
         success: function(response) {
             $('#tabelaFila').empty();

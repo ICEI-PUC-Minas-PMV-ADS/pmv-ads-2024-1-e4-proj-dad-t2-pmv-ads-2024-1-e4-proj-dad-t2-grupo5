@@ -50,7 +50,7 @@ const AtendimentoSchema = new Schema({
   data: {
     type: Date,
     default: Date.now
-  }
+  },
 });
 
 AtendimentoSchema.virtual('nomeMedico', {
