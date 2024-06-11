@@ -63,6 +63,9 @@
     </div>
 </div>
 
+
+
+
 <script>
     function verificarExame(atendimentoId) {
         $.ajax({
@@ -88,20 +91,14 @@
 
     function imprimirSolicitacao() {
         var atendimentoId = $('#registrarExameModal').data('atendimentoId');
-        console.log( atendimentoId);
-        
+        console.log(atendimentoId);
+
         $.ajax({
             url: `http://localhost:3001/solicitacaoExames/atendimento/${atendimentoId}`,
             type: 'GET',
             success: function(data) {
                 var conteudoParaImprimir = montarConteudoImpressao(data);
-                var janelaDeImpressao = window.open('', '_blank', 'width=800,height=600');
-                janelaDeImpressao.document.open();
-                janelaDeImpressao.document.write(conteudoParaImprimir);
-                janelaDeImpressao.document.close();
-                janelaDeImpressao.focus();
-                janelaDeImpressao.print();
-                janelaDeImpressao.close();
+                criarEImprimirIframe(conteudoParaImprimir);
             },
             error: function(xhr, status, error) {
                 console.error('Erro ao obter dados para impressão:', error);
@@ -144,6 +141,26 @@
         return html;
     }
 
+    function criarEImprimirIframe(conteudo) {
+        var iframe = document.createElement('iframe');
+        iframe.style.display = 'none'; 
+        document.body.appendChild(iframe);
+
+        iframe.onload = function() {
+            var doc = iframe.contentDocument || iframe.contentWindow.document;
+            doc.open();
+            doc.write(conteudo);
+            doc.close();
+
+            setTimeout(function() {
+                iframe.contentWindow.print();
+                document.body.removeChild(iframe); 
+            }, 500);
+        };
+
+        iframe.srcdoc = "about:blank"; 
+    }
+    
     function registrarExameRealizado() {
         var atendimentoId = $('#registrarExameModal').data('atendimentoId');
         var pacienteId = $('#registrarExameModal').data('pacienteId');
