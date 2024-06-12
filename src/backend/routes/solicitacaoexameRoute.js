@@ -3,7 +3,7 @@ const router = express.Router();
 const solicitacaoexame = require('../models/solicitacaoexame');
 
 // Verificar se existe uma solicitação para um determinado ID de atendimento
-router.get('/validar/:atendimentoId', async (req, res) => {
+router.get('/:atendimentoId', async (req, res) => {
     const atendimentoId = req.params.atendimentoId;
     try {
         const existente = await solicitacaoexame.findOne({ 'atendimentoRef.AtendimentoId': atendimentoId });
