@@ -69,7 +69,7 @@
 <script>
     function verificarExame(atendimentoId) {
         $.ajax({
-            url: `http://localhost:3001/examesRealizados/${atendimentoId}`,
+            url: `https://vivabemapi.vercel.app/examesRealizados/${atendimentoId}`,
             type: 'GET',
             headers: {
                 'x-api-key': '<?php echo addslashes($apiKey); ?>'
@@ -95,7 +95,7 @@
 
         // Primeira chamada para obter detalhes do atendimento
         $.ajax({
-            url: `http://localhost:3001/atendimentos/${atendimentoId}`,
+            url: `https://vivabemapi.vercel.app/atendimentos/${atendimentoId}`,
             type: 'GET',
             success: function(atendimentoDataArray) {
                 if (atendimentoDataArray.length > 0) {
@@ -103,7 +103,7 @@
                     console.log('Dados do Atendimento:', atendimentoData);
                     // Segunda chamada para obter detalhes dos exames solicitados
                     $.ajax({
-                        url: `http://localhost:3001/solicitacaoExames/atendimento/${atendimentoId}`,
+                        url: `https://vivabemapi.vercel.app/solicitacaoExames/atendimento/${atendimentoId}`,
                         type: 'GET',
                         success: function(exameData) {
                             console.log('Dados da Solicitação de Exames:', exameData);
@@ -255,7 +255,7 @@ document.getElementById('formRegistrarExame').addEventListener('submit', functio
         });
     });
 
-    fetch('http://localhost:3001/examesRealizados/', {
+    fetch('https://vivabemapi.vercel.app/examesRealizados/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

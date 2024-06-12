@@ -32,7 +32,7 @@ if (!$pacientes || curl_errno($ch)) {
     // die('Erro ao acessar a API: ' . curl_error($ch));
 }
 
-// verificarAutenticacao($domain);
+verificarAutenticacao($domain);
 // verificarIsUserFarmacia($domain); Teste
     
 ?>

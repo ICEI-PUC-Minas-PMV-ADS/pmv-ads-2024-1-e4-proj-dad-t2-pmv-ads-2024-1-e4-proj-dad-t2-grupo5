@@ -270,7 +270,7 @@
             // console.log('Dados sendo enviados:', JSON.stringify(dadosExame));
 
             $.ajax({
-                url: "http://localhost:3001/solicitacaoExames",
+                url: "https://vivabemapi.vercel.app/solicitacaoExames",
                 type: "POST",
                 contentType: "application/json",
                 data: JSON.stringify(dadosExame),
