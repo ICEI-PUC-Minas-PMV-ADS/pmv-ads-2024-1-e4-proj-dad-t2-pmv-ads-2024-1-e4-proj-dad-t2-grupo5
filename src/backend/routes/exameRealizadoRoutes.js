@@ -18,6 +18,21 @@ router.get('/:atendimentoId', async (req, res) => {
     }
 });
 
+// Verificar se existe uma realização de exame para um dado ID de atendimento
+router.get('/detalhes/:atendimentoId', async (req, res) => {
+    const atendimentoId = req.params.atendimentoId;
+    try {
+        const exame = await ExameRealizado.findOne({ "solicitacaoRef.AtendimentoId": atendimentoId }).exec();
+        if (!exame) {
+            return res.status(404).json({ message: "Exame não encontrado." });
+        }
+        res.json(exame);
+    } catch (error) {
+        console.error("Erro ao buscar detalhes do exame por atendimento ID:", error);
+        res.status(500).json({ error: error.message });
+    }
+});
+
 // Criar uma nova receita médica
 router.post('/', async (req, res) => {
     try {

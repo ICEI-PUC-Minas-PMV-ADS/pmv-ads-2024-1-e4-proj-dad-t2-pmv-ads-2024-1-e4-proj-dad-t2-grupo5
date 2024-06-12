@@ -7,7 +7,6 @@ $dotenv->load();
 $apiKey = $_ENV['API_KEY'];
 
 include '../partials/header.php';
-$ch = curl_init();
 
 curl_setopt($ch, CURLOPT_URL, "https://vivabemapi.vercel.app/pacientes");
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);

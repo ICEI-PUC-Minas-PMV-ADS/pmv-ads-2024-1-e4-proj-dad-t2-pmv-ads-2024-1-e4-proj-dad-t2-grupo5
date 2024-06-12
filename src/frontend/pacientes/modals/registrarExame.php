@@ -22,47 +22,6 @@
 </div>
 
 
-<div class="modal fade" id="modalRegistrarExame" tabindex="-1" role="dialog" aria-labelledby="modalRegistrarExameLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalRegistrarExameLabel">Registrar Exame Realizado</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="formRegistrarExame">
-                    <div class="form-group">
-                        <label>Data de Realização</label>
-                        <input type="date" class="form-control" name="dataRealizacao" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Observações</label>
-                        <input type="text" class="form-control" name="observacoes">
-                    </div>
-                    <div id="resultadosExame">
-                        <h5>Resultados</h5>
-                        <div class="form-row resultado-exame">
-                            <div class="col">
-                                <input type="text" class="form-control" name="nomeExame[]" placeholder="Nome do Exame" required>
-                            </div>
-                            <div class="col">
-                                <input type="text" class="form-control" name="resultado[]" placeholder="Resultado" required>
-                            </div>
-                            <div class="col">
-                                <input type="text" class="form-control" name="normalRange[]" placeholder="Faixa Normal" required>
-                            </div>
-                        </div>
-                    </div>
-                    <button type="button" class="btn btn-secondary mt-2" onclick="adicionarResultado()">+</button>
-                    <button type="submit" class="btn btn-primary mt-2">Registrar Exame</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
 
 
 
@@ -87,6 +46,77 @@
                 alert('Erro ao verificar a existência de exame.');
             }
         });
+    }
+
+    function imprimirExameRealizado() {
+        var atendimentoId = $('#registrarExameModal').data('atendimentoId');
+        
+        $.ajax({
+            url: `https://vivabemapi.vercel.app/examesRealizados/detalhes/${atendimentoId}`,
+            type: 'GET',
+            success: function(data) {
+                var conteudoParaImprimir = montarConteudoImpressaoExame(data);
+                criarEImprimirIframe(conteudoParaImprimir);
+            },
+            error: function(xhr, status, error) {
+                console.error('Erro ao obter detalhes do exame realizado:', error);
+                alert('Erro ao obter detalhes do exame realizado.');
+            }
+        });
+    }
+
+    function montarConteudoImpressaoExame(dados) {
+        var html = `
+            <html>
+            <head>
+                <title>Exame Realizado</title>
+                <style>
+                    body { font-family: Arial, sans-serif; font-size: 14px; }
+                    table { width: 100%; border-collapse: collapse; }
+                    th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+                    th { background-color: #f2f2f2; }
+                </style>
+            </head>
+            <body>
+                <h1>Detalhes do Exame Realizado</h1>
+                <p><strong>Atendimento ID:</strong> ${dados.solicitacaoRef.AtendimentoId}</p>
+                <p><strong>Médico:</strong> ${dados.solicitacaoRef.medico.nome} (${dados.solicitacaoRef.medico.crm})</p>
+                <p><strong>Paciente:</strong> ${dados.solicitacaoRef.paciente.nome} (SUS: ${dados.solicitacaoRef.paciente.sus})</p>
+                <p><strong>Data de Realização:</strong> ${new Date(dados.dataRealizacao).toLocaleDateString()}</p>
+                <table>
+                    <tr><th>Exame</th><th>Resultado</th><th>Faixa Normal</th></tr>`;
+
+        dados.resultados.forEach(result => {
+            html += `<tr>
+                        <td>${result.nomeExame}</td>
+                        <td>${result.resultado}</td>
+                        <td>${result.normalRange}</td>
+                    </tr>`;
+        });
+
+        html += `</table>
+                <p><strong>Observações:</strong> ${dados.observacoes}</p>
+            </body>
+            </html>`;
+
+        return html;
+    }
+
+    function criarEImprimirIframe(conteudo) {
+        var iframe = document.createElement('iframe');
+        iframe.style.position = 'absolute';
+        iframe.style.right = '100%'; // Esconde o iframe
+        document.body.appendChild(iframe);
+
+        var doc = iframe.contentDocument || iframe.contentWindow.document;
+        doc.open();
+        doc.write(conteudo);
+        doc.close();
+
+        iframe.onload = function() {
+            iframe.contentWindow.print();
+            document.body.removeChild(iframe); // Remove o iframe após a impressão
+        };
     }
 
     function imprimirSolicitacao() {
@@ -208,70 +238,112 @@
 </script>
 
 
+<div class="modal fade" id="modalRegistrarExame" tabindex="-1" role="dialog" aria-labelledby="modalRegistrarExameLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalRegistrarExameLabel">Registrar Exame Realizado</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="formRegistrarExame">
+                    <div class="form-group">
+                        <label>Data de Realização</label>
+                        <input type="date" class="form-control" name="dataRealizacao" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Observações</label>
+                        <input type="text" class="form-control" name="observacoes">
+                    </div>
+                    <div id="resultadosExame">
+                        <h5>Resultados</h5>
+                        <div class="form-row resultado-exame">
+                            <div class="col">
+                                <input type="text" class="form-control" name="nomeExame[]" placeholder="Nome do Exame" required>
+                            </div>
+                            <div class="col">
+                                <input type="text" class="form-control" name="resultado[]" placeholder="Resultado" required>
+                            </div>
+                            <div class="col">
+                                <input type="text" class="form-control" name="normalRange[]" placeholder="Faixa Normal" required>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-secondary mt-2" onclick="adicionarResultado()">+</button>
+                    <button type="submit" class="btn btn-primary mt-2">Registrar Exame</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <script>
-function adicionarResultado() {
-    const container = document.getElementById('resultadosExame');
-    const novoResultado = document.createElement('div');
-    novoResultado.className = 'form-row resultado-exame';
-    novoResultado.innerHTML = `
-        <div class="col">
-            <input type="text" class="form-control" name="nomeExame[]" placeholder="Nome do Exame" required>
-        </div>
-        <div class="col">
-            <input type="text" class="form-control" name="resultado[]" placeholder="Resultado" required>
-        </div>
-        <div class="col">
-            <input type="text" class="form-control" name="normalRange[]" placeholder="Faixa Normal" required>
-        </div>
-    `;
-    container.appendChild(novoResultado);
-}
+    function adicionarResultado() {
+        const container = document.getElementById('resultadosExame');
+        const novoResultado = document.createElement('div');
+        novoResultado.className = 'form-row resultado-exame';
+        novoResultado.innerHTML = `
+            <div class="col">
+                <input type="text" class="form-control" name="nomeExame[]" placeholder="Nome do Exame" required>
+            </div>
+            <div class="col">
+                <input type="text" class="form-control" name="resultado[]" placeholder="Resultado" required>
+            </div>
+            <div class="col">
+                <input type="text" class="form-control" name="normalRange[]" placeholder="Faixa Normal" required>
+            </div>
+        `;
+        container.appendChild(novoResultado);
+    }
 
-// Função para enviar dados
-document.getElementById('formRegistrarExame').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const form = $(this);
-    const atendimentoId = form.data('atendimentoId');
-    const pacienteId = form.data('pacienteId');
-    const medicoId = form.data('medicoId');
+    // Função para enviar dados
+    document.getElementById('formRegistrarExame').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const form = $(this);
+        const atendimentoId = form.data('atendimentoId');
+        const pacienteId = form.data('pacienteId');
+        const medicoId = form.data('medicoId');
 
-    const formData = new FormData(this);
-    const data = {
-        solicitacaoRef: {
-            AtendimentoId: atendimentoId,
-            medico: medicoId,
-            paciente: pacienteId
-        },
-        resultados: [],
-        dataRealizacao: formData.get('dataRealizacao'),
-        observacoes: formData.get('observacoes')
-    };
+        const formData = new FormData(this);
+        const data = {
+            solicitacaoRef: {
+                AtendimentoId: atendimentoId,
+                medico: medicoId,
+                paciente: pacienteId
+            },
+            resultados: [],
+            dataRealizacao: formData.get('dataRealizacao'),
+            observacoes: formData.get('observacoes')
+        };
 
-    formData.getAll('nomeExame[]').forEach((nomeExame, index) => {
-        data.resultados.push({
-            nomeExame: nomeExame,
-            resultado: formData.getAll('resultado[]')[index],
-            normalRange: formData.getAll('normalRange[]')[index]
+        formData.getAll('nomeExame[]').forEach((nomeExame, index) => {
+            data.resultados.push({
+                nomeExame: nomeExame,
+                resultado: formData.getAll('resultado[]')[index],
+                normalRange: formData.getAll('normalRange[]')[index]
+            });
+        });
+
+        fetch('https://vivabemapi.vercel.app/examesRealizados/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(data => {
+            $('#modalRegistrarExame').modal('hide');
+            location.reload();
+        })
+        .catch(error => {
+            console.error('Erro ao registrar exame:', error);
+            alert('Erro ao registrar exame: ' + error.message);
         });
     });
-
-    fetch('https://vivabemapi.vercel.app/examesRealizados/', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-    .then(response => response.json())
-    .then(data => {
-        $('#modalRegistrarExame').modal('hide');
-        location.reload();
-    })
-    .catch(error => {
-        console.error('Erro ao registrar exame:', error);
-        alert('Erro ao registrar exame: ' + error.message);
-    });
-});
 </script>
 
 
