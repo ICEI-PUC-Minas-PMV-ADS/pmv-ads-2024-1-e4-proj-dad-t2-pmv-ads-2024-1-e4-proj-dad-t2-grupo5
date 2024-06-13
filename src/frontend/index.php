@@ -33,7 +33,6 @@ require './vendor/autoload.php';
                                 <option value="Farmacia">Fármacia</option>
                                 <option value="Enfermagem">Enfermagem</option>
                                 <option value="Medico">Médico</option>
-                                <option value="Pediatria">Pediatria</option>
                                 <option value="Recepcao">Recepção</option>
                                 <option value="Secretaria">Secretaria</option>
                             </select>
