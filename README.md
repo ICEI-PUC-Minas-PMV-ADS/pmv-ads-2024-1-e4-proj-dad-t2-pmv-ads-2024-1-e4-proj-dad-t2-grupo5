@@ -16,8 +16,6 @@ Ao abranger uma ampla gama de públicos-alvo, desde cidadãos em geral até pess
 * Lucas Filipe
 * Lucas Guilherme
 * Neemias Cândido
-* Natan Fonseca
-* Eryc Lisboa
 
 ## Orientador
 
