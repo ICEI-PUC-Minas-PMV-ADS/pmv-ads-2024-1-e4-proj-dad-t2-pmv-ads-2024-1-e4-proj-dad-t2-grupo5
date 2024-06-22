@@ -55,6 +55,11 @@ Assim que a primeira versão do sistema estiver disponível, deverá complementa
 # Video da entrega da etapa 4
 [Clique aqui para assistir no youtube](https://youtu.be/rF0LmsLAOsw)
 
+# Video da entrega da etapa 5
+[Clique aqui para assistir nosso vídeo](https://landingvivabem.reislucasf.com.br/video/faculfim.mp4)
+
 # Apresentação
 
-<li><a href="presentation/README.md"> Apresentação da solução</a></li>
+[Clique aqui para ver nossa Landing Page](https://landingvivabem.reislucasf.com.br/)
+
+
