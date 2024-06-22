@@ -1,0 +1,23 @@
+message: Please cite this software using these metadata.
+title: Viva Bem
+authors:
+  - family-names: Filipe dos Reis
+    given-names:  Lucas
+  - family-names: Guilherme dos Reis
+    given-names: Lucas
+  - family-names: Junior Anjos LOpes
+    given-names: Neemias
+  - family-names: Andrade Rolim
+    given-names: Wellington
+  - name-suffix: Professor
+    affiliation: PUC Minas
+    family-names: Vilela Cardoso
+    given-names: Leonardo
+keywords:
+  - Gestão
+  - Saude
+  - Atendimento
+  - Medico
+https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e4-proj-dad-t2-pmv-ads-2024-1-e4-proj-dad-t2-grupo5
+version: 1.0.0
+date-released: 2024-06-22
